@@ -301,6 +301,34 @@
       color: #999;
       font-size: 1rem;
     }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--chartreuse);
+    }
+
+    .footer-links {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+    }
+
+    .footer-sep {
+      color: #333;
+      margin: 0 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -502,6 +530,27 @@
       </div>
     </div>
   </section>
+
+  <section id="open-source">
+    <div class="container">
+      <h2>Open source. Free. Built by developers, for developers.</h2>
+      <p>Manifold is MIT-licensed and available on GitHub. Star it if you find it useful. Open an issue if you don't.</p>
+      <a href="#" class="btn-outline" style="margin-top: 2rem">View on GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-brand">Manifold</span>
+      <span class="footer-links">
+        <a href="#">GitHub</a>
+        <span class="footer-sep">&middot;</span>
+        <span style="color:#666">MIT License</span>
+        <span class="footer-sep">&middot;</span>
+        <span style="color:#666">v0.1.0</span>
+      </span>
+    </div>
+  </footer>
 
 </body>
 </html>
