@@ -156,9 +156,61 @@
       font-size: 0.75rem;
       color: #666;
     }
+
+    /* Hero */
+    .hero {
+      padding: 8rem 0 6rem;
+    }
+
+    .hero h1 {
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-sub {
+      color: #999;
+      margin-bottom: 2.5rem;
+      font-size: 1.25rem;
+    }
+
+    .hero-terminals {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-top: 4rem;
+    }
   </style>
 </head>
 <body>
+
+  <header class="hero">
+    <div class="container">
+      <h1>One app. Many repos.<br>Even more agents.</h1>
+      <p class="hero-sub">Manifold orchestrates multiple AI agents across isolated branches so they never step on each other's code. No wrappers. No plugins. The real CLI, untouched.</p>
+      <a href="#" class="btn-primary">Download for macOS</a>
+      <div class="hero-terminals">
+        <pre class="terminal"><span class="terminal-header">Claude Code — feature/auth-refactor</span><span class="accent">~/manifold $</span> claude
+<span style="color:#888">⠋ Refactoring auth middleware...</span>
+<span style="color:#888">  Updated: src/auth/middleware.ts</span>
+<span style="color:#888">  Updated: src/auth/session.ts</span>
+<span style="color:#888">  Created: src/auth/oauth2.ts</span>
+<span class="accent">✓ 3 files changed</span>
+<span class="accent">~/manifold $</span> <span class="cursor">█</span></pre>
+        <pre class="terminal"><span class="terminal-header">Codex — feature/api-pagination</span><span class="accent">~/manifold $</span> codex
+<span style="color:#888">⠋ Adding cursor-based pagination...</span>
+<span style="color:#888">  Updated: src/api/routes.ts</span>
+<span style="color:#888">  Updated: src/api/handlers.ts</span>
+<span class="accent">✓ 2 files changed</span>
+<span class="accent">~/manifold $</span> <span class="cursor">█</span></pre>
+        <pre class="terminal"><span class="terminal-header">Gemini CLI — feature/test-coverage</span><span class="accent">~/manifold $</span> gemini
+<span style="color:#888">⠋ Writing integration tests...</span>
+<span style="color:#888">  Created: tests/api/pagination.test.ts</span>
+<span style="color:#888">  Created: tests/auth/oauth2.test.ts</span>
+<span style="color:#888">  Running: 24 tests...</span>
+<span class="accent">✓ 24 passed, 0 failed</span>
+<span class="accent">~/manifold $</span> <span class="cursor">█</span></pre>
+      </div>
+    </div>
+  </header>
 
 </body>
 </html>
