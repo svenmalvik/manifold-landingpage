@@ -54,6 +54,7 @@
     h2 {
       font-size: 2.5rem;
       color: var(--chartreuse);
+      margin-bottom: 1.5rem;
     }
 
     p {
@@ -149,6 +150,7 @@
       border: 1px solid #333;
       padding: 1rem;
       overflow-x: auto;
+      display: inline-block;
     }
 
     .terminal-header {
@@ -159,6 +161,15 @@
       font-family: var(--font-mono);
       font-size: 0.75rem;
       color: #777;
+    }
+
+    /* ASCII Logo */
+    .ascii-logo {
+      color: var(--chartreuse);
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      line-height: 1.2;
+      margin-bottom: 2rem;
     }
 
     /* Hero */
@@ -186,7 +197,7 @@
     /* Comparison */
     .comparison {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 2rem;
       margin-top: 3rem;
     }
@@ -360,6 +371,10 @@
 
     /* Tablet */
     @media (max-width: 1024px) {
+      .ascii-logo {
+        font-size: 0.85rem;
+      }
+
       h1 {
         font-size: 3rem;
       }
@@ -373,7 +388,7 @@
       }
 
       .comparison {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
       }
 
       .features {
@@ -392,6 +407,10 @@
 
     /* Mobile */
     @media (max-width: 768px) {
+      .ascii-logo {
+        font-size: 0.55rem;
+      }
+
       h1 {
         font-size: 2.25rem;
       }
@@ -432,6 +451,12 @@
 
   <header class="hero">
     <div class="container">
+      <pre class="ascii-logo" aria-label="Manifold">
+    __  ___            _ ____      __    __
+   /  |/  /___ _____  (_) __/___  / /___/ /
+  / /|_/ / __ `/ __ \/ / /_/ __ \/ / __  /
+ / /  / / /_/ / / / / / __/ /_/ / / /_/ /
+/_/  /_/\__,_/_/ /_/_/_/  \____/_/\__,_/</pre>
       <h1>One app. Many repos.<br>Even more agents.</h1>
       <p class="hero-sub">Manifold orchestrates multiple AI agents across isolated branches so they never step on each other's code. No wrappers. No plugins. The real CLI, untouched.</p>
       <a href="#" class="btn-primary">Download for macOS</a>
@@ -466,7 +491,7 @@
       <p>Manifold doesn't wrap, proxy, or re-skin your agents. When you open Claude Code inside Manifold, it <em>is</em> Claude Code — the same binary, the same keybindings, the same output. Same for Codex. Same for Gemini CLI. Manifold gives each agent its own terminal, its own workspace, its own branch. You keep the experience you already know.</p>
       <div class="comparison">
         <div class="comparison-col">
-          <h3>Claude Code in your terminal</h3>
+          <h3>Claude Code</h3>
           <pre class="terminal"><span class="accent">~ $</span> claude
 <span class="dim">Claude Code v1.0.12</span>
 <span class="dim">Model: claude-opus-4-6</span>
@@ -480,21 +505,35 @@
 <span class="accent">~/project $</span> <span class="cursor">█</span></pre>
         </div>
         <div class="comparison-col">
-          <h3>Claude Code in Manifold</h3>
-          <pre class="terminal"><span class="accent">~ $</span> claude
-<span class="dim">Claude Code v1.0.12</span>
-<span class="dim">Model: claude-opus-4-6</span>
+          <h3>Gemini CLI</h3>
+          <pre class="terminal"><span class="accent">~ $</span> gemini
+<span class="dim">Gemini CLI v0.1.0</span>
+<span class="dim">Model: gemini-2.5-pro</span>
 
-<span class="accent">&gt;</span> refactor the auth module
-<span class="dim">I'll refactor the auth module to use</span>
-<span class="dim">OAuth2 with PKCE flow...</span>
+<span class="accent">&gt;</span> write integration tests
+<span class="dim">I'll create integration tests for</span>
+<span class="dim">the auth and API modules...</span>
 
-<span class="dim">  Updated: src/auth/middleware.ts</span>
-<span class="dim">  Updated: src/auth/session.ts</span>
+<span class="dim">  Created: tests/auth/oauth2.test.ts</span>
+<span class="dim">  Created: tests/api/routes.test.ts</span>
+<span class="accent">~/project $</span> <span class="cursor">█</span></pre>
+        </div>
+        <div class="comparison-col">
+          <h3>Codex</h3>
+          <pre class="terminal"><span class="accent">~ $</span> codex
+<span class="dim">Codex v0.1.0</span>
+<span class="dim">Model: o3</span>
+
+<span class="accent">&gt;</span> add cursor-based pagination
+<span class="dim">I'll add cursor-based pagination</span>
+<span class="dim">to the API routes...</span>
+
+<span class="dim">  Updated: src/api/routes.ts</span>
+<span class="dim">  Updated: src/api/handlers.ts</span>
 <span class="accent">~/project $</span> <span class="cursor">█</span></pre>
         </div>
       </div>
-      <p class="comparison-caption">Spot the difference. There isn't one.</p>
+      <p class="comparison-caption">Same tools. Same output. Manifold just gives each one its own workspace.</p>
     </div>
   </section>
 
