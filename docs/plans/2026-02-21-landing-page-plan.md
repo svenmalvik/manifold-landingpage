@@ -1,0 +1,867 @@
+# Manifold Landing Page Implementation Plan
+
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+
+**Goal:** Build a single-file static landing page for Manifold — a desktop app for running multiple AI coding agents in parallel.
+
+**Architecture:** Single `index.html` with embedded `<style>` and `<script>`. Google Fonts for JetBrains Mono + Inter. All visuals are ASCII art in `<pre>` blocks. CSS-only cursor blink animation.
+
+**Tech Stack:** HTML, CSS, vanilla JS (cursor blink only)
+
+**Design reference:** `landing-page-prompt.md` in project root
+
+---
+
+### Task 1: Base HTML Shell + CSS Foundation
+
+**Files:**
+- Create: `index.html`
+
+**Step 1: Create the base HTML file with CSS custom properties, font imports, reset, and typography**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manifold — One app. Many repos. Even more agents.</title>
+  <meta name="description" content="Manifold orchestrates multiple AI agents across isolated branches so they never step on each other's code.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0A0A0A;
+      --chartreuse: #CCFF00;
+      --white: #FAFAFA;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: 4rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: var(--chartreuse);
+    }
+
+    p {
+      font-size: 1.125rem;
+      max-width: 680px;
+    }
+
+    a {
+      color: var(--chartreuse);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    pre {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      line-height: 1.4;
+      overflow-x: auto;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 6rem 0;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .accent {
+      color: var(--chartreuse);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--chartreuse);
+      color: var(--black);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      border: 2px solid var(--chartreuse);
+      border-radius: 0;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--chartreuse);
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--chartreuse);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      border: 2px solid var(--chartreuse);
+      border-radius: 0;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-outline:hover {
+      background: var(--chartreuse);
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .cursor {
+      color: var(--chartreuse);
+      animation: blink 1s step-end infinite;
+    }
+
+    .terminal {
+      background: #111;
+      border: 1px solid #333;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .terminal-header {
+      display: flex;
+      gap: 0.5rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid #333;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+**Step 2: Verify the file opens in a browser with a black background**
+
+Open `index.html` in browser. Expect: solid black page, no errors in console.
+
+**Step 3: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add base HTML shell with CSS foundation"
+```
+
+---
+
+### Task 2: Hero Section
+
+**Files:**
+- Modify: `index.html` (insert into `<body>`)
+
+**Step 1: Add the hero section inside `<body>`**
+
+Insert this as the first child of `<body>`:
+
+```html
+  <header class="hero">
+    <div class="container">
+      <h1>One app. Many repos.<br>Even more agents.</h1>
+      <p class="hero-sub">Manifold orchestrates multiple AI agents across isolated branches so they never step on each other's code. No wrappers. No plugins. The real CLI, untouched.</p>
+      <a href="#" class="btn-primary">Download for macOS</a>
+      <div class="hero-terminals">
+        <pre class="terminal"><span class="terminal-header">Claude Code — feature/auth-refactor</span><span class="accent">~/manifold $</span> claude
+<span style="color:#888">⠋ Refactoring auth middleware...</span>
+<span style="color:#888">  Updated: src/auth/middleware.ts</span>
+<span style="color:#888">  Updated: src/auth/session.ts</span>
+<span style="color:#888">  Created: src/auth/oauth2.ts</span>
+<span class="accent">✓ 3 files changed</span>
+<span class="accent">~/manifold $</span> <span class="cursor">█</span></pre>
+        <pre class="terminal"><span class="terminal-header">Codex — feature/api-pagination</span><span class="accent">~/manifold $</span> codex
+<span style="color:#888">⠋ Adding cursor-based pagination...</span>
+<span style="color:#888">  Updated: src/api/routes.ts</span>
+<span style="color:#888">  Updated: src/api/handlers.ts</span>
+<span class="accent">✓ 2 files changed</span>
+<span class="accent">~/manifold $</span> <span class="cursor">█</span></pre>
+        <pre class="terminal"><span class="terminal-header">Gemini CLI — feature/test-coverage</span><span class="accent">~/manifold $</span> gemini
+<span style="color:#888">⠋ Writing integration tests...</span>
+<span style="color:#888">  Created: tests/api/pagination.test.ts</span>
+<span style="color:#888">  Created: tests/auth/oauth2.test.ts</span>
+<span style="color:#888">  Running: 24 tests...</span>
+<span class="accent">✓ 24 passed, 0 failed</span>
+<span class="accent">~/manifold $</span> <span class="cursor">█</span></pre>
+      </div>
+    </div>
+  </header>
+```
+
+**Step 2: Add hero CSS inside the `<style>` block (before the closing `</style>`)**
+
+```css
+    /* Hero */
+    .hero {
+      padding: 8rem 0 6rem;
+    }
+
+    .hero h1 {
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-sub {
+      color: #999;
+      margin-bottom: 2.5rem;
+      font-size: 1.25rem;
+    }
+
+    .hero-terminals {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-top: 4rem;
+    }
+```
+
+**Step 3: Verify in browser**
+
+Expect: Large headline, grey subtext, chartreuse button, three terminal panes side by side with blinking cursors.
+
+**Step 4: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add hero section with terminal panes"
+```
+
+---
+
+### Task 3: Section 1 — "The Real Thing"
+
+**Files:**
+- Modify: `index.html` (insert after `</header>`)
+
+**Step 1: Add section 1 HTML after the closing `</header>` tag**
+
+```html
+  <section id="real-thing">
+    <div class="container">
+      <h2>Your tools. Unmodified.</h2>
+      <p>Manifold doesn't wrap, proxy, or re-skin your agents. When you open Claude Code inside Manifold, it <em>is</em> Claude Code — the same binary, the same keybindings, the same output. Same for Codex. Same for Gemini CLI. Manifold gives each agent its own terminal, its own workspace, its own branch. You keep the experience you already know.</p>
+      <div class="comparison">
+        <div class="comparison-col">
+          <h3>Claude Code in your terminal</h3>
+          <pre class="terminal"><span class="accent">~ $</span> claude
+<span style="color:#888">Claude Code v1.0.12</span>
+<span style="color:#888">Model: claude-opus-4-6</span>
+
+<span class="accent">&gt;</span> refactor the auth module
+<span style="color:#888">I'll refactor the auth module to use</span>
+<span style="color:#888">OAuth2 with PKCE flow...</span>
+
+<span style="color:#888">  Updated: src/auth/middleware.ts</span>
+<span style="color:#888">  Updated: src/auth/session.ts</span>
+<span class="accent">~/project $</span> <span class="cursor">█</span></pre>
+        </div>
+        <div class="comparison-col">
+          <h3>Claude Code in Manifold</h3>
+          <pre class="terminal"><span class="accent">~ $</span> claude
+<span style="color:#888">Claude Code v1.0.12</span>
+<span style="color:#888">Model: claude-opus-4-6</span>
+
+<span class="accent">&gt;</span> refactor the auth module
+<span style="color:#888">I'll refactor the auth module to use</span>
+<span style="color:#888">OAuth2 with PKCE flow...</span>
+
+<span style="color:#888">  Updated: src/auth/middleware.ts</span>
+<span style="color:#888">  Updated: src/auth/session.ts</span>
+<span class="accent">~/project $</span> <span class="cursor">█</span></pre>
+        </div>
+      </div>
+      <p class="comparison-caption">Spot the difference. There isn't one.</p>
+    </div>
+  </section>
+```
+
+**Step 2: Add comparison CSS**
+
+```css
+    /* Comparison */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .comparison-col h3 {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .comparison-caption {
+      color: #666;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      margin-top: 1.5rem;
+      font-style: italic;
+    }
+```
+
+**Step 3: Verify and commit**
+
+```bash
+git add index.html
+git commit -m "feat: add section 1 — the real thing"
+```
+
+---
+
+### Task 4: Section 2 — "Parallel Without the Pain"
+
+**Files:**
+- Modify: `index.html` (insert after section 1)
+
+**Step 1: Add section 2 HTML**
+
+```html
+  <section id="parallel">
+    <div class="container">
+      <h2>Three agents. One repo. Zero conflicts.</h2>
+      <p>Every agent works on its own isolated branch — a full copy of your codebase that stays in sync with main but never collides with another agent's work. Manifold creates, manages, and cleans up these branches automatically. You focus on what to build. Manifold handles where they build it.</p>
+      <div class="features">
+        <div class="feature">
+          <span class="feature-icon accent">&#9656;</span>
+          <div>
+            <strong>Isolated branches</strong>
+            <span>Each agent gets a dedicated workspace branched from your main codebase. No merge conflicts between agents.</span>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon accent">&#9656;</span>
+          <div>
+            <strong>Automatic lifecycle</strong>
+            <span>Branches are created when you spawn an agent, removed when you're done. No manual git choreography.</span>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon accent">&#9656;</span>
+          <div>
+            <strong>Live status</strong>
+            <span>See which agent is running, waiting, or finished. Watch file changes stream in real time.</span>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon accent">&#9656;</span>
+          <div>
+            <strong>Conflict detection</strong>
+            <span>If two agents touch the same file, Manifold flags it immediately — before it becomes a merge nightmare.</span>
+          </div>
+        </div>
+      </div>
+      <pre class="terminal branch-diagram">
+<span class="accent">main</span>  ─────────────────────────────────────────────────────
+         │              │                    │
+         │              │                    │
+         ├── <span class="accent">feature/auth-refactor</span>          │
+         │   <span style="color:#888">Claude Code ● running</span>        │
+         │              │                    │
+         │              ├── <span class="accent">feature/api-pagination</span>
+         │              │   <span style="color:#888">Codex ● running</span>
+         │              │                    │
+         │              │                    ├── <span class="accent">feature/test-coverage</span>
+         │              │                    │   <span style="color:#888">Gemini CLI ✓ done</span>
+         │              │                    │
+</pre>
+    </div>
+  </section>
+```
+
+**Step 2: Add features + branch diagram CSS**
+
+```css
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .feature strong {
+      display: block;
+      font-family: var(--font-mono);
+      margin-bottom: 0.25rem;
+    }
+
+    .feature span {
+      color: #999;
+      font-size: 0.95rem;
+    }
+
+    .branch-diagram {
+      margin-top: 2rem;
+      padding: 2rem;
+      font-size: 0.8rem;
+    }
+```
+
+**Step 3: Verify and commit**
+
+```bash
+git add index.html
+git commit -m "feat: add section 2 — parallel without the pain"
+```
+
+---
+
+### Task 5: Section 3 — "Multi-Repo, Multi-Agent"
+
+**Files:**
+- Modify: `index.html` (insert after section 2)
+
+**Step 1: Add section 3 HTML**
+
+```html
+  <section id="multi-repo">
+    <div class="container">
+      <h2>One app. Every project. All your agents.</h2>
+      <p>Register all your repositories in Manifold. Switch between them instantly. Spin up agents on any project with one click. Run a Claude Code agent refactoring your backend while a Gemini agent writes tests for your frontend — in two different repos, at the same time, from the same window.</p>
+      <pre class="terminal project-switcher">
+  <span class="accent">MANIFOLD — Projects</span>
+
+  <span style="background:#1a1a1a;padding:0.25rem 0.5rem">▸ <span class="accent">manifold-api</span>         3 agents running</span>
+    ▸ manifold-web          1 agent running
+    ▸ manifold-cli          idle
+    ▸ design-system         2 agents running
+
+  ────────────────────────────────────────
+
+  <span style="color:#888">↑↓ navigate   ↵ select   n new project   q quit</span>
+</pre>
+    </div>
+  </section>
+```
+
+**Step 2: Add project switcher CSS**
+
+```css
+    /* Project switcher */
+    .project-switcher {
+      margin-top: 3rem;
+      max-width: 500px;
+      padding: 1.5rem;
+    }
+```
+
+**Step 3: Verify and commit**
+
+```bash
+git add index.html
+git commit -m "feat: add section 3 — multi-repo multi-agent"
+```
+
+---
+
+### Task 6: Section 4 — "Built for the Terminal"
+
+**Files:**
+- Modify: `index.html` (insert after section 3)
+
+**Step 1: Add section 4 HTML**
+
+```html
+  <section id="terminal">
+    <div class="container">
+      <h2>Developers don't need dashboards. They need terminals.</h2>
+      <p>Manifold's UI is a multi-pane terminal environment. Each agent gets a real PTY. You see raw output — streamed, unfiltered. Open a shell tab alongside your agents. Browse files and diffs without leaving the app. Everything is keyboard-navigable.</p>
+      <ul class="feature-list">
+        <li>Resizable multi-pane layout (agent terminal + code viewer + file tree + shell)</li>
+        <li>Built-in diff viewer — compare agent branches against main</li>
+        <li>File browser with syntax highlighting</li>
+        <li>Shell tabs that persist across restarts</li>
+        <li>AI-generated branch names and commit messages</li>
+      </ul>
+      <pre class="terminal ui-mockup">
+<span class="accent">┌──────────────────────────────────────────────────────────────────────────────┐</span>
+<span class="accent">│</span> <span class="accent">MANIFOLD</span>  manifold-api  <span style="color:#888">│ agents: 3  │ branch: main  │ ⌘K: commands</span>  <span class="accent">│</span>
+<span class="accent">├────────────────────────┬─────────────────────────┬───────────────────────────┤</span>
+<span class="accent">│</span> <span style="color:#666">FILE TREE</span>              <span class="accent">│</span> <span class="accent">Claude Code</span>               <span class="accent">│</span> <span style="color:#666">DIFF VIEWER</span>              <span class="accent">│</span>
+<span class="accent">│</span>                        <span class="accent">│</span> <span style="color:#666">feature/auth-refactor</span>    <span class="accent">│</span>                           <span class="accent">│</span>
+<span class="accent">│</span>  <span class="accent">▾</span> src/                 <span class="accent">│</span>                           <span class="accent">│</span>  <span style="color:#666">src/auth/middleware.ts</span>  <span class="accent">│</span>
+<span class="accent">│</span>    <span class="accent">▾</span> auth/              <span class="accent">│</span> <span class="accent">$</span> Refactoring auth...    <span class="accent">│</span>                           <span class="accent">│</span>
+<span class="accent">│</span>      <span class="accent">●</span> middleware.ts    <span class="accent">│</span>   Updated middleware.ts  <span class="accent">│</span>  <span style="color:#c00">- const auth = basic()</span> <span class="accent">│</span>
+<span class="accent">│</span>      <span class="accent">●</span> session.ts       <span class="accent">│</span>   Updated session.ts     <span class="accent">│</span>  <span class="accent">+ const auth = oauth2()</span> <span class="accent">│</span>
+<span class="accent">│</span>        oauth2.ts        <span class="accent">│</span>   Created oauth2.ts      <span class="accent">│</span>  <span style="color:#c00">- secret: env.KEY</span>      <span class="accent">│</span>
+<span class="accent">│</span>    <span class="accent">▾</span> api/               <span class="accent">│</span> <span class="accent">✓ 3 files changed</span>       <span class="accent">│</span>  <span class="accent">+ secret: vault.get()</span>  <span class="accent">│</span>
+<span class="accent">│</span>      routes.ts          <span class="accent">│</span> <span class="accent">$</span> <span class="cursor">█</span>                     <span class="accent">│</span>                           <span class="accent">│</span>
+<span class="accent">│</span>      handlers.ts        <span class="accent">│</span>                           <span class="accent">│</span>                           <span class="accent">│</span>
+<span class="accent">├────────────────────────┼─────────────────────────┼───────────────────────────┤</span>
+<span class="accent">│</span> <span style="color:#666">AGENTS</span>                 <span class="accent">│</span> <span style="color:#666">Codex</span>                     <span class="accent">│</span> <span style="color:#666">Gemini CLI</span>                <span class="accent">│</span>
+<span class="accent">│</span>                        <span class="accent">│</span> <span style="color:#666">feature/api-pagination</span>   <span class="accent">│</span> <span style="color:#666">feature/test-coverage</span>    <span class="accent">│</span>
+<span class="accent">│</span>  <span class="accent">●</span> Claude  <span class="accent">running</span>   <span class="accent">│</span>                           <span class="accent">│</span>                           <span class="accent">│</span>
+<span class="accent">│</span>  <span class="accent">●</span> Codex   <span class="accent">running</span>   <span class="accent">│</span> <span class="accent">$</span> Adding pagination...   <span class="accent">│</span> <span class="accent">✓</span> 24 tests passed        <span class="accent">│</span>
+<span class="accent">│</span>  <span style="color:#888">○</span> Gemini  <span style="color:#888">done</span>      <span class="accent">│</span>   Updated routes.ts      <span class="accent">│</span> <span class="accent">$</span> <span class="cursor">█</span>                     <span class="accent">│</span>
+<span class="accent">│</span>                        <span class="accent">│</span> <span class="accent">$</span> <span class="cursor">█</span>                     <span class="accent">│</span>                           <span class="accent">│</span>
+<span class="accent">└────────────────────────┴─────────────────────────┴───────────────────────────┘</span>
+</pre>
+    </div>
+  </section>
+```
+
+**Step 2: Add feature list + UI mockup CSS**
+
+```css
+    /* Feature list */
+    .feature-list {
+      list-style: none;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-list li {
+      padding: 0.5rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    .feature-list li::before {
+      content: '▸ ';
+      color: var(--chartreuse);
+    }
+
+    /* UI Mockup */
+    .ui-mockup {
+      font-size: 0.75rem;
+      line-height: 1.3;
+      padding: 0;
+      overflow-x: auto;
+    }
+```
+
+**Step 3: Verify and commit**
+
+```bash
+git add index.html
+git commit -m "feat: add section 4 — built for the terminal"
+```
+
+---
+
+### Task 7: Section 5 — "How It Works"
+
+**Files:**
+- Modify: `index.html` (insert after section 4)
+
+**Step 1: Add section 5 HTML**
+
+```html
+  <section id="how-it-works">
+    <div class="container">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Register a project</h3>
+          <p>Point Manifold at any git repository on your machine.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Spawn agents</h3>
+          <p>Pick an agent (Claude Code, Codex, or Gemini CLI), describe the task, and launch. Manifold creates an isolated branch and drops the agent in.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Ship the work</h3>
+          <p>Review diffs, commit changes, and create pull requests — all from inside Manifold.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+```
+
+**Step 2: Add steps CSS**
+
+```css
+    /* Steps */
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .step-number {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--chartreuse);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .step h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .step p {
+      color: #999;
+      font-size: 1rem;
+    }
+```
+
+**Step 3: Verify and commit**
+
+```bash
+git add index.html
+git commit -m "feat: add section 5 — how it works"
+```
+
+---
+
+### Task 8: Section 6 — "Open Source" + Footer
+
+**Files:**
+- Modify: `index.html` (insert after section 5)
+
+**Step 1: Add section 6 and footer HTML**
+
+```html
+  <section id="open-source">
+    <div class="container">
+      <h2>Open source. Free. Built by developers, for developers.</h2>
+      <p>Manifold is MIT-licensed and available on GitHub. Star it if you find it useful. Open an issue if you don't.</p>
+      <a href="#" class="btn-outline" style="margin-top: 2rem">View on GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-brand">Manifold</span>
+      <span class="footer-links">
+        <a href="#">GitHub</a>
+        <span class="footer-sep">·</span>
+        <span style="color:#666">MIT License</span>
+        <span class="footer-sep">·</span>
+        <span style="color:#666">v0.1.0</span>
+      </span>
+    </div>
+  </footer>
+```
+
+**Step 2: Add footer CSS**
+
+```css
+    /* Footer */
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--chartreuse);
+    }
+
+    .footer-links {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+    }
+
+    .footer-sep {
+      color: #333;
+      margin: 0 0.5rem;
+    }
+```
+
+**Step 3: Verify and commit**
+
+```bash
+git add index.html
+git commit -m "feat: add section 6 and footer"
+```
+
+---
+
+### Task 9: Responsive Styles
+
+**Files:**
+- Modify: `index.html` (add media queries to `<style>`)
+
+**Step 1: Add responsive CSS before the closing `</style>` tag**
+
+```css
+    /* Tablet */
+    @media (max-width: 1024px) {
+      h1 {
+        font-size: 3rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .hero-terminals {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .ui-mockup {
+        font-size: 0.6rem;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.25rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      section {
+        padding: 4rem 0;
+      }
+
+      .hero {
+        padding: 4rem 0 3rem;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .ui-mockup {
+        display: none;
+      }
+
+      .branch-diagram {
+        font-size: 0.65rem;
+      }
+    }
+```
+
+**Step 2: Verify at different viewport widths**
+
+Check 1440px, 768px, and 375px viewports. Sections should stack on narrow screens. Hero text should be readable on mobile.
+
+**Step 3: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add responsive styles"
+```
+
+---
+
+### Task 10: Final Review + Polish
+
+**Files:**
+- Modify: `index.html` (minor adjustments)
+
+**Step 1: Review the complete page end-to-end**
+
+Open in browser, scroll through all sections, verify:
+- All sections present and readable
+- Cursor blink animation working
+- Responsive breakpoints functioning
+- No horizontal overflow on any screen size
+- Links styled correctly
+- Color contrast acceptable
+
+**Step 2: Fix any issues found during review**
+
+**Step 3: Commit any final adjustments**
+
+```bash
+git add index.html
+git commit -m "feat: polish and final adjustments"
+```
