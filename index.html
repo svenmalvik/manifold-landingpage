@@ -533,18 +533,16 @@
         </div>
       </div>
       <pre class="terminal branch-diagram" role="img" aria-label="Git branch diagram showing three feature branches forking from main">
-<span class="accent">main</span>  ─────────────────────────────────────────────────────
-         │              │                    │
-         │              │                    │
-         ├── <span class="accent">feature/auth-refactor</span>          │
-         │   <span class="dim">Claude Code ● running</span>        │
-         │              │                    │
-         │              ├── <span class="accent">feature/api-pagination</span>
-         │              │   <span class="dim">Codex ● running</span>
-         │              │                    │
-         │              │                    ├── <span class="accent">feature/test-coverage</span>
-         │              │                    │   <span class="dim">Gemini CLI ✓ done</span>
-         │              │                    │
+<span class="accent">main</span> ----------------------------------------
+  |
+  +-- <span class="accent">feature/auth-refactor</span>
+  |     <span class="dim">Claude Code ................... running</span>
+  |
+  +-- <span class="accent">feature/api-pagination</span>
+  |     <span class="dim">Codex ........................ running</span>
+  |
+  +-- <span class="accent">feature/test-coverage</span>
+        <span class="dim">Gemini CLI ..................... done</span>
 </pre>
     </div>
   </section>
@@ -580,27 +578,27 @@
         <li>AI-generated branch names and commit messages</li>
       </ul>
       <pre class="terminal ui-mockup" role="img" aria-label="Manifold UI mockup showing file tree, agent terminals, and diff viewer in a multi-pane layout">
-<span class="accent">┌──────────────────────────────────────────────────────────────────────────────┐</span>
-<span class="accent">│</span> <span class="accent">MANIFOLD</span>  manifold-api  <span class="dim">│ agents: 3  │ branch: main  │ ⌘K: commands</span>  <span class="accent">│</span>
-<span class="accent">├────────────────────────┬─────────────────────────┬───────────────────────────┤</span>
-<span class="accent">│</span> <span class="dimmer">FILE TREE</span>              <span class="accent">│</span> <span class="accent">Claude Code</span>               <span class="accent">│</span> <span class="dimmer">DIFF VIEWER</span>              <span class="accent">│</span>
-<span class="accent">│</span>                        <span class="accent">│</span> <span class="dimmer">feature/auth-refactor</span>    <span class="accent">│</span>                           <span class="accent">│</span>
-<span class="accent">│</span>  <span class="accent">▾</span> src/                 <span class="accent">│</span>                           <span class="accent">│</span>  <span class="dimmer">src/auth/middleware.ts</span>  <span class="accent">│</span>
-<span class="accent">│</span>    <span class="accent">▾</span> auth/              <span class="accent">│</span> <span class="accent">$</span> Refactoring auth...    <span class="accent">│</span>                           <span class="accent">│</span>
-<span class="accent">│</span>      <span class="accent">●</span> middleware.ts    <span class="accent">│</span>   Updated middleware.ts  <span class="accent">│</span>  <span class="diff-removed">- const auth = basic()</span> <span class="accent">│</span>
-<span class="accent">│</span>      <span class="accent">●</span> session.ts       <span class="accent">│</span>   Updated session.ts     <span class="accent">│</span>  <span class="accent">+ const auth = oauth2()</span> <span class="accent">│</span>
-<span class="accent">│</span>        oauth2.ts        <span class="accent">│</span>   Created oauth2.ts      <span class="accent">│</span>  <span class="diff-removed">- secret: env.KEY</span>      <span class="accent">│</span>
-<span class="accent">│</span>    <span class="accent">▾</span> api/               <span class="accent">│</span> <span class="accent">✓ 3 files changed</span>       <span class="accent">│</span>  <span class="accent">+ secret: vault.get()</span>  <span class="accent">│</span>
-<span class="accent">│</span>      routes.ts          <span class="accent">│</span> <span class="accent">$</span> <span class="cursor">█</span>                     <span class="accent">│</span>                           <span class="accent">│</span>
-<span class="accent">│</span>      handlers.ts        <span class="accent">│</span>                           <span class="accent">│</span>                           <span class="accent">│</span>
-<span class="accent">├────────────────────────┼─────────────────────────┼───────────────────────────┤</span>
-<span class="accent">│</span> <span class="dimmer">AGENTS</span>                 <span class="accent">│</span> <span class="dimmer">Codex</span>                     <span class="accent">│</span> <span class="dimmer">Gemini CLI</span>                <span class="accent">│</span>
-<span class="accent">│</span>                        <span class="accent">│</span> <span class="dimmer">feature/api-pagination</span>   <span class="accent">│</span> <span class="dimmer">feature/test-coverage</span>    <span class="accent">│</span>
-<span class="accent">│</span>                        <span class="accent">│</span>                           <span class="accent">│</span>                           <span class="accent">│</span>
-<span class="accent">│</span>  <span class="accent">●</span> Claude  <span class="accent">running</span>   <span class="accent">│</span> <span class="accent">$</span> Adding pagination...   <span class="accent">│</span> <span class="accent">✓</span> 24 tests passed        <span class="accent">│</span>
-<span class="accent">│</span>  <span class="accent">●</span> Codex   <span class="accent">running</span>   <span class="accent">│</span>   Updated routes.ts      <span class="accent">│</span> <span class="accent">$</span> <span class="cursor">█</span>                     <span class="accent">│</span>
-<span class="accent">│</span>  <span class="dim">○</span> Gemini  <span class="dim">done</span>      <span class="accent">│</span> <span class="accent">$</span> <span class="cursor">█</span>                     <span class="accent">│</span>                           <span class="accent">│</span>
-<span class="accent">└────────────────────────┴─────────────────────────┴───────────────────────────┘</span>
+<span class="accent">+------------------------+--------------------------+--------------------------+</span>
+<span class="accent">|</span> <span class="accent">MANIFOLD</span>  manifold-api <span class="accent">|</span> agents: 3   branch: main <span class="accent">|</span> cmd-K: commands          <span class="accent">|</span>
+<span class="accent">+------------------------+--------------------------+--------------------------+</span>
+<span class="accent">|</span> <span class="dimmer">FILE TREE</span>              <span class="accent">|</span> <span class="accent">Claude Code</span>              <span class="accent">|</span> <span class="dimmer">DIFF VIEWER</span>              <span class="accent">|</span>
+<span class="accent">|</span>                        <span class="accent">|</span> <span class="dimmer">feature/auth-refactor</span>    <span class="accent">|</span>                          <span class="accent">|</span>
+<span class="accent">|</span>  <span class="accent">v</span> src/                <span class="accent">|</span>                          <span class="accent">|</span>  <span class="dimmer">src/auth/middleware.ts</span>  <span class="accent">|</span>
+<span class="accent">|</span>    <span class="accent">v</span> auth/             <span class="accent">|</span> <span class="accent">$</span> Refactoring auth...    <span class="accent">|</span>                          <span class="accent">|</span>
+<span class="accent">|</span>      <span class="accent">*</span> middleware.ts   <span class="accent">|</span>   Updated middleware.ts  <span class="accent">|</span>  <span class="diff-removed">- const auth = basic()</span>  <span class="accent">|</span>
+<span class="accent">|</span>      <span class="accent">*</span> session.ts      <span class="accent">|</span>   Updated session.ts     <span class="accent">|</span>  <span class="accent">+ const auth = oauth2()</span> <span class="accent">|</span>
+<span class="accent">|</span>        oauth2.ts       <span class="accent">|</span>   Created oauth2.ts      <span class="accent">|</span>  <span class="diff-removed">- secret: env.KEY</span>       <span class="accent">|</span>
+<span class="accent">|</span>    <span class="accent">v</span> api/              <span class="accent">|</span> <span class="accent">+</span> 3 files changed        <span class="accent">|</span>  <span class="accent">+ secret: vault.get()</span>   <span class="accent">|</span>
+<span class="accent">|</span>      routes.ts         <span class="accent">|</span> <span class="accent">$</span> <span class="cursor">_</span>                      <span class="accent">|</span>                          <span class="accent">|</span>
+<span class="accent">|</span>      handlers.ts       <span class="accent">|</span>                          <span class="accent">|</span>                          <span class="accent">|</span>
+<span class="accent">+------------------------+--------------------------+--------------------------+</span>
+<span class="accent">|</span> <span class="dimmer">AGENTS</span>                 <span class="accent">|</span> <span class="dimmer">Codex</span>                    <span class="accent">|</span> <span class="dimmer">Gemini CLI</span>               <span class="accent">|</span>
+<span class="accent">|</span>                        <span class="accent">|</span> <span class="dimmer">feature/api-pagination</span>   <span class="accent">|</span> <span class="dimmer">feature/test-coverage</span>    <span class="accent">|</span>
+<span class="accent">|</span>                        <span class="accent">|</span>                          <span class="accent">|</span>                          <span class="accent">|</span>
+<span class="accent">|</span>  <span class="accent">*</span> Claude  <span class="accent">running</span>     <span class="accent">|</span> <span class="accent">$</span> Adding pagination...   <span class="accent">|</span> <span class="accent">+</span> 24 tests passed        <span class="accent">|</span>
+<span class="accent">|</span>  <span class="accent">*</span> Codex   <span class="accent">running</span>     <span class="accent">|</span>   Updated routes.ts      <span class="accent">|</span> <span class="accent">$</span> <span class="cursor">_</span>                      <span class="accent">|</span>
+<span class="accent">|</span>  <span class="dim">o</span> Gemini  <span class="dim">done</span>        <span class="accent">|</span> <span class="accent">$</span> <span class="cursor">_</span>                      <span class="accent">|</span>                          <span class="accent">|</span>
+<span class="accent">+------------------------+--------------------------+--------------------------+</span>
 </pre>
     </div>
   </section>
