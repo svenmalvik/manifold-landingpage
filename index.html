@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manifold — One app. Many repos. Even more agents.</title>
+  <meta name="description" content="Manifold orchestrates multiple AI agents across isolated branches so they never step on each other's code.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0A0A0A;
+      --chartreuse: #CCFF00;
+      --white: #FAFAFA;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: 4rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: var(--chartreuse);
+    }
+
+    p {
+      font-size: 1.125rem;
+      max-width: 680px;
+    }
+
+    a {
+      color: var(--chartreuse);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    pre {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      line-height: 1.4;
+      overflow-x: auto;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 6rem 0;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .accent {
+      color: var(--chartreuse);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--chartreuse);
+      color: var(--black);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      border: 2px solid var(--chartreuse);
+      border-radius: 0;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--chartreuse);
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--chartreuse);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      border: 2px solid var(--chartreuse);
+      border-radius: 0;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-outline:hover {
+      background: var(--chartreuse);
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .cursor {
+      color: var(--chartreuse);
+      animation: blink 1s step-end infinite;
+    }
+
+    .terminal {
+      background: #111;
+      border: 1px solid #333;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .terminal-header {
+      display: flex;
+      gap: 0.5rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid #333;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+</body>
+</html>
