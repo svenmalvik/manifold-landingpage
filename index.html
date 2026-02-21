@@ -201,6 +201,44 @@
       margin-top: 1.5rem;
       font-style: italic;
     }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .feature strong {
+      display: block;
+      font-family: var(--font-mono);
+      margin-bottom: 0.25rem;
+    }
+
+    .feature span {
+      color: #999;
+      font-size: 0.95rem;
+    }
+
+    .branch-diagram {
+      margin-top: 2rem;
+      padding: 2rem;
+      font-size: 0.8rem;
+    }
   </style>
 </head>
 <body>
@@ -270,6 +308,57 @@
         </div>
       </div>
       <p class="comparison-caption">Spot the difference. There isn't one.</p>
+    </div>
+  </section>
+
+  <section id="parallel">
+    <div class="container">
+      <h2>Three agents. One repo. Zero conflicts.</h2>
+      <p>Every agent works on its own isolated branch — a full copy of your codebase that stays in sync with main but never collides with another agent's work. Manifold creates, manages, and cleans up these branches automatically. You focus on what to build. Manifold handles where they build it.</p>
+      <div class="features">
+        <div class="feature">
+          <span class="feature-icon accent">&#9656;</span>
+          <div>
+            <strong>Isolated branches</strong>
+            <span>Each agent gets a dedicated workspace branched from your main codebase. No merge conflicts between agents.</span>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon accent">&#9656;</span>
+          <div>
+            <strong>Automatic lifecycle</strong>
+            <span>Branches are created when you spawn an agent, removed when you're done. No manual git choreography.</span>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon accent">&#9656;</span>
+          <div>
+            <strong>Live status</strong>
+            <span>See which agent is running, waiting, or finished. Watch file changes stream in real time.</span>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon accent">&#9656;</span>
+          <div>
+            <strong>Conflict detection</strong>
+            <span>If two agents touch the same file, Manifold flags it immediately — before it becomes a merge nightmare.</span>
+          </div>
+        </div>
+      </div>
+      <pre class="terminal branch-diagram">
+<span class="accent">main</span>  ─────────────────────────────────────────────────────
+         │              │                    │
+         │              │                    │
+         ├── <span class="accent">feature/auth-refactor</span>          │
+         │   <span style="color:#888">Claude Code ● running</span>        │
+         │              │                    │
+         │              ├── <span class="accent">feature/api-pagination</span>
+         │              │   <span style="color:#888">Codex ● running</span>
+         │              │                    │
+         │              │                    ├── <span class="accent">feature/test-coverage</span>
+         │              │                    │   <span style="color:#888">Gemini CLI ✓ done</span>
+         │              │                    │
+</pre>
     </div>
   </section>
 
