@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manifold — One app. Many repos. Even more agents.</title>
   <meta name="description" content="Manifold orchestrates multiple AI agents across isolated branches so they never step on each other's code.">
+  <meta property="og:title" content="Manifold — One app. Many repos. Even more agents.">
+  <meta property="og:description" content="Manifold orchestrates multiple AI agents across isolated branches so they never step on each other's code.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230A0A0A' width='100' height='100'/><text y='.88em' x='.15em' font-size='80' fill='%23CCFF00' font-family='monospace'>M</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -153,7 +158,7 @@
       border-bottom: 1px solid #333;
       font-family: var(--font-mono);
       font-size: 0.75rem;
-      color: #666;
+      color: #777;
     }
 
     /* Hero */
@@ -188,13 +193,13 @@
 
     .comparison-col h3 {
       font-size: 1rem;
-      color: #666;
+      color: #777;
       margin-bottom: 1rem;
       font-weight: 400;
     }
 
     .comparison-caption {
-      color: #666;
+      color: #777;
       font-family: var(--font-mono);
       font-size: 0.875rem;
       margin-top: 1.5rem;
@@ -329,6 +334,30 @@
       margin: 0 0.5rem;
     }
 
+    /* Utility classes */
+    .dim { color: #888; }
+    .dimmer { color: #777; }
+    .diff-removed { color: #c00; }
+    .highlight-row { background: #1a1a1a; padding: 0.25rem 0.5rem; }
+
+    /* Accessibility */
+    a:focus-visible,
+    .btn-primary:focus-visible,
+    .btn-outline:focus-visible {
+      outline: 2px solid var(--chartreuse);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor {
+        animation: none;
+      }
+    }
+
+    #open-source .btn-outline {
+      margin-top: 2rem;
+    }
+
     /* Tablet */
     @media (max-width: 1024px) {
       h1 {
@@ -408,23 +437,23 @@
       <a href="#" class="btn-primary">Download for macOS</a>
       <div class="hero-terminals">
         <pre class="terminal"><span class="terminal-header">Claude Code — feature/auth-refactor</span><span class="accent">~/manifold $</span> claude
-<span style="color:#888">⠋ Refactoring auth middleware...</span>
-<span style="color:#888">  Updated: src/auth/middleware.ts</span>
-<span style="color:#888">  Updated: src/auth/session.ts</span>
-<span style="color:#888">  Created: src/auth/oauth2.ts</span>
+<span class="dim">⠋ Refactoring auth middleware...</span>
+<span class="dim">  Updated: src/auth/middleware.ts</span>
+<span class="dim">  Updated: src/auth/session.ts</span>
+<span class="dim">  Created: src/auth/oauth2.ts</span>
 <span class="accent">✓ 3 files changed</span>
 <span class="accent">~/manifold $</span> <span class="cursor">█</span></pre>
         <pre class="terminal"><span class="terminal-header">Codex — feature/api-pagination</span><span class="accent">~/manifold $</span> codex
-<span style="color:#888">⠋ Adding cursor-based pagination...</span>
-<span style="color:#888">  Updated: src/api/routes.ts</span>
-<span style="color:#888">  Updated: src/api/handlers.ts</span>
+<span class="dim">⠋ Adding cursor-based pagination...</span>
+<span class="dim">  Updated: src/api/routes.ts</span>
+<span class="dim">  Updated: src/api/handlers.ts</span>
 <span class="accent">✓ 2 files changed</span>
 <span class="accent">~/manifold $</span> <span class="cursor">█</span></pre>
         <pre class="terminal"><span class="terminal-header">Gemini CLI — feature/test-coverage</span><span class="accent">~/manifold $</span> gemini
-<span style="color:#888">⠋ Writing integration tests...</span>
-<span style="color:#888">  Created: tests/api/pagination.test.ts</span>
-<span style="color:#888">  Created: tests/auth/oauth2.test.ts</span>
-<span style="color:#888">  Running: 24 tests...</span>
+<span class="dim">⠋ Writing integration tests...</span>
+<span class="dim">  Created: tests/api/pagination.test.ts</span>
+<span class="dim">  Created: tests/auth/oauth2.test.ts</span>
+<span class="dim">  Running: 24 tests...</span>
 <span class="accent">✓ 24 passed, 0 failed</span>
 <span class="accent">~/manifold $</span> <span class="cursor">█</span></pre>
       </div>
@@ -439,29 +468,29 @@
         <div class="comparison-col">
           <h3>Claude Code in your terminal</h3>
           <pre class="terminal"><span class="accent">~ $</span> claude
-<span style="color:#888">Claude Code v1.0.12</span>
-<span style="color:#888">Model: claude-opus-4-6</span>
+<span class="dim">Claude Code v1.0.12</span>
+<span class="dim">Model: claude-opus-4-6</span>
 
 <span class="accent">&gt;</span> refactor the auth module
-<span style="color:#888">I'll refactor the auth module to use</span>
-<span style="color:#888">OAuth2 with PKCE flow...</span>
+<span class="dim">I'll refactor the auth module to use</span>
+<span class="dim">OAuth2 with PKCE flow...</span>
 
-<span style="color:#888">  Updated: src/auth/middleware.ts</span>
-<span style="color:#888">  Updated: src/auth/session.ts</span>
+<span class="dim">  Updated: src/auth/middleware.ts</span>
+<span class="dim">  Updated: src/auth/session.ts</span>
 <span class="accent">~/project $</span> <span class="cursor">█</span></pre>
         </div>
         <div class="comparison-col">
           <h3>Claude Code in Manifold</h3>
           <pre class="terminal"><span class="accent">~ $</span> claude
-<span style="color:#888">Claude Code v1.0.12</span>
-<span style="color:#888">Model: claude-opus-4-6</span>
+<span class="dim">Claude Code v1.0.12</span>
+<span class="dim">Model: claude-opus-4-6</span>
 
 <span class="accent">&gt;</span> refactor the auth module
-<span style="color:#888">I'll refactor the auth module to use</span>
-<span style="color:#888">OAuth2 with PKCE flow...</span>
+<span class="dim">I'll refactor the auth module to use</span>
+<span class="dim">OAuth2 with PKCE flow...</span>
 
-<span style="color:#888">  Updated: src/auth/middleware.ts</span>
-<span style="color:#888">  Updated: src/auth/session.ts</span>
+<span class="dim">  Updated: src/auth/middleware.ts</span>
+<span class="dim">  Updated: src/auth/session.ts</span>
 <span class="accent">~/project $</span> <span class="cursor">█</span></pre>
         </div>
       </div>
@@ -503,18 +532,18 @@
           </div>
         </div>
       </div>
-      <pre class="terminal branch-diagram">
+      <pre class="terminal branch-diagram" role="img" aria-label="Git branch diagram showing three feature branches forking from main">
 <span class="accent">main</span>  ─────────────────────────────────────────────────────
          │              │                    │
          │              │                    │
          ├── <span class="accent">feature/auth-refactor</span>          │
-         │   <span style="color:#888">Claude Code ● running</span>        │
+         │   <span class="dim">Claude Code ● running</span>        │
          │              │                    │
          │              ├── <span class="accent">feature/api-pagination</span>
-         │              │   <span style="color:#888">Codex ● running</span>
+         │              │   <span class="dim">Codex ● running</span>
          │              │                    │
          │              │                    ├── <span class="accent">feature/test-coverage</span>
-         │              │                    │   <span style="color:#888">Gemini CLI ✓ done</span>
+         │              │                    │   <span class="dim">Gemini CLI ✓ done</span>
          │              │                    │
 </pre>
     </div>
@@ -524,22 +553,22 @@
     <div class="container">
       <h2>One app. Every project. All your agents.</h2>
       <p>Register all your repositories in Manifold. Switch between them instantly. Spin up agents on any project with one click. Run a Claude Code agent refactoring your backend while a Gemini agent writes tests for your frontend — in two different repos, at the same time, from the same window.</p>
-      <pre class="terminal project-switcher">
+      <pre class="terminal project-switcher" role="img" aria-label="Project switcher showing four repositories with active agent counts">
   <span class="accent">MANIFOLD — Projects</span>
 
-  <span style="background:#1a1a1a;padding:0.25rem 0.5rem">▸ <span class="accent">manifold-api</span>         3 agents running</span>
+  <span class="highlight-row">▸ <span class="accent">manifold-api</span>         3 agents running</span>
     ▸ manifold-web          1 agent running
     ▸ manifold-cli          idle
     ▸ design-system         2 agents running
 
   ────────────────────────────────────────
 
-  <span style="color:#888">↑↓ navigate   ↵ select   n new project   q quit</span>
+  <span class="dim">↑↓ navigate   ↵ select   n new project   q quit</span>
 </pre>
     </div>
   </section>
 
-  <section id="terminal">
+  <section id="built-for-terminal">
     <div class="container">
       <h2>Developers don't need dashboards. They need terminals.</h2>
       <p>Manifold's UI is a multi-pane terminal environment. Each agent gets a real PTY. You see raw output — streamed, unfiltered. Open a shell tab alongside your agents. Browse files and diffs without leaving the app. Everything is keyboard-navigable. No electron bloat. No loading spinners. Just your agents, working.</p>
@@ -550,27 +579,27 @@
         <li>Shell tabs that persist across restarts</li>
         <li>AI-generated branch names and commit messages</li>
       </ul>
-      <pre class="terminal ui-mockup">
+      <pre class="terminal ui-mockup" role="img" aria-label="Manifold UI mockup showing file tree, agent terminals, and diff viewer in a multi-pane layout">
 <span class="accent">┌──────────────────────────────────────────────────────────────────────────────┐</span>
-<span class="accent">│</span> <span class="accent">MANIFOLD</span>  manifold-api  <span style="color:#888">│ agents: 3  │ branch: main  │ ⌘K: commands</span>  <span class="accent">│</span>
+<span class="accent">│</span> <span class="accent">MANIFOLD</span>  manifold-api  <span class="dim">│ agents: 3  │ branch: main  │ ⌘K: commands</span>  <span class="accent">│</span>
 <span class="accent">├────────────────────────┬─────────────────────────┬───────────────────────────┤</span>
-<span class="accent">│</span> <span style="color:#666">FILE TREE</span>              <span class="accent">│</span> <span class="accent">Claude Code</span>               <span class="accent">│</span> <span style="color:#666">DIFF VIEWER</span>              <span class="accent">│</span>
-<span class="accent">│</span>                        <span class="accent">│</span> <span style="color:#666">feature/auth-refactor</span>    <span class="accent">│</span>                           <span class="accent">│</span>
-<span class="accent">│</span>  <span class="accent">▾</span> src/                 <span class="accent">│</span>                           <span class="accent">│</span>  <span style="color:#666">src/auth/middleware.ts</span>  <span class="accent">│</span>
+<span class="accent">│</span> <span class="dimmer">FILE TREE</span>              <span class="accent">│</span> <span class="accent">Claude Code</span>               <span class="accent">│</span> <span class="dimmer">DIFF VIEWER</span>              <span class="accent">│</span>
+<span class="accent">│</span>                        <span class="accent">│</span> <span class="dimmer">feature/auth-refactor</span>    <span class="accent">│</span>                           <span class="accent">│</span>
+<span class="accent">│</span>  <span class="accent">▾</span> src/                 <span class="accent">│</span>                           <span class="accent">│</span>  <span class="dimmer">src/auth/middleware.ts</span>  <span class="accent">│</span>
 <span class="accent">│</span>    <span class="accent">▾</span> auth/              <span class="accent">│</span> <span class="accent">$</span> Refactoring auth...    <span class="accent">│</span>                           <span class="accent">│</span>
-<span class="accent">│</span>      <span class="accent">●</span> middleware.ts    <span class="accent">│</span>   Updated middleware.ts  <span class="accent">│</span>  <span style="color:#c00">- const auth = basic()</span> <span class="accent">│</span>
+<span class="accent">│</span>      <span class="accent">●</span> middleware.ts    <span class="accent">│</span>   Updated middleware.ts  <span class="accent">│</span>  <span class="diff-removed">- const auth = basic()</span> <span class="accent">│</span>
 <span class="accent">│</span>      <span class="accent">●</span> session.ts       <span class="accent">│</span>   Updated session.ts     <span class="accent">│</span>  <span class="accent">+ const auth = oauth2()</span> <span class="accent">│</span>
-<span class="accent">│</span>        oauth2.ts        <span class="accent">│</span>   Created oauth2.ts      <span class="accent">│</span>  <span style="color:#c00">- secret: env.KEY</span>      <span class="accent">│</span>
+<span class="accent">│</span>        oauth2.ts        <span class="accent">│</span>   Created oauth2.ts      <span class="accent">│</span>  <span class="diff-removed">- secret: env.KEY</span>      <span class="accent">│</span>
 <span class="accent">│</span>    <span class="accent">▾</span> api/               <span class="accent">│</span> <span class="accent">✓ 3 files changed</span>       <span class="accent">│</span>  <span class="accent">+ secret: vault.get()</span>  <span class="accent">│</span>
 <span class="accent">│</span>      routes.ts          <span class="accent">│</span> <span class="accent">$</span> <span class="cursor">█</span>                     <span class="accent">│</span>                           <span class="accent">│</span>
 <span class="accent">│</span>      handlers.ts        <span class="accent">│</span>                           <span class="accent">│</span>                           <span class="accent">│</span>
 <span class="accent">├────────────────────────┼─────────────────────────┼───────────────────────────┤</span>
-<span class="accent">│</span> <span style="color:#666">AGENTS</span>                 <span class="accent">│</span> <span style="color:#666">Codex</span>                     <span class="accent">│</span> <span style="color:#666">Gemini CLI</span>                <span class="accent">│</span>
-<span class="accent">│</span>                        <span class="accent">│</span> <span style="color:#666">feature/api-pagination</span>   <span class="accent">│</span> <span style="color:#666">feature/test-coverage</span>    <span class="accent">│</span>
+<span class="accent">│</span> <span class="dimmer">AGENTS</span>                 <span class="accent">│</span> <span class="dimmer">Codex</span>                     <span class="accent">│</span> <span class="dimmer">Gemini CLI</span>                <span class="accent">│</span>
+<span class="accent">│</span>                        <span class="accent">│</span> <span class="dimmer">feature/api-pagination</span>   <span class="accent">│</span> <span class="dimmer">feature/test-coverage</span>    <span class="accent">│</span>
 <span class="accent">│</span>                        <span class="accent">│</span>                           <span class="accent">│</span>                           <span class="accent">│</span>
 <span class="accent">│</span>  <span class="accent">●</span> Claude  <span class="accent">running</span>   <span class="accent">│</span> <span class="accent">$</span> Adding pagination...   <span class="accent">│</span> <span class="accent">✓</span> 24 tests passed        <span class="accent">│</span>
 <span class="accent">│</span>  <span class="accent">●</span> Codex   <span class="accent">running</span>   <span class="accent">│</span>   Updated routes.ts      <span class="accent">│</span> <span class="accent">$</span> <span class="cursor">█</span>                     <span class="accent">│</span>
-<span class="accent">│</span>  <span style="color:#888">○</span> Gemini  <span style="color:#888">done</span>      <span class="accent">│</span> <span class="accent">$</span> <span class="cursor">█</span>                     <span class="accent">│</span>                           <span class="accent">│</span>
+<span class="accent">│</span>  <span class="dim">○</span> Gemini  <span class="dim">done</span>      <span class="accent">│</span> <span class="accent">$</span> <span class="cursor">█</span>                     <span class="accent">│</span>                           <span class="accent">│</span>
 <span class="accent">└────────────────────────┴─────────────────────────┴───────────────────────────┘</span>
 </pre>
     </div>
@@ -603,7 +632,7 @@
     <div class="container">
       <h2>Open source. Free. Built by developers, for developers.</h2>
       <p>Manifold is MIT-licensed and available on GitHub. Star it if you find it useful. Open an issue if you don't.</p>
-      <a href="#" class="btn-outline" style="margin-top: 2rem">View on GitHub</a>
+      <a href="#" class="btn-outline">View on GitHub</a>
     </div>
   </section>
 
@@ -613,9 +642,9 @@
       <span class="footer-links">
         <a href="#">GitHub</a>
         <span class="footer-sep">&middot;</span>
-        <span style="color:#666">MIT License</span>
+        <span class="dimmer">MIT License</span>
         <span class="footer-sep">&middot;</span>
-        <span style="color:#666">v0.1.0</span>
+        <span class="dimmer">v0.1.0</span>
       </span>
     </div>
   </footer>
