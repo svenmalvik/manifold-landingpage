@@ -178,6 +178,29 @@
       gap: 1rem;
       margin-top: 4rem;
     }
+
+    /* Comparison */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .comparison-col h3 {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .comparison-caption {
+      color: #666;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      margin-top: 1.5rem;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -211,6 +234,44 @@
       </div>
     </div>
   </header>
+
+  <section id="real-thing">
+    <div class="container">
+      <h2>Your tools. Unmodified.</h2>
+      <p>Manifold doesn't wrap, proxy, or re-skin your agents. When you open Claude Code inside Manifold, it <em>is</em> Claude Code — the same binary, the same keybindings, the same output. Same for Codex. Same for Gemini CLI. Manifold gives each agent its own terminal, its own workspace, its own branch. You keep the experience you already know.</p>
+      <div class="comparison">
+        <div class="comparison-col">
+          <h3>Claude Code in your terminal</h3>
+          <pre class="terminal"><span class="accent">~ $</span> claude
+<span style="color:#888">Claude Code v1.0.12</span>
+<span style="color:#888">Model: claude-opus-4-6</span>
+
+<span class="accent">&gt;</span> refactor the auth module
+<span style="color:#888">I'll refactor the auth module to use</span>
+<span style="color:#888">OAuth2 with PKCE flow...</span>
+
+<span style="color:#888">  Updated: src/auth/middleware.ts</span>
+<span style="color:#888">  Updated: src/auth/session.ts</span>
+<span class="accent">~/project $</span> <span class="cursor">█</span></pre>
+        </div>
+        <div class="comparison-col">
+          <h3>Claude Code in Manifold</h3>
+          <pre class="terminal"><span class="accent">~ $</span> claude
+<span style="color:#888">Claude Code v1.0.12</span>
+<span style="color:#888">Model: claude-opus-4-6</span>
+
+<span class="accent">&gt;</span> refactor the auth module
+<span style="color:#888">I'll refactor the auth module to use</span>
+<span style="color:#888">OAuth2 with PKCE flow...</span>
+
+<span style="color:#888">  Updated: src/auth/middleware.ts</span>
+<span style="color:#888">  Updated: src/auth/session.ts</span>
+<span class="accent">~/project $</span> <span class="cursor">█</span></pre>
+        </div>
+      </div>
+      <p class="comparison-caption">Spot the difference. There isn't one.</p>
+    </div>
+  </section>
 
 </body>
 </html>
