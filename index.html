@@ -239,6 +239,13 @@
       padding: 2rem;
       font-size: 0.8rem;
     }
+
+    /* Project switcher */
+    .project-switcher {
+      margin-top: 3rem;
+      max-width: 500px;
+      padding: 1.5rem;
+    }
   </style>
 </head>
 <body>
@@ -358,6 +365,25 @@
          │              │                    ├── <span class="accent">feature/test-coverage</span>
          │              │                    │   <span style="color:#888">Gemini CLI ✓ done</span>
          │              │                    │
+</pre>
+    </div>
+  </section>
+
+  <section id="multi-repo">
+    <div class="container">
+      <h2>One app. Every project. All your agents.</h2>
+      <p>Register all your repositories in Manifold. Switch between them instantly. Spin up agents on any project with one click. Run a Claude Code agent refactoring your backend while a Gemini agent writes tests for your frontend — in two different repos, at the same time, from the same window.</p>
+      <pre class="terminal project-switcher">
+  <span class="accent">MANIFOLD — Projects</span>
+
+  <span style="background:#1a1a1a;padding:0.25rem 0.5rem">▸ <span class="accent">manifold-api</span>         3 agents running</span>
+    ▸ manifold-web          1 agent running
+    ▸ manifold-cli          idle
+    ▸ design-system         2 agents running
+
+  ────────────────────────────────────────
+
+  <span style="color:#888">↑↓ navigate   ↵ select   n new project   q quit</span>
 </pre>
     </div>
   </section>
