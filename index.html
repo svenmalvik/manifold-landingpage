@@ -187,6 +187,19 @@
       font-size: 1.25rem;
     }
 
+    .hero-screenshot {
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-screenshot img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #333;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    }
+
     .hero-terminals {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -460,6 +473,9 @@
       <h1>One app. Many repos.<br>Even more agents.</h1>
       <p class="hero-sub">Manifold orchestrates multiple AI agents across isolated branches so they never step on each other's code. No wrappers. No plugins. The real CLI, untouched.</p>
       <a href="#" class="btn-primary">Download for macOS</a>
+      <div class="hero-screenshot">
+        <img src="screenshot-2026-02-22-12-54-05.jpg" alt="Manifold desktop app showing multi-pane terminal layout with project sidebar, Claude Code agent, and code viewer" width="1600" height="900">
+      </div>
       <div class="hero-terminals">
         <pre class="terminal"><span class="terminal-header">Claude Code — feature/auth-refactor</span><span class="accent">~/manifold $</span> claude
 <span class="dim">⠋ Refactoring auth middleware...</span>
