@@ -254,6 +254,44 @@
       margin-right: 0.5rem;
       vertical-align: middle;
     }
+
+    /* Features */
+    .features-section {
+      padding: 4.5rem 0;
+    }
+
+    .features-intro {
+      color: var(--text-dim);
+      font-size: 1.05rem;
+      max-width: 600px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      transition: border-color 0.15s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 <body>
@@ -302,6 +340,31 @@
       <span>Ollama</span>
     </div>
   </div>
+
+  <section id="features" class="features-section">
+    <div class="container">
+      <h2>Built for parallel agents</h2>
+      <p class="features-intro">Run multiple AI coding agents on the same codebase without stepping on each other's work.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Isolated branches</h3>
+          <p>Each agent gets a dedicated git worktree branched from main. No merge conflicts between agents. Manifold creates, manages, and cleans them up.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Every project, one window</h3>
+          <p>Register all your repositories. Switch between them instantly. Run agents on your backend and frontend simultaneously from the same app.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Any agent, side by side</h3>
+          <p>Claude Code, Codex, Gemini CLI, Copilot, Ollama — run them all in parallel on the same repo. Real PTY terminals, real output, no wrappers.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Open source</h3>
+          <p>MIT licensed, free forever. Built by developers, for developers. Star it if you find it useful. Open an issue if you don't.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </body>
 </html>
