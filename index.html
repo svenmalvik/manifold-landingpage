@@ -226,6 +226,34 @@
       height: auto;
       display: block;
     }
+
+    /* Agents Strip */
+    .agents-strip {
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .agents-strip-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .agents-strip-inner span::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--chartreuse);
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body>
@@ -265,6 +293,15 @@
       </div>
     </div>
   </header>
+  <div class="agents-strip">
+    <div class="container agents-strip-inner">
+      <span>Claude Code</span>
+      <span>Gemini CLI</span>
+      <span>Codex</span>
+      <span>Copilot</span>
+      <span>Ollama</span>
+    </div>
+  </div>
 
 </body>
 </html>
