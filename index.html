@@ -292,6 +292,65 @@
       color: var(--text-dim);
       font-size: 0.95rem;
     }
+
+    /* Simple View */
+    .simple-section {
+      padding: 4.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .simple-split {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .simple-screenshot {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+      background: var(--surface);
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dimmer);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .simple-screenshot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .simple-text p {
+      color: var(--text-dim);
+      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+      max-width: 440px;
+    }
+
+    .simple-features {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .simple-features li {
+      padding: 0.4rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    .simple-features li::before {
+      content: '▸ ';
+      color: var(--chartreuse);
+    }
   </style>
 </head>
 <body>
@@ -361,6 +420,25 @@
         <div class="feature-card">
           <h3>Open source</h3>
           <p>MIT licensed, free forever. Built by developers, for developers. Star it if you find it useful. Open an issue if you don't.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="simple-view" class="simple-section">
+    <div class="container">
+      <h2>Not just for developers</h2>
+      <div class="simple-split">
+        <div class="simple-screenshot">[ Simple View Screenshot ]</div>
+        <div class="simple-text">
+          <p>Your designers, PMs, and ops team can use Manifold too. Simple View is a lightweight app builder — no terminal required. Anyone on your team can describe what they need and ship it.</p>
+          <p>Build custom provisioners that deploy straight into your infrastructure. Azure Kubernetes, AWS, GCP — whatever you run, Manifold plugs into it.</p>
+          <ul class="simple-features">
+            <li>Simple View for non-developers</li>
+            <li>Custom provisioners for deep infra integration</li>
+            <li>Deploy to any runtime environment</li>
+            <li>Developers and non-devs, same tool</li>
+          </ul>
         </div>
       </div>
     </div>
