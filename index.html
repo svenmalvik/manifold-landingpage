@@ -358,6 +358,26 @@
       color: var(--chartreuse);
     }
 
+    /* Custom Provisioners CTA */
+    .custom-provisioners {
+      padding: 4.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .custom-provisioners-inner {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .custom-provisioners-inner p {
+      color: var(--text-dim);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      max-width: 520px;
+    }
+
     /* Footer */
     footer {
       padding: 3rem 0;
@@ -442,7 +462,8 @@
       }
 
       .features-section,
-      .simple-section {
+      .simple-section,
+      .custom-provisioners {
         padding: 3rem 0;
       }
 
@@ -560,6 +581,14 @@
           </ul>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="custom-provisioners">
+    <div class="container custom-provisioners-inner">
+      <h2>Build custom provisioners</h2>
+      <p>Need Manifold to deploy into your infrastructure? We help teams build custom provisioners for Kubernetes, cloud platforms, and internal toolchains.</p>
+      <a href="mailto:sven@malvik.de" class="btn-outline">Reach out &rarr;</a>
     </div>
   </section>
 
