@@ -115,6 +115,117 @@
       color: var(--text);
       text-decoration: none;
     }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-block;
+      background: var(--chartreuse);
+      color: var(--logo-bg);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.85rem 1.75rem;
+      border: 2px solid var(--chartreuse);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--chartreuse);
+      text-decoration: none;
+    }
+
+    .btn-primary:focus-visible {
+      outline: 2px solid var(--chartreuse);
+      outline-offset: 2px;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.85rem 1.75rem;
+      border: 2px solid var(--accent);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: var(--canvas);
+      text-decoration: none;
+    }
+
+    .btn-outline:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 5rem 0 4rem;
+    }
+
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      margin-bottom: 1rem;
+    }
+
+    .hero-sub {
+      color: var(--text-dim);
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-intel {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .hero-intel:hover {
+      color: var(--accent-hover);
+    }
+
+    .hero-meta {
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dimmer);
+    }
+
+    .hero-screenshot {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-screenshot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -135,6 +246,25 @@
       </div>
     </div>
   </nav>
+  <header class="hero">
+    <div class="container">
+      <div class="hero-split">
+        <div class="hero-text">
+          <h1>One app. Many repos.<br>Even more agents.</h1>
+          <p class="hero-sub">Manifold orchestrates multiple AI agents across isolated branches so they never step on each other's code. No wrappers. No plugins. The real CLI, untouched.</p>
+          <div class="hero-ctas">
+            <a href="https://github.com/vippsas/manifold/releases/download/v0.1.65/Manifold-0.1.65-arm64.dmg" class="btn-primary">Download for macOS (Apple Silicon)</a>
+            <a href="https://github.com/vippsas/manifold/releases/download/v0.1.65/Manifold-0.1.65.dmg" class="hero-intel">Intel</a>
+            <a href="https://github.com/svenmalvik/manifold" class="btn-outline">View on GitHub</a>
+          </div>
+          <p class="hero-meta">Free &amp; open source · macOS · v0.1.65</p>
+        </div>
+        <div class="hero-screenshot">
+          <img src="https://raw.githubusercontent.com/vippsas/manifold/main/manifold.jpg" alt="Manifold desktop app showing multi-pane terminal layout with project sidebar, Claude Code agent, and code viewer" width="1600" height="900">
+        </div>
+      </div>
+    </div>
+  </header>
 
 </body>
 </html>
