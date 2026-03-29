@@ -351,6 +351,51 @@
       content: '▸ ';
       color: var(--chartreuse);
     }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .footer-cta .btn-primary {
+      font-size: 0.8rem;
+      padding: 0.65rem 1.25rem;
+    }
+
+    .footer-links {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-dimmer);
+    }
+
+    .footer-links a {
+      color: var(--text-dim);
+    }
+
+    .footer-sep {
+      margin: 0 0.5rem;
+      color: var(--border);
+    }
   </style>
 </head>
 <body>
@@ -443,6 +488,24 @@
       </div>
     </div>
   </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-brand">Manifold</span>
+        <div class="footer-cta">
+          <a href="https://github.com/vippsas/manifold/releases/download/v0.1.65/Manifold-0.1.65-arm64.dmg" class="btn-primary">Download for macOS</a>
+        </div>
+      </div>
+      <span class="footer-links">
+        <a href="https://github.com/svenmalvik/manifold">GitHub</a>
+        <span class="footer-sep">&middot;</span>
+        <span>MIT License</span>
+        <span class="footer-sep">&middot;</span>
+        <span>v0.1.65</span>
+      </span>
+    </div>
+  </footer>
 
 </body>
 </html>
