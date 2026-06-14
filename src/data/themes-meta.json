@@ -1,0 +1,122 @@
+[
+  {
+    "id": "manifold-dark",
+    "label": "Manifold Dark",
+    "type": "dark",
+    "swatch": {
+      "bg": "#0A0A0E",
+      "fg": "#E8E8F0",
+      "accent": "#C9906D"
+    }
+  },
+  {
+    "id": "manifold-light",
+    "label": "Manifold Light",
+    "type": "light",
+    "swatch": {
+      "bg": "#FFFFFF",
+      "fg": "#1C1A17",
+      "accent": "#9E6038"
+    }
+  },
+  {
+    "id": "garfield-dark",
+    "label": "Garfield Dark",
+    "type": "dark",
+    "swatch": {
+      "bg": "#0A0A0E",
+      "fg": "#E8E8F0",
+      "accent": "#5A78FF"
+    }
+  },
+  {
+    "id": "garfield-light",
+    "label": "Garfield Light",
+    "type": "light",
+    "swatch": {
+      "bg": "#FFFFFF",
+      "fg": "#1C1A17",
+      "accent": "#FF5B24"
+    }
+  },
+  {
+    "id": "neon-dark",
+    "label": "Neon Dark",
+    "type": "dark",
+    "swatch": {
+      "bg": "#0A0A0E",
+      "fg": "#E8E8F0",
+      "accent": "#D6FE51"
+    }
+  },
+  {
+    "id": "neon-light",
+    "label": "Neon Light",
+    "type": "light",
+    "swatch": {
+      "bg": "#FDFDFB",
+      "fg": "#1A1410",
+      "accent": "#FF1F8E"
+    }
+  },
+  {
+    "id": "royal-dark",
+    "label": "Royal Dark",
+    "type": "dark",
+    "swatch": {
+      "bg": "#06080F",
+      "fg": "#E6ECF7",
+      "accent": "#E2C275"
+    }
+  },
+  {
+    "id": "royal-light",
+    "label": "Royal Light",
+    "type": "light",
+    "swatch": {
+      "bg": "#F6F1E7",
+      "fg": "#2B2E3A",
+      "accent": "#1B3A6B"
+    }
+  },
+  {
+    "id": "jade-dark",
+    "label": "Jade Dark",
+    "type": "dark",
+    "swatch": {
+      "bg": "#080C0A",
+      "fg": "#E6F0EA",
+      "accent": "#5FBF9A"
+    }
+  },
+  {
+    "id": "jade-light",
+    "label": "Jade Light",
+    "type": "light",
+    "swatch": {
+      "bg": "#F8FBF8",
+      "fg": "#1A2620",
+      "accent": "#1E6B4F"
+    }
+  },
+  {
+    "id": "platinum-dark",
+    "label": "Platinum Dark",
+    "type": "dark",
+    "swatch": {
+      "bg": "#0A0A0C",
+      "fg": "#E8E9ED",
+      "accent": "#C8CDD6"
+    }
+  },
+  {
+    "id": "platinum-light",
+    "label": "Platinum Light",
+    "type": "light",
+    "swatch": {
+      "bg": "#FAFAFB",
+      "fg": "#25272D",
+      "accent": "#3A4150"
+    }
+  }
+]

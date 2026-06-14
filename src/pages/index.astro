@@ -73,7 +73,18 @@ const runtimes = ['Claude Code', 'Codex', 'Gemini CLI', 'Copilot', 'Ollama']
 
 <style>
   .shot { max-width: 940px; margin: var(--space-2xl) auto 0; padding: 0 var(--space-xl); }
-  .shot-frame { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-overlay); }
+  .shot-frame {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    /* Separation is theme-aware (see --frame-* in themes.css): on dark canvases
+       it comes from light — a brushed-metal top highlight + faint rim over a
+       deep lift; on light canvases from a dark hairline + a softer shadow. */
+    box-shadow:
+      inset 0 1px 0 var(--frame-highlight),
+      0 0 0 1px var(--frame-rim),
+      var(--frame-shadow);
+  }
   .shot-frame img { width: 100%; height: auto; display: block; }
   .shot-caption { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: var(--space-md); }
 

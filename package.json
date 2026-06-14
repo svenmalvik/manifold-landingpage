@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "themes": "node scripts/gen-themes.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
