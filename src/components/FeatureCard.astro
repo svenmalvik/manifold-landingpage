@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string
+  href: string
+  image?: string
+  imageAlt?: string
+}
+const { title, href, image, imageAlt = '' } = Astro.props
+---
+<article class="feature-card reveal">
+  {image && (
+    <div class="feature-shot">
+      <img src={image} alt={imageAlt} loading="lazy" />
+    </div>
+  )}
+  <h3 class="feature-title">{title}</h3>
+  <p class="feature-desc"><slot /></p>
+  <a href={href} class="feature-link">Learn more →</a>
+</article>
+
+<style>
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent-cyan);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    transition: transform 200ms ease, box-shadow 200ms ease, opacity 300ms ease;
+  }
+  .feature-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-elevated); }
+  .feature-shot {
+    margin: calc(-1 * var(--space-lg)) calc(-1 * var(--space-lg)) var(--space-md);
+    border-bottom: 1px solid var(--border);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    overflow: hidden;
+    background: var(--canvas);
+  }
+  .feature-shot img { width: 100%; height: auto; display: block; }
+  .feature-title { color: var(--accent-gold); font-size: 1.1rem; margin-bottom: var(--space-sm); }
+  .feature-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: var(--space-md); flex: 1; }
+  .feature-link { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent-blue); }
+  .feature-link:hover { color: var(--accent-cyan); }
+</style>

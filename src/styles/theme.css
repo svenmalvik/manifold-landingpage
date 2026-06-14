@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Surfaces */
+  --canvas: #06080F;
+  --surface: #0E1017;
+  --surface-2: #141722;
+  --border: #1A1D28;
+  --divider: #14161F;
+
+  /* Text */
+  --text-primary: #E6ECF7;
+  --text-secondary: #A0A8BB;
+  --text-muted: #5E6B82;
+
+  /* Accents */
+  --accent-gold: #E2C275;
+  --accent-gold-hover: #ECD18F;
+  --accent-blue: #8FB4F2;
+  --accent-cyan: #7FC8E8;
+
+  /* Status (gemstone) */
+  --status-success: #43C97A;
+  --status-error: #D2495F;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Spacing scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 64px;
+
+  /* Radius */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* Shadows */
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-overlay: 0 20px 70px rgba(0, 0, 0, 0.6);
+
+  /* Layout */
+  --max-width: 1080px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent-blue); text-decoration: none; transition: color 150ms ease; }
+a:hover { color: var(--accent-cyan); }
+a:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 2px; }
+
+h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; color: var(--text-primary); }
+
+code, pre { font-family: var(--font-mono); }
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--space-xl); }
+
+@media (max-width: 768px) {
+  .container { padding: 0 var(--space-md); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* Scroll-reveal utility (used by feature cards) */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

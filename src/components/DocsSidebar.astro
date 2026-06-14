@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content'
+const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order)
+const current = Astro.url.pathname.replace(/\/$/, '')
+---
+<nav class="docs-sidebar" aria-label="Documentation">
+  <ul>
+    {docs.map((doc) => {
+      const href = doc.id === 'getting-started' ? '/docs' : `/docs/${doc.id}`
+      const isActive = current === href || (href === '/docs' && current === '/docs')
+      return (
+        <li>
+          <a href={href} class={isActive ? 'active' : ''}>{doc.data.title}</a>
+        </li>
+      )
+    })}
+  </ul>
+</nav>
+
+<style>
+  .docs-sidebar ul { list-style: none; }
+  .docs-sidebar li { margin-bottom: var(--space-xs); }
+  .docs-sidebar a {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-left: 2px solid transparent;
+    transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .docs-sidebar a:hover { background: var(--surface); color: var(--text-primary); }
+  .docs-sidebar a.active { color: var(--accent-gold); border-left-color: var(--accent-gold); background: var(--surface); }
+</style>

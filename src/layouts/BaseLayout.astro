@@ -1,0 +1,37 @@
+---
+import '../styles/theme.css'
+import Navigation from '../components/Navigation.astro'
+import Footer from '../components/Footer.astro'
+
+interface Props {
+  title?: string
+  description?: string
+}
+const {
+  title = 'Manifold — A full developer workspace for orchestrating AI agents',
+  description = 'Run Claude Code, Codex, Gemini CLI, and other CLI coding agents side by side on the same repo — each on its own isolated branch, in a real terminal.',
+} = Astro.props
+const ogImage = 'https://manifold.no/images/Manifold_ov.png'
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://manifold.no" />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={ogImage} />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024' width='1024' height='1024'><rect width='1024' height='1024' rx='192' ry='192' fill='%230A0A0A'/><defs><mask id='g'><rect width='1024' height='1024' fill='white'/><circle cx='410' cy='440' r='52' fill='black'/><circle cx='614' cy='440' r='52' fill='black'/><path d='M430 540Q512 610 594 540Q570 580 512 590Q454 580 430 540Z' fill='black'/></mask></defs><path mask='url(%23g)' fill='%23CCFF00' d='M512 180C340 180 260 310 260 440L260 700Q260 740 290 740Q320 710 350 740Q380 770 410 740Q440 710 470 740Q500 770 530 740Q560 710 590 740Q620 770 650 740Q680 710 710 740Q740 770 764 740L764 440C764 310 684 180 512 180Z'/></svg>" />
+</head>
+<body>
+  <Navigation />
+  <slot />
+  <Footer />
+</body>
+</html>
