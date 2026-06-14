@@ -1,0 +1,118 @@
+---
+// Compact theme control matching the Manifold app's TitleBar: a dropdown of
+// theme family NAMES plus a light/dark toggle button. The active theme id is
+// `${family}-${mode}` (e.g. neon-dark). Picking a family preserves the current
+// mode; the toggle flips the mode within the current family. The toggle shows
+// the CURRENT mode's icon (☀ when dark, ☾ when light), exactly like the app.
+const FAMILIES = [
+  { id: 'manifold', label: 'Manifold' },
+  { id: 'garfield', label: 'Garfield' },
+  { id: 'neon', label: 'Neon' },
+  { id: 'royal', label: 'Royal' },
+  { id: 'jade', label: 'Jade' },
+  { id: 'platinum', label: 'Platinum' },
+]
+---
+<div class="theme-control">
+  <select class="theme-select" aria-label="Theme">
+    {FAMILIES.map((f) => <option value={f.id}>{f.label}</option>)}
+  </select>
+  <button type="button" class="theme-toggle" aria-label="Switch to Light theme" title="Switch to Light theme">☀</button>
+</div>
+
+<style>
+  .theme-control { display: flex; align-items: center; gap: 6px; }
+
+  .theme-select {
+    height: 28px;
+    padding: 0 26px 0 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%23999' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 9px center;
+    outline: none;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .theme-select:hover { color: var(--text-primary); border-color: var(--accent-gold); }
+  .theme-select:focus-visible { border-color: var(--accent-gold); box-shadow: 0 0 0 2px var(--accent-gold); }
+  /* Native option list is OS-rendered; keep it readable on every theme. */
+  .theme-select option { background: var(--surface); color: var(--text-primary); }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 28px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .theme-toggle:hover { color: var(--text-primary); border-color: var(--accent-gold); }
+  .theme-toggle:focus-visible { outline: none; border-color: var(--accent-gold); box-shadow: 0 0 0 2px var(--accent-gold); }
+</style>
+
+<script>
+  const root = document.querySelector('.theme-control')
+  if (root) {
+    const html = document.documentElement
+    const KEY = 'manifold-theme'
+    const FALLBACK = 'neon-dark'
+    const FAMILIES = ['manifold', 'garfield', 'neon', 'royal', 'jade', 'platinum']
+
+    const select = root.querySelector('.theme-select') as HTMLSelectElement
+    const toggle = root.querySelector('.theme-toggle') as HTMLButtonElement
+
+    const familyOf = (id: string) => FAMILIES.find((f) => id.startsWith(f)) || 'neon'
+    const modeOf = (id: string) => (id.endsWith('-light') ? 'light' : 'dark')
+    const current = () => html.getAttribute('data-theme') || FALLBACK
+
+    function sync(id: string) {
+      select.value = familyOf(id)
+      const dark = modeOf(id) === 'dark'
+      toggle.textContent = dark ? '☀' : '☾'
+      const label = dark ? 'Switch to Light theme' : 'Switch to Dark theme'
+      toggle.title = label
+      toggle.setAttribute('aria-label', label)
+    }
+
+    function apply(id: string) {
+      html.setAttribute('data-theme', id)
+      try {
+        localStorage.setItem(KEY, id)
+      } catch (e) {
+        /* storage may be unavailable; theme still applies for the session */
+      }
+      sync(id)
+    }
+
+    select.addEventListener('change', () => {
+      const suffix = modeOf(current()) === 'light' ? '-light' : '-dark'
+      apply(`${select.value}${suffix}`)
+    })
+
+    toggle.addEventListener('click', () => {
+      const fam = familyOf(current())
+      apply(modeOf(current()) === 'light' ? `${fam}-dark` : `${fam}-light`)
+    })
+
+    // Reflect the theme set before paint by the inline head script.
+    sync(current())
+  }
+</script>

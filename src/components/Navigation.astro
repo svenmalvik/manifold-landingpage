@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro'
+import ThemeSwitcher from './ThemeSwitcher.astro'
 ---
 <nav class="nav">
   <div class="container nav-inner">
@@ -10,6 +11,7 @@ import Logo from './Logo.astro'
     <div class="nav-links">
       <a href="/docs">Docs</a>
       <a href="https://github.com/vippsas/manifold">GitHub</a>
+      <ThemeSwitcher />
       <a href="https://github.com/vippsas/manifold/releases" class="nav-download">Download</a>
     </div>
   </div>
@@ -21,7 +23,7 @@ import Logo from './Logo.astro'
     top: 0;
     z-index: 100;
     padding: var(--space-md) 0;
-    background: rgba(6, 8, 15, 0.85);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
