@@ -1,0 +1,32 @@
+---
+import Logo from './Logo.astro'
+const version = '0.2.83'
+---
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <Logo size={20} />
+      <span>Manifold</span>
+      <span class="footer-version">v{version}</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/vippsas/manifold">GitHub</a>
+      <a href="https://github.com/vippsas/manifold/releases">Releases</a>
+      <a href="https://github.com/vippsas/manifold/discussions">Discussions</a>
+      <a href="https://github.com/vippsas/manifold/blob/main/LICENSE">MIT License</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { padding: var(--space-2xl) 0; border-top: 1px solid var(--border); margin-top: var(--space-2xl); }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md); }
+  .footer-brand { display: flex; align-items: center; gap: var(--space-sm); font-family: var(--font-mono); font-weight: 700; color: var(--text-primary); }
+  .footer-version { color: var(--text-muted); font-weight: 400; }
+  .footer-links { display: flex; gap: var(--space-lg); flex-wrap: wrap; }
+  .footer-links a { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-secondary); }
+  .footer-links a:hover { color: var(--accent-cyan); }
+  @media (max-width: 768px) {
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
