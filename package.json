@@ -1,7 +1,7 @@
 {
   "name": "manifold-landingpage",
   "type": "module",
-  "version": "0.2.83",
+  "version": "0.2.86",
   "private": true,
   "scripts": {
     "dev": "astro dev",
