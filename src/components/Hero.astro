@@ -1,0 +1,55 @@
+---
+const version = '0.2.83'
+const armDmg = `https://github.com/vippsas/manifold/releases/download/v${version}/Manifold-${version}-arm64.dmg`
+const intelDmg = `https://github.com/vippsas/manifold/releases/download/v${version}/Manifold-${version}.dmg`
+---
+<header class="hero">
+  <div class="container">
+    <div class="wordmark">MANIFOLD</div>
+    <div class="hero-rule"></div>
+    <h1 class="hero-tagline">A full developer workspace for orchestrating AI agents</h1>
+    <p class="hero-lede">
+      Run Claude Code, Codex, Gemini CLI, and other CLI coding agents side by side on the
+      same codebase — each on its own isolated branch, in a real terminal.
+    </p>
+    <div class="hero-ctas">
+      <a href={armDmg} class="btn-primary">Download for macOS (Apple Silicon)</a>
+      <a href={intelDmg} class="hero-intel">Intel</a>
+    </div>
+    <p class="hero-meta">Free &amp; open source · macOS · v{version}</p>
+  </div>
+</header>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: var(--space-2xl) 0 var(--space-xl);
+    background: radial-gradient(120% 70% at 50% -10%, #0C1424 0%, var(--canvas) 55%);
+  }
+  .wordmark {
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    font-size: clamp(2.4rem, 7vw, 4.6rem);
+    line-height: 1;
+    color: var(--text-primary);
+    padding-left: 0.4em;
+  }
+  .hero-rule { width: 56px; height: 1px; background: var(--accent-gold); margin: var(--space-lg) auto; }
+  .hero-tagline { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 600; color: var(--text-primary); max-width: 700px; margin: 0 auto; }
+  .hero-lede { font-size: 1.05rem; color: var(--text-secondary); max-width: 620px; margin: var(--space-md) auto 0; }
+  .hero-ctas { display: flex; gap: var(--space-md); align-items: center; justify-content: center; flex-wrap: wrap; margin-top: var(--space-xl); }
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent-gold);
+    color: var(--canvas);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: var(--radius-sm);
+    transition: filter 150ms ease;
+  }
+  .btn-primary:hover { filter: brightness(1.1); color: var(--canvas); }
+  .hero-intel { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-blue); }
+  .hero-meta { margin-top: var(--space-md); font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); }
+</style>
