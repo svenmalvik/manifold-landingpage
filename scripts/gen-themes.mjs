@@ -32,6 +32,37 @@ function rgba(hex, a) {
   return `rgba(${r}, ${g}, ${b}, ${a})`
 }
 
+// --- contrast -------------------------------------------------------------
+// The app's palettes are tuned for a dense IDE, where muted text sits next to
+// its own label and "disabled" is meant to recede. On a marketing page the same
+// tokens carry real copy, so a few need a WCAG floor enforced here rather than
+// being patched per-component.
+function relLuminance(hex) {
+  const { r, g, b } = parseHex(hex)
+  const f = [r, g, b].map((v) => {
+    const s = v / 255
+    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4)
+  })
+  return 0.2126 * f[0] + 0.7152 * f[1] + 0.0722 * f[2]
+}
+function contrast(a, b) {
+  const l1 = relLuminance(a)
+  const l2 = relLuminance(b)
+  return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05)
+}
+/** Whichever of `a`/`b` reads better on `bg`. Used for text on the accent fill. */
+function bestOn(bg, a, b) {
+  return contrast(a, bg) >= contrast(b, bg) ? a : b
+}
+/** Nudge `colour` toward `target` until it clears `min` contrast against `bg`. */
+function ensureContrast(colour, bg, target, min = 4.5) {
+  let out = colour
+  for (let t = 0; t <= 1.001 && contrast(out, bg) < min; t += 0.04) {
+    out = mix(colour, target, t)
+  }
+  return out
+}
+
 // --- theme ordering (matches the app's family grouping) -------------------
 const FAMILY_ORDER = ['Manifold', 'Garfield', 'Neon', 'Jade', 'Platinum']
 // Theme used for the bare :root fallback (applies only when JS is disabled and
@@ -91,9 +122,15 @@ function deriveTokens(colors, type) {
     '--border': c('panel.border'),
     '--divider': c('editorGroup.border'),
     '--text-primary': fg,
-    '--text-secondary': c('descriptionForeground'),
-    '--text-muted': c('disabledForeground'),
+    '--text-secondary': ensureContrast(c('descriptionForeground'), canvas, fg),
+    // disabledForeground is tuned to recede in the app's chrome; on a page it
+    // carries the hero meta line and figure annotations, so it gets a floor.
+    '--text-muted': ensureContrast(c('disabledForeground'), canvas, fg),
     '--accent-gold': accent,
+    // Foreground for text sitting on the accent fill (the download button).
+    // On dark themes the canvas wins and nothing changes; on light themes with
+    // a saturated accent, white-on-orange fails AA and the foreground wins.
+    '--on-accent': bestOn(accent, canvas, fg),
     '--accent-gold-hover': dark ? lighten(accent, 0.12) : darken(accent, 0.1),
     '--accent-blue': c('terminal.ansiBrightBlue'),
     '--accent-cyan': c('terminal.ansiBrightCyan'),
