@@ -60,26 +60,6 @@
     }
   },
   {
-    "id": "royal-dark",
-    "label": "Royal Dark",
-    "type": "dark",
-    "swatch": {
-      "bg": "#06080F",
-      "fg": "#E6ECF7",
-      "accent": "#E2C275"
-    }
-  },
-  {
-    "id": "royal-light",
-    "label": "Royal Light",
-    "type": "light",
-    "swatch": {
-      "bg": "#F6F1E7",
-      "fg": "#2B2E3A",
-      "accent": "#1B3A6B"
-    }
-  },
-  {
     "id": "jade-dark",
     "label": "Jade Dark",
     "type": "dark",

@@ -41,11 +41,11 @@ const ogImage = 'https://manifold.no/images/Manifold_ov.png'
           theme = saved
         } else {
           var light = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-          theme = light ? 'neon-light' : 'neon-dark'
+          theme = light ? 'manifold-light' : 'manifold-dark'
         }
         document.documentElement.setAttribute('data-theme', theme)
       } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'neon-dark')
+        document.documentElement.setAttribute('data-theme', 'manifold-dark')
       }
     })()
   </script>

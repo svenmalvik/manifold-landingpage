@@ -8,7 +8,6 @@ const FAMILIES = [
   { id: 'manifold', label: 'Manifold' },
   { id: 'garfield', label: 'Garfield' },
   { id: 'neon', label: 'Neon' },
-  { id: 'royal', label: 'Royal' },
   { id: 'jade', label: 'Jade' },
   { id: 'platinum', label: 'Platinum' },
 ]
@@ -73,13 +72,13 @@ const FAMILIES = [
   if (root) {
     const html = document.documentElement
     const KEY = 'manifold-theme'
-    const FALLBACK = 'neon-dark'
-    const FAMILIES = ['manifold', 'garfield', 'neon', 'royal', 'jade', 'platinum']
+    const FALLBACK = 'manifold-dark'
+    const FAMILIES = ['manifold', 'garfield', 'neon', 'jade', 'platinum']
 
     const select = root.querySelector('.theme-select') as HTMLSelectElement
     const toggle = root.querySelector('.theme-toggle') as HTMLButtonElement
 
-    const familyOf = (id: string) => FAMILIES.find((f) => id.startsWith(f)) || 'neon'
+    const familyOf = (id: string) => FAMILIES.find((f) => id.startsWith(f)) || 'manifold'
     const modeOf = (id: string) => (id.endsWith('-light') ? 'light' : 'dark')
     const current = () => html.getAttribute('data-theme') || FALLBACK
 
