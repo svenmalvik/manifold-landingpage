@@ -7,16 +7,19 @@ const intelDmg = `https://github.com/vippsas/manifold/releases/download/v${versi
   <div class="container">
     <div class="wordmark">MANIFOLD</div>
     <div class="hero-rule"></div>
-    <h1 class="hero-tagline">A full developer workspace for orchestrating AI agents</h1>
+    <h1 class="hero-tagline">
+      Every agent. Every repo.<br />
+      <em>Nothing leaves your Mac.</em>
+    </h1>
     <p class="hero-lede">
-      Run Claude Code, Codex, Gemini CLI, and other CLI coding agents side by side on the
-      same codebase — each on its own isolated branch, in a real terminal.
+      Run Claude Code, Codex, Gemini CLI, Copilot — and local models — side by side
+      on one codebase. Real terminals, isolated git branches, all on your own disk.
     </p>
     <div class="hero-ctas">
       <a href={armDmg} class="btn-primary">Download for macOS (Apple Silicon)</a>
       <a href={intelDmg} class="hero-intel">Intel</a>
     </div>
-    <p class="hero-meta">Free &amp; open source · macOS · v{version}</p>
+    <p class="hero-meta">MIT licensed · no account · no telemetry · v{version}</p>
   </div>
 </header>
 
@@ -35,21 +38,23 @@ const intelDmg = `https://github.com/vippsas/manifold/releases/download/v${versi
     padding-left: 0.4em;
   }
   .hero-rule { width: 56px; height: 1px; background: var(--accent-gold); margin: var(--space-lg) auto; }
-  .hero-tagline { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 600; color: var(--text-primary); max-width: 700px; margin: 0 auto; }
-  .hero-lede { font-size: 1.05rem; color: var(--text-secondary); max-width: 620px; margin: var(--space-md) auto 0; }
-  .hero-ctas { display: flex; gap: var(--space-md); align-items: center; justify-content: center; flex-wrap: wrap; margin-top: var(--space-xl); }
-  .btn-primary {
-    display: inline-block;
-    background: var(--accent-gold);
-    color: var(--canvas);
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 0.9rem;
-    padding: 0.85rem 1.75rem;
-    border-radius: var(--radius-sm);
-    transition: filter 150ms ease;
+
+  /* The display serif is the page's whole visual argument — it is what stops
+     this reading like every other developer-tool landing page. */
+  .hero-tagline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 5.5vw, 3.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    /* Both lines are ~24 characters; anything narrower orphans "Mac." */
+    max-width: 26ch;
+    margin: 0 auto;
   }
-  .btn-primary:hover { filter: brightness(1.1); color: var(--canvas); }
-  .hero-intel { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-blue); }
+  .hero-tagline em { font-style: italic; color: var(--accent-gold); }
+
+  .hero-lede { font-size: 1.05rem; color: var(--text-secondary); max-width: 620px; margin: var(--space-lg) auto 0; }
+  .hero-ctas { display: flex; gap: var(--space-md); align-items: center; justify-content: center; flex-wrap: wrap; margin-top: var(--space-xl); }
   .hero-meta { margin-top: var(--space-md); font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); }
 </style>

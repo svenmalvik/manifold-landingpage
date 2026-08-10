@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Hero from '../components/Hero.astro'
 import FeatureCard from '../components/FeatureCard.astro'
+import ProductShot from '../components/ProductShot.astro'
 
 const runtimes = ['Claude Code', 'Codex', 'Gemini CLI', 'Copilot', 'Ollama']
 ---
@@ -9,12 +10,7 @@ const runtimes = ['Claude Code', 'Codex', 'Gemini CLI', 'Copilot', 'Ollama']
   <main>
     <Hero />
 
-    <section class="shot">
-      <div class="shot-frame">
-        <img src="/images/Manifold_ov.png" alt="Manifold workspace with multiple agents running in parallel" width="2524" height="1388" loading="eager" />
-      </div>
-      <p class="shot-caption">The Manifold workspace — agents, terminals, diffs, and search in one window.</p>
-    </section>
+    <ProductShot />
 
     <section class="features container">
       <h2 class="section-heading">Everything you need to run agents in parallel</h2>
