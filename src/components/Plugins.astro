@@ -4,13 +4,12 @@ import Section from './Section.astro'
 // docs/architecture/plugins.md.
 //
 // The privileged capabilities (agent:control, agent:spawn, lm, workspace:manage,
-// verdicts:*, transcription:read) are restricted to BUILT-IN plugins regardless
+// transcription:read) are restricted to BUILT-IN plugins regardless
 // of what a manifest claims. That is precisely why an enterprise plugin needing
 // them has to come through us. Say that plainly rather than implying anyone can
 // self-serve a privileged plugin.
 const shipped = [
   { id: 'manifold.loop', name: 'Loop', desc: 'Edit → evaluate → keep or discard.' },
-  { id: 'manifold.statistics', name: 'Statistics', desc: 'Per-runtime quality metrics across every repository.' },
   { id: 'manifold.worktrees', name: 'Worktrees', desc: 'Every managed worktree, in one view.' },
   { id: 'manifold.watch', name: 'Watch', desc: 'Hand the agent a video: frames, transcript, report.' },
 ]
@@ -72,9 +71,8 @@ const shipped = [
     list-style: none;
     margin-top: var(--space-xl);
     display: grid;
-    /* Four shipped plugins; 215px lets all four sit on one row at full width
-       rather than leaving the fourth alone on a second. */
-    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    /* Three shipped plugins, sized so they hold one row at full width. */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: var(--space-md);
   }
   .grid li {

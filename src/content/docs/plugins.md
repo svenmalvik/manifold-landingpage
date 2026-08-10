@@ -13,11 +13,8 @@ Manifold's own features are plugins. The automated Loop is one of them, so the e
 | Plugin | Id | What it does |
 | --- | --- | --- |
 | Autoresearch Loop | `manifold.loop` | The improve-and-evaluate cycle. See [Loop](/docs/loop). |
-| Statistics | `manifold.statistics` | Per-runtime quality metrics and recent sessions across every repository. |
 | Worktrees | `manifold.worktrees` | Every managed worktree, in one view. |
 | Watch | `manifold.watch` | Hand the agent a video and get frames, a transcript, and a report. |
-
-Three `hello` plugins also ship as API samples, including one that demonstrates the VS Code shim. They are examples rather than features.
 
 ## Writing your own
 
@@ -53,7 +50,7 @@ Three capabilities are available to any plugin you write:
 | `workspace:read` | Read the current workspace and its repositories. |
 | `configuration` | Read the plugin's own configuration. |
 
-Seven more are granted only to plugins that ship inside the app, whatever a manifest asks for: `workspace:manage`, `agent:control`, `agent:spawn`, `lm`, `transcription:read`, `verdicts:read`, and `verdicts:write`.
+Five more are granted only to plugins that ship inside the app, whatever a manifest asks for: `workspace:manage`, `agent:control`, `agent:spawn`, `lm`, and `transcription:read`.
 
 So a plugin that reads the workspace, keeps its own state, or contributes a view is yours to write and drop in. One that drives an agent, spawns one, or reaches the language model has to be built in. If your team needs that reach, [get in touch](/enterprise) and it can ship as a built-in under the same MIT licence.
 
