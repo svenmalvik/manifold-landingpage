@@ -188,11 +188,18 @@ The lead claim, proven. Carries a diagram rather than a paragraph.
         no Manifold server
 ```
 
-> There is no Manifold account, because there is no Manifold server.
+> There is no Manifold account, because there is no server we operate.
 >
 > Your repositories, your worktrees, your session history and your captured memory live in
 > `~/.manifold` on your own disk. Prompts go straight from your machine to the provider you
 > already pay for. Nothing is proxied, stored, or replayed by us.
+
+**Wording correction, 2026-08-10.** This section originally read *"there is no Manifold
+server"*. That is false: **Manifold Server exists** (see section 9b). The substance of the
+claim survives — the server runs on the operator's own infrastructure with their own
+credentials, so no vendor takes custody — but the sentence had to name *whose* server rather
+than deny one. "No server in the middle" in the receipt became "No service of ours in the
+middle" for the same reason. **Do not revert either phrasing.**
 
 ```
 Sessions run on your machine — not in someone else's sandbox.
@@ -273,6 +280,40 @@ project. Optional Ask AI over the results.
 > Manifold captures what happened — prompts, responses, observations the agent noted,
 > session summaries — into per-project SQLite. Resume a stopped session weeks later and the
 > agent gets its history back.
+
+### 9b — Manifold Server (added 2026-08-10)
+
+**Manifold Server exists.** It is a self-hosted dispatcher: it polls GitHub for issues
+carrying a trigger label, claims one with a label swap, clones the repo into a per-issue
+sandbox on `manifold/issue-<n>`, runs a coding agent unattended, optionally runs an
+operator-supplied verify command, then opens a pull request that closes the issue. Failures
+and no-op runs escalate to `needs-human` with a comment. Humans remain the merge gate.
+
+**Three hard constraints on this section.**
+
+1. **It is not published.** In beta, no date. The section leads with a prominent
+   *"Not released yet"* notice placed **before** any capability copy, plus a `Beta` badge on
+   the eyebrow. A skimming reader must not come away thinking it ships today.
+2. **`vippsas/manifold-server` is an INTERNAL repo with no `LICENSE`.** Never link it — it
+   404s for everyone outside the org — and never call it open source. Only the desktop app is
+   MIT. A build gate asserts the string `manifold-server` never reaches `dist/`.
+3. **Its README documents the operator's own deployment** — cloud subscriptions, key vaults,
+   clusters, service catalogues, secret names. **None of that may appear on a public page.**
+   Describe behaviour, never infrastructure. A build gate greps `dist/` for those terms.
+
+**Why it strengthens rather than weakens the positioning.** The category's paid answer to
+"I want agents working while I'm away" is the vendor's own cloud, holding the customer's
+session data. Manifold's answer is a container the operator deploys with their own GitHub and
+model credentials. Same capability, no change of custody.
+
+**The section states the exception outright:** running the server *is* the one case where
+code leaves the machine — into infrastructure the operator controls. Saying so plainly is
+more persuasive than a seamless claim, and it keeps the hero honest, since the hero describes
+the desktop app, which is what visitors actually download.
+
+Interest routes to GitHub Discussions or the maintainer's LinkedIn. **No email address on
+the page** (spam surface, and publishing a work address is not this page's call), and no
+signup form — that would break the no-third-party-requests rule the copy depends on.
 
 ### 10 — The receipt
 

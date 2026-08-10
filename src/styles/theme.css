@@ -98,6 +98,24 @@ code, pre { font-family: var(--font-mono); }
 }
 .section-title em { font-style: italic; color: var(--accent-text); }
 
+/* Availability badge, for anything not generally available yet. Deliberately
+   loud enough that a reader cannot skim past it. */
+.badge {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateY(-0.18em);
+  margin-left: 0.35em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+  background: var(--accent-gold);
+  padding: 0.15em 0.55em;
+  border-radius: var(--radius-xs);
+}
+
 .section-lede {
   color: var(--text-secondary);
   font-size: 1.05rem;

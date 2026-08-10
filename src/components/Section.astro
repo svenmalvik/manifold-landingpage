@@ -6,13 +6,20 @@
 interface Props {
   id?: string
   eyebrow?: string
+  /** Availability label (e.g. "Beta"). Rides the eyebrow, where labels belong. */
+  badge?: string
   wide?: boolean
 }
-const { id, eyebrow, wide = false } = Astro.props
+const { id, eyebrow, badge, wide = false } = Astro.props
 ---
 <section class="section" id={id}>
   <div class:list={['container', { wide }]}>
-    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    {eyebrow && (
+      <p class="eyebrow">
+        {eyebrow}
+        {badge && <span class="badge">{badge}</span>}
+      </p>
+    )}
     <h2 class="section-title"><slot name="title" /></h2>
     {Astro.slots.has('lede') && <p class="section-lede"><slot name="lede" /></p>}
     <slot />
