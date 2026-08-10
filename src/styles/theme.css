@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+/* Fonts are self-hosted via @fontsource, imported in BaseLayout.astro. A page
+   whose headline is "nothing leaves your Mac" must not report its visitors to
+   a font CDN. */
 @import './themes.css';
 
 :root {
@@ -9,6 +11,8 @@
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  /* Mirrors the app's own --font-display stack with the webfont in front. */
+  --font-display: 'Instrument Serif', ui-serif, 'New York', Georgia, 'Times New Roman', serif;
 
   /* Spacing scale */
   --space-xs: 4px;
