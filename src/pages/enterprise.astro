@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHeader from '../components/PageHeader.astro'
+import Section from '../components/Section.astro'
+
+// This page is an EXHIBIT, not a brochure. It exists to start conversations with
+// engineering leaders at other organisations, not to drive adoption of Manifold.
+// Deliberately absent, and should stay absent:
+//   - any rollout / pilot / "deploy it across your org" path
+//   - any claim about who uses Manifold or how widely
+//   - any pricing, tier, or commercial offer
+// Attribution is stewardship only — "open source under Vipps MobilePay" — and
+// must NOT be escalated into a production-use endorsement.
+//
+// SVEN: the "What we'd skip" section below is my inference from the repository,
+// not your stated view. Each item is grounded (file counts, the three-phase
+// migration that pulled Loop out of core) but the opinions are yours to own —
+// overwrite them with what you actually think.
+const title = 'For engineering leaders — Manifold'
+const description =
+  'A report from building a self-hosted multi-agent coding platform: what exists, what we would skip if we started again, and what we still do not know.'
+---
+<BaseLayout title={title} description={description}>
+  <main>
+    <PageHeader eyebrow="For engineering leaders">
+      <Fragment slot="title">We built the platform. Here's what we'd tell you <em>not</em> to build.</Fragment>
+      <Fragment slot="lede">
+        Manifold is a self-hosted workspace for running AI coding agents across many
+        repositories, open source under Vipps MobilePay. This page is a report on building
+        it — not a pitch. If you have been handed the same mandate, the useful part is which
+        pieces turned out to carry their weight and which did not.
+      </Fragment>
+    </PageHeader>
+
+    <Section eyebrow="The exhibit">
+      <Fragment slot="title">What exists.</Fragment>
+
+      <div class="mono-figure">
+        <pre><b>runtimes</b>     Claude Code · Codex · Copilot · Gemini CLI
+             <span class="dim">plus both against a local Ollama model</span>
+<b>isolation</b>    one agent, one git worktree, one branch
+<b>scale</b>        many repositories in one working set, one agent across all
+<b>loop</b>         prompt → evaluate → commit on improvement, revert on regression
+<b>memory</b>       prompts, responses and observations in per-project SQLite
+<b>plugins</b>      sandboxed host process, capability-gated
+<b>dispatcher</b>   labelled issue → pull request, unattended  <span class="dim">(beta, unpublished)</span>
+<b>licence</b>      MIT for the app  ·  168 releases since March</pre>
+      </div>
+
+      <p class="body">
+        It runs entirely on infrastructure you control, with your own model credentials, and
+        it never merges anything — agents open pull requests and your existing CI and branch
+        protection decide what lands. The <a href="/security">security page</a> documents the
+        data flow and the gaps.
+      </p>
+    </Section>
+
+    <Section eyebrow="Lessons">
+      <Fragment slot="title">What we'd <em>skip</em> if we started again.</Fragment>
+      <Fragment slot="lede">
+        The expensive parts and the load-bearing parts were not the same parts.
+      </Fragment>
+
+      <ol class="lessons">
+        <li>
+          <h3>Don't rebuild the IDE.</h3>
+          <p>
+            About a quarter of the interface code is an editor — file tree, split panes,
+            viewers. Agents need a terminal, a diff and a branch. Your engineers already have
+            an IDE they like, and it is better than the one you are about to write.
+          </p>
+        </li>
+        <li>
+          <h3>Decide the extension boundary before the first feature.</h3>
+          <p>
+            The automated Loop was built into the core, then removed and rebuilt as a plugin
+            across a three-phase migration — renderer wiring, main-process wiring and session
+            fields all had to come out. Choosing what is core and what is an extension on day
+            one would have saved every hour of that.
+          </p>
+        </li>
+        <li>
+          <h3>If you build one thing, build worktree isolation.</h3>
+          <p>
+            One agent, one git worktree, one branch. It is a small amount of code and it
+            deletes the entire category of problem people expect from running agents in
+            parallel. Everything else here is optional next to it.
+          </p>
+        </li>
+        <li>
+          <h3>Don't build memory before someone asks for it.</h3>
+          <p>
+            We built capture and search with four modes and three scopes. What a resumed agent
+            actually needs is the previous session's summary. The rest was built on
+            conviction.
+          </p>
+        </li>
+        <li>
+          <h3>Craft is not leverage.</h3>
+          <p>
+            Ten hand-tuned themes. They are genuinely nice and they moved nothing. Worth
+            knowing which of your work is for the user and which is for you.
+          </p>
+        </li>
+      </ol>
+    </Section>
+
+    <Section eyebrow="Open questions">
+      <Fragment slot="title">What we still don't know.</Fragment>
+      <Fragment slot="lede">
+        Named, with none of them settled. If you have an answer, it is worth more to us than
+        anything above.
+      </Fragment>
+
+      <ul class="questions">
+        <li>Should several teams share one agent platform, or should each team run its own?</li>
+        <li>How much has to exist before a team asks for it, rather than being offered it?</li>
+        <li>Is an unattended issue-to-pull-request pipeline net positive once a human still reviews every result?</li>
+        <li>Does a real terminal beat a curated chat interface for most engineers, or only for the ones who already live in a terminal?</li>
+        <li>What is the smallest version of this that a platform team could justify maintaining?</li>
+      </ul>
+    </Section>
+
+    <Section eyebrow="If you're further along">
+      <Fragment slot="title">One question.</Fragment>
+
+      <p class="ask">What was the first thing a team asked you for?</p>
+
+      <p class="body">
+        If you are building an AI platform inside an engineering organisation, that answer is
+        the thing we most want to hear — particularly if it was nothing. A reply in a message
+        is plenty; no call required.
+      </p>
+
+      <div class="ctas">
+        <a href="https://www.linkedin.com/in/svenmalvik/" class="btn-primary">Reach out on LinkedIn</a>
+        <a href="https://github.com/vippsas/manifold/discussions" class="hero-intel">Or start a thread in Discussions</a>
+      </div>
+
+      <p class="note">
+        Manifold is open source under Vipps MobilePay and free under the MIT licence. There is
+        nothing to buy here, and no one will follow up with a quote.
+      </p>
+    </Section>
+  </main>
+</BaseLayout>
+
+<style>
+  .body { color: var(--text-secondary); max-width: var(--measure); margin-top: var(--space-xl); }
+  .body code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent-cyan); }
+
+  .lessons { list-style: none; counter-reset: l; margin-top: var(--space-xl); display: grid; gap: var(--space-xl); max-width: var(--measure); }
+  .lessons li { counter-increment: l; padding-left: var(--space-2xl); position: relative; }
+  .lessons li::before {
+    content: counter(l);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent-text);
+  }
+  .lessons h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; color: var(--text-primary); margin-bottom: var(--space-sm); }
+  .lessons p { color: var(--text-secondary); }
+
+  .questions { list-style: none; margin-top: var(--space-xl); display: grid; gap: var(--space-md); max-width: var(--measure); }
+  .questions li {
+    color: var(--text-secondary);
+    padding-left: var(--space-lg);
+    position: relative;
+  }
+  .questions li::before { content: '?'; position: absolute; left: 0; color: var(--accent-text); font-family: var(--font-mono); font-weight: 700; }
+
+  .ask {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    line-height: 1.3;
+    color: var(--text-primary);
+    border-left: 2px solid var(--accent-gold);
+    padding-left: var(--space-lg);
+    max-width: var(--measure);
+    margin-top: var(--space-xl);
+  }
+
+  .ctas { display: flex; gap: var(--space-lg); align-items: center; flex-wrap: wrap; margin-top: var(--space-2xl); }
+  .note { margin-top: var(--space-lg); font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted); max-width: var(--measure); }
+</style>

@@ -66,6 +66,16 @@ import Section from './Section.astro'
     command runs with the git credentials stripped from its environment.
   </p>
 
+  <p class="pull">On a laptop, an agent runs with your reach. In a pod, the namespace is the sandbox.</p>
+
+  <p class="body">
+    That is the real reason the server exists. It runs the agent as a container in
+    Kubernetes, so confinement is enforced by your cluster — service account, security
+    context, resource limits, network policy — using the controls you already run every
+    other workload under. The agent gets a per-issue clone instead of a developer's whole
+    disk. <a href="/security">The security page</a> covers both boundaries.
+  </p>
+
   <div class="caveat">
     <p>
       <b>This is the one place your code leaves your Mac</b> — into a container

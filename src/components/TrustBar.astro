@@ -1,0 +1,64 @@
+---
+// Facts directly under the hero, so an organisation reads the answer to "is this
+// for us?" without scrolling. Every chip is checkable.
+//
+// Attribution is deliberately STEWARDSHIP, not endorsement: "open source under
+// Vipps MobilePay" says who stewards the project. It must NOT be escalated into
+// "used in production at" or "trusted by" — that is a different, uncleared claim.
+// No logo wall, no counters, no testimonials.
+const facts = [
+  { label: 'Open source under Vipps MobilePay', detail: 'MIT licensed' },
+  { label: 'Runs on your own infrastructure', detail: 'no vendor endpoint' },
+  { label: 'No per-seat licence', detail: 'zero at any headcount' },
+  { label: 'No account, no telemetry', detail: 'nothing to sign up for' },
+]
+---
+<section class="trust">
+  <div class="container">
+    <ul>
+      {facts.map((f) => (
+        <li>
+          <span class="label">{f.label}</span>
+          <span class="detail">{f.detail}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="routes">
+      <a href="/security">Security &amp; data flow</a>
+      <span class="sep">·</span>
+      <a href="/enterprise">For engineering leaders</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .trust {
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: var(--space-2xl);
+  }
+  ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: var(--space-lg);
+  }
+  li { display: flex; flex-direction: column; gap: 2px; }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+  .label::before { content: '└ '; color: var(--accent-text); }
+  .detail { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); padding-left: 1.1em; }
+
+  .routes {
+    margin-top: var(--space-xl);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-align: center;
+  }
+  .routes .sep { color: var(--text-muted); margin: 0 var(--space-sm); }
+</style>

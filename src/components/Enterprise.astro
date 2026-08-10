@@ -31,8 +31,10 @@ import Section from './Section.astro'
     <div>
       <dt>What does it cost per engineer?</dt>
       <dd>
-        Nothing. There is no per-seat licence and no paid tier, so cost doesn't scale with
-        headcount. You pay your model provider for inference, as you already do.
+        Nothing. There is no per-seat licence and no paid tier, so the line item doesn't grow
+        with headcount — at two hundred engineers a per-seat agent tool is a six-figure annual
+        commitment, and this is zero. You pay your model provider for inference, as you
+        already do.
       </dd>
     </div>
     <div>
@@ -61,10 +63,14 @@ import Section from './Section.astro'
   <div class="caveat">
     <p>
       <b>The honest trade.</b> There is no vendor here, which is the point — and also the
-      limitation. No support contract, no SLA, no account manager. You get a permissive
-      licence, the source, and a maintainer who answers. If your procurement process
-      requires a counterparty, that is worth knowing before you start, not after.
-      <a href="https://www.linkedin.com/in/svenmalvik/">Talk to us first</a>.
+      limitation. No support contract, no SLA, no account manager, and no managed
+      configuration yet. You get a permissive licence, the source, and a maintainer who
+      answers. If your procurement process requires a counterparty, that is worth knowing
+      before you start, not after.
+    </p>
+    <p class="routes">
+      <a href="/security">Read the security &amp; data-flow page</a> ·
+      <a href="/enterprise">What we'd tell you not to build</a>
     </p>
   </div>
 </Section>
@@ -92,4 +98,5 @@ import Section from './Section.astro'
   }
   .caveat p { color: var(--text-secondary); font-size: 0.95rem; }
   .caveat b { color: var(--text-primary); }
+  .routes { margin-top: var(--space-md); font-family: var(--font-mono); font-size: 0.78rem; }
 </style>
