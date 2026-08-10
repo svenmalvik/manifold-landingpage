@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro'
-const version = '0.2.108'
+import { getManifoldRelease } from '../lib/manifold-release'
+const { version } = await getManifoldRelease()
 ---
 <footer class="footer">
   <div class="container footer-inner">
@@ -16,6 +17,13 @@ const version = '0.2.108'
       <a href="https://github.com/vippsas/manifold/blob/main/LICENSE">MIT License</a>
     </div>
   </div>
+  <div class="container footer-meta">
+    <p>
+      Maintained by Sven Malvik ·
+      <a href="mailto:sven@malvik.de">sven@malvik.de</a> ·
+      <a href="https://www.linkedin.com/in/svenmalvik/">LinkedIn</a>
+    </p>
+  </div>
 </footer>
 
 <style>
@@ -26,6 +34,14 @@ const version = '0.2.108'
   .footer-links { display: flex; gap: var(--space-lg); flex-wrap: wrap; }
   .footer-links a { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-secondary); }
   .footer-links a:hover { color: var(--accent-cyan); }
+
+  /* Maintainer line on its own row, below the project links, so a person is
+     visibly reachable without competing with the project's own navigation. */
+  .footer-meta { margin-top: var(--space-lg); }
+  .footer-meta p { font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); }
+  .footer-meta a { color: var(--text-secondary); }
+  .footer-meta a:hover { color: var(--accent-cyan); }
+
   @media (max-width: 768px) {
     .footer-inner { flex-direction: column; align-items: flex-start; }
   }

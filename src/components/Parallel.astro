@@ -1,0 +1,34 @@
+---
+import Section from './Section.astro'
+---
+<Section eyebrow="Isolation">
+  <Fragment slot="title">Four agents. Four branches. <em>One repo</em>.</Fragment>
+  <Fragment slot="lede">
+    Every agent gets its own git worktree on its own branch, so they never collide.
+  </Fragment>
+
+  <div class="mono-figure boxed">
+    <pre><b>manifold</b>  (main)
+   │
+   ├── <span class="dim">worktree</span>  manifold/fix-login-bug      <span class="s running">●</span> running
+   ├── <span class="dim">worktree</span>  manifold/add-rate-limit     <span class="s waiting">●</span> waiting
+   ├── <span class="dim">worktree</span>  manifold/refactor-search    <span class="s done">●</span> done
+   └── <span class="dim">worktree</span>  manifold/upgrade-deps       <span class="s error">●</span> error</pre>
+  </div>
+
+  <p class="body">
+    Branches are named <code>&lt;repo&gt;/&lt;task-slug&gt;</code> automatically. Start an
+    agent on a fresh worktree branch, directly on the current branch when you don't want
+    one, on an existing branch to continue work, or on an open pull request.
+  </p>
+</Section>
+
+<style>
+  .body { color: var(--text-secondary); max-width: var(--measure); margin-top: var(--space-xl); }
+  .body code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent-cyan); }
+  /* Gemstone status colours, matching the legend under the product shot. */
+  .s.running { color: var(--accent-cyan); }
+  .s.waiting { color: var(--accent-text); }
+  .s.done { color: var(--status-success); }
+  .s.error { color: var(--status-error); }
+</style>

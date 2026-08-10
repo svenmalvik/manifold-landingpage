@@ -1,0 +1,308 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHeader from '../components/PageHeader.astro'
+import Section from '../components/Section.astro'
+
+// This page serves EVALUATION traffic: someone arriving from the nav asking
+// "can my organisation depend on this?". An earlier version carried a build
+// post-mortem ("what we'd skip", "what we still don't know"); it was written for
+// a peer platform leader, not a buyer, and to a buyer it read as "the thing
+// you're evaluating contains a lot we regret". Removed deliberately. Do not
+// reintroduce that framing here.
+//
+// Two hard rules that still apply:
+//   1. Manifold Server is UNPUBLISHED. More detail must not become a promise.
+//      every mention keeps the beta caveat and no date is ever given.
+//   2. Never name the server's repository or its operator's infrastructure. A
+//      build gate asserts the repo slug and those infra terms never reach dist/.
+//      Describe behaviour, never deployment specifics.
+//
+// The partnering offer is deliberately non-commercial: bring the use case, we
+// review and ship it under MIT. No SLA, no engagement, no fee is offered
+// anywhere, because none has been defined.
+const title = 'For engineering leaders · Manifold'
+const description =
+  'What Manifold is, how the self-hosted issue-to-pull-request server works, how the plugin boundary lets your team extend it, and what you own versus what we provide.'
+---
+<BaseLayout title={title} description={description}>
+  <main>
+    <PageHeader eyebrow="For engineering leaders">
+      <Fragment slot="title">Agents your engineers run, on infrastructure <em>you</em> own.</Fragment>
+      <Fragment slot="lede">
+        Manifold is a self-hosted workspace for running AI coding agents across many
+        repositories, open source under Vipps MobilePay. This page covers what exists today,
+        how the automation server works, and where your team can extend it.
+      </Fragment>
+    </PageHeader>
+
+    <Section eyebrow="The shape of it">
+      <Fragment slot="title">What exists.</Fragment>
+
+      <div class="mono-figure">
+        <pre><b>runtimes</b>     Claude Code · Codex · Copilot · Gemini CLI
+             <span class="dim">plus both against a local Ollama model</span>
+<b>isolation</b>    one agent, one git worktree, one branch
+<b>scale</b>        many repositories in one working set, one agent across all
+<b>loop</b>         prompt → evaluate → commit on improvement, revert on regression
+<b>memory</b>       prompts, responses and observations in per-project SQLite
+<b>plugins</b>      sandboxed host process, capability-gated
+<b>server</b>       labelled issue → pull request, unattended  <span class="dim">(beta, unpublished)</span>
+<b>licence</b>      MIT for the app  ·  168 releases since March</pre>
+      </div>
+
+      <p class="body">
+        It runs entirely on infrastructure you control, with your own model credentials, and
+        it never merges anything. Agents open pull requests, and your existing CI and branch
+        protection decide what lands. The <a href="/security">security page</a> documents the
+        data flow, credential handling and the gaps.
+      </p>
+    </Section>
+
+    <Section eyebrow="Manifold Server" badge="Beta">
+      <Fragment slot="title">Work that happens <em>without anyone watching</em>.</Fragment>
+      <Fragment slot="lede">
+        Label a GitHub issue and a server you run takes it to a pull request, unattended.
+      </Fragment>
+
+      <p class="availability">
+        <b>Not released yet.</b> It's in beta and isn't published. You can't deploy it today
+        and there is no date. The desktop app above ships independently and never depends on
+        it. This is here so you can judge where Manifold is heading before you commit to it.
+      </p>
+
+      <div class="mono-figure boxed">
+        <pre>  <b>trigger</b>      an issue gets your trigger label
+  <b>claim</b>        label swap: a durable claim, so two runners
+               never take the same issue
+  <b>sandbox</b>      per-issue clone on branch manifold/issue-&lt;n&gt;
+  <b>agent</b>        runs unattended, with a per-run time limit
+  <b>verify</b>       your command: compile, unit, contract
+  <b>outcome</b>      pull request that closes the issue
+               <span class="dim">or</span> needs-human <span class="dim">+ a comment explaining why</span></pre>
+      </div>
+
+      <dl class="qa">
+        <div>
+          <dt>Where does it run?</dt>
+          <dd>
+            As a container in your own Kubernetes cluster. That is the point: the pod and
+            namespace <em>are</em> the sandbox. You define the service account, the security
+            context, the resource limits and the network policy, so the agent is confined by
+            the same controls you already run every other workload under. It also gets a
+            per-issue clone rather than a developer's whole disk.
+          </dd>
+        </div>
+        <div>
+          <dt>What stops it spending without limit?</dt>
+          <dd>
+            Concurrency is capped, because concurrency is spend. Each agent invocation has a
+            time limit, and a run that changes nothing is escalated rather than retried
+            indefinitely.
+          </dd>
+        </div>
+        <div>
+          <dt>What stops it shipping something broken?</dt>
+          <dd>
+            You supply a verify command. It runs offline in the same locked-down sandbox as
+            the agent, so a green result means compile-and-unit sound, not
+            integration-proven. A non-zero exit blocks the pull request and escalates instead
+            of opening it.
+          </dd>
+        </div>
+        <div>
+          <dt>Who decides what merges?</dt>
+          <dd>
+            You do, unchanged. It opens pull requests under a bot identity; your CI and
+            branch protection are the gate, exactly as for a human contributor. It never
+            merges.
+          </dd>
+        </div>
+        <div>
+          <dt>How many repositories?</dt>
+          <dd>
+            As many as you register. Repositories are added and removed through its own API
+            without a redeploy, and each environment can use its own trigger label so a
+            staging instance never claims production issues.
+          </dd>
+        </div>
+      </dl>
+    </Section>
+
+    <Section eyebrow="Plugins">
+      <Fragment slot="title">Your team extends it. <em>We ship the privileged parts</em>.</Fragment>
+      <Fragment slot="lede">
+        Manifold's own features are plugins. The automated Loop is one of them, so the
+        extension model is the one we build on ourselves.
+      </Fragment>
+
+      <div class="mono-figure boxed">
+        <pre>  <b>yours to write</b>    storage · workspace:read · configuration
+                  views, trees, panels
+                  <span class="dim">drop it in ~/.manifold/plugins and it loads</span>
+
+  <b>ours to ship</b>      agent:control · agent:spawn · lm
+                  workspace:manage · transcription:read
+                  <span class="dim">built-in only, whatever a manifest claims</span></pre>
+      </div>
+
+      <p class="body">
+        Every plugin runs in a sandboxed host process, not in the app's main process and not
+        in the UI, and declares the capabilities it needs in its manifest. The host enforces
+        that list, and an unrecognised capability rejects the whole manifest rather than being
+        quietly ignored, so a typo can't widen a plugin's reach. There is also a
+        VS&nbsp;Code compatibility shim, so a subset of extensions your team already uses runs
+        unmodified.
+      </p>
+
+      <p class="pull">
+        A plugin that reads the workspace or contributes a view, you can build and deploy
+        yourself. One that drives an agent needs to be built in, so that one we do together.
+      </p>
+
+      <div class="caveat">
+        <p>
+          <b>How that works.</b> Bring the use case. If it needs privileged reach, we review
+          the design with you, and what ships lands as a built-in under the same MIT licence
+          as the rest of the app: yours to run, fork or walk away from. No fee, no contract,
+          and no exclusivity in either direction.
+        </p>
+      </div>
+    </Section>
+
+    <Section eyebrow="Division of responsibility">
+      <Fragment slot="title">What you own. What we provide.</Fragment>
+
+      <div class="split">
+        <div>
+          <h3>Yours</h3>
+          <ul>
+            <li>The machines, and the cluster if you run the server</li>
+            <li>The model contract and every credential</li>
+            <li>The repositories, the branches, the merge decision</li>
+            <li>All session data, on your own disk</li>
+            <li>Any plugin your team writes</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Ours</h3>
+          <ul>
+            <li>The app, MIT licensed, source included</li>
+            <li>The plugin API and its capability boundary</li>
+            <li>Privileged plugins, built with you and shipped built-in</li>
+            <li>Releases, 168 of them since March</li>
+            <li>A maintainer who answers</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="caveat">
+        <p>
+          <b>Not in either column.</b> There is no SLA, no support contract, no account
+          manager, and no managed configuration yet. Settings are per-user, so a platform
+          team can't centrally pin defaults or push a standard plugin set. If any of those is
+          a hard requirement for your organisation, it is worth establishing before a pilot
+          rather than after.
+        </p>
+      </div>
+    </Section>
+
+    <Section eyebrow="Next step">
+      <Fragment slot="title">Start with one thing you'd automate.</Fragment>
+      <Fragment slot="lede">
+        The most useful first conversation isn't a demo. It's the specific job you would hand
+        to an agent, and whether Manifold can already do it.
+      </Fragment>
+
+      <div class="ctas">
+        <a href="https://www.linkedin.com/in/svenmalvik/" class="btn-primary">Get in touch</a>
+        <a href="https://github.com/vippsas/manifold/discussions" class="hero-intel">Or open a thread in Discussions</a>
+      </div>
+
+      <p class="note">
+        Manifold is open source under Vipps MobilePay and free under the MIT licence. There is
+        nothing to buy, and no one will follow up with a quote.
+      </p>
+    </Section>
+  </main>
+</BaseLayout>
+
+<style>
+  .body { color: var(--text-secondary); max-width: var(--measure); margin-top: var(--space-xl); }
+  .body code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent-cyan); }
+
+  .availability {
+    margin-top: var(--space-lg);
+    max-width: var(--measure);
+    padding: var(--space-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent-gold);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    box-shadow: inset 0 1px 0 var(--frame-highlight);
+  }
+  .availability b { color: var(--text-primary); }
+
+  .qa { margin-top: var(--space-xl); display: grid; gap: var(--space-xl); max-width: var(--measure); }
+  .qa dt {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    color: var(--accent-text);
+    margin-bottom: var(--space-sm);
+  }
+  .qa dd { color: var(--text-secondary); }
+  .qa dd em { font-style: italic; color: var(--text-primary); }
+
+  .pull {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+    border-left: 2px solid var(--accent-gold);
+    padding-left: var(--space-lg);
+    max-width: var(--measure);
+    margin-top: var(--space-xl);
+  }
+
+  .split {
+    margin-top: var(--space-xl);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-xl);
+  }
+  .split h3 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+  }
+  .split ul { list-style: none; display: grid; gap: var(--space-sm); }
+  .split li {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    padding-left: var(--space-lg);
+    position: relative;
+  }
+  .split li::before { content: '└'; position: absolute; left: 0; color: var(--accent-text); font-family: var(--font-mono); }
+
+  .caveat {
+    margin-top: var(--space-xl);
+    max-width: var(--measure);
+    padding: var(--space-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent-cyan);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 1px 0 var(--frame-highlight);
+  }
+  .caveat p { color: var(--text-secondary); font-size: 0.95rem; }
+  .caveat b { color: var(--text-primary); }
+
+  .ctas { display: flex; gap: var(--space-lg); align-items: center; flex-wrap: wrap; margin-top: var(--space-2xl); }
+  .note { margin-top: var(--space-lg); font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted); max-width: var(--measure); }
+</style>

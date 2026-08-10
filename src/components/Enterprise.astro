@@ -1,0 +1,102 @@
+---
+import Section from './Section.astro'
+// The enterprise argument. Every line here must be answerable from the app and
+// server behaviour: no aspirational compliance language, no certifications we
+// don't hold, no SLA we don't offer. Absence of a vendor is the claim; absence of
+// a vendor is also the limitation, and the closing caveat says so.
+---
+<Section id="enterprise" eyebrow="For engineering organisations">
+  <Fragment slot="title">Full autonomy. <em>No vendor in your critical path</em>.</Fragment>
+  <Fragment slot="lede">
+    The questions a security review actually asks, answered by how Manifold is built rather
+    than by a policy document.
+  </Fragment>
+
+  <dl class="qa">
+    <div>
+      <dt>Where does our source code go?</dt>
+      <dd>
+        Onto your developers' machines and, if you run the server, into your own cluster.
+        Prompts go from there to whichever model provider you already have a contract with.
+        There is no Manifold-operated service in the path, so there is nothing of ours to
+        review, breach, or subpoena.
+      </dd>
+    </div>
+    <div>
+      <dt>Which region is it hosted in?</dt>
+      <dd>
+        Yours. You choose, because you deploy. Nothing is pinned to a region we picked.
+      </dd>
+    </div>
+    <div>
+      <dt>What does it cost per engineer?</dt>
+      <dd>
+        Nothing. There is no per-seat licence and no paid tier, so the line item doesn't grow
+        with headcount. At two hundred engineers, a per-seat agent tool is a six-figure
+        annual commitment. This is zero. You pay your model provider for inference, as you
+        already do.
+      </dd>
+    </div>
+    <div>
+      <dt>Can we audit it?</dt>
+      <dd>
+        The desktop app is MIT licensed. Clone it and read every line. Legal gets a
+        permissive licence, and security gets the source.
+      </dd>
+    </div>
+    <div>
+      <dt>Who approves what an agent writes?</dt>
+      <dd>
+        You do. Agents work on isolated branches and open pull requests. Your CI and branch
+        protection decide what lands, the same gate as any engineer.
+      </dd>
+    </div>
+    <div>
+      <dt>Does it fit our stack?</dt>
+      <dd>
+        Bring your own model credentials, or run entirely on local models. Extend the
+        workspace with your own plugins. Point it at as many repositories as you like.
+      </dd>
+    </div>
+  </dl>
+
+  <div class="caveat">
+    <p>
+      <b>What is missing.</b> There is no vendor here. That is the point, and also the
+      limitation. No support contract, no SLA, no account manager, and no managed
+      configuration yet. You get a permissive licence, the source, and a maintainer who
+      answers. If your procurement process requires a counterparty, that is worth knowing
+      before you start, not after.
+    </p>
+    <p class="routes">
+      <a href="/security">Security and data flow</a> ·
+      <a href="/enterprise">Manifold Server, plugins, and what you own</a>
+    </p>
+  </div>
+</Section>
+
+<style>
+  .qa { margin-top: var(--space-xl); display: grid; gap: var(--space-xl); max-width: var(--measure); }
+  .qa dt {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    color: var(--accent-text);
+    margin-bottom: var(--space-sm);
+  }
+  .qa dd { color: var(--text-secondary); }
+
+  .caveat {
+    margin-top: var(--space-2xl);
+    max-width: var(--measure);
+    padding: var(--space-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent-cyan);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 1px 0 var(--frame-highlight);
+  }
+  .caveat p { color: var(--text-secondary); font-size: 0.95rem; }
+  .caveat b { color: var(--text-primary); }
+  .routes { margin-top: var(--space-md); font-family: var(--font-mono); font-size: 0.78rem; }
+</style>

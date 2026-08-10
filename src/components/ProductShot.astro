@@ -1,0 +1,46 @@
+---
+// Real capture, taken on a throwaway profile registering only a fictional
+// `checkout-service` repo. The whole window, uncropped and unretouched.
+//
+// What it actually shows: three agent tabs (Claude, Copilot, Codex) over one
+// repository, a live Codex session, a shell running `git status` with its real
+// output, the file tree, a rendered README, and the status bar. The agents are
+// idle and all sit on `main`, so the caption claims neither work in flight nor
+// per-agent branches, and there is deliberately no running/waiting/done/error
+// legend. The four states are labelled in the worktree figure further down,
+// where a real example backs each one.
+//
+// Three candidates, sized to what each visitor actually needs. The frame is
+// 1100 CSS px on desktop but only ~348 on a phone, where a 1.75x screen needs
+// ~610 physical px, so serving 1100w there wasted 23 KB, so 700w covers it.
+const width = 1100
+const height = 668
+---
+<section class="shot">
+  <div class="shot-frame metal-frame">
+    <img
+      src="/images/workspace.webp"
+      srcset="/images/workspace@700.webp 700w, /images/workspace.webp 1100w, /images/workspace@2x.webp 2200w"
+      sizes="(max-width: 1164px) calc(100vw - 64px), 1100px"
+      alt="The Manifold workspace: Claude Code, Copilot and Codex agents open as tabs over one repository, with a shell running git status, the file tree and a rendered README"
+      width={width}
+      height={height}
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
+  <p class="shot-caption">Three agents, a shell and the docs. One window, one repository.</p>
+</section>
+
+<style>
+  .shot { max-width: 1100px; margin: var(--space-2xl) auto 0; padding: 0 var(--space-xl); }
+  .shot-frame img { width: 100%; height: auto; display: block; }
+
+  .shot-caption {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: var(--space-md);
+  }
+</style>

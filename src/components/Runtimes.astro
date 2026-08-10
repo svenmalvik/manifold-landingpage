@@ -1,0 +1,70 @@
+---
+import Section from './Section.astro'
+// The Ollama entries are the only place on the page where a genuine offline
+// claim can be made. Everywhere else, prompts go to the provider the user
+// configured. Keep the "no network" tag on these two and nowhere else.
+const runtimes = [
+  { name: 'Claude Code', bin: 'claude', local: false },
+  { name: 'Codex', bin: 'codex', local: false },
+  { name: 'Copilot', bin: 'copilot', local: false },
+  { name: 'Gemini CLI', bin: 'gemini', local: false },
+  { name: 'Claude Code (Ollama)', bin: 'ollama launch claude', local: true },
+  { name: 'Codex (Ollama)', bin: 'ollama launch codex', local: true },
+]
+---
+<Section eyebrow="Runtimes">
+  <Fragment slot="title">Every agent. Including the ones that work <em>offline</em>.</Fragment>
+  <Fragment slot="lede">
+    Manifold checks for the runtime binaries on your PATH and runs them as-is.
+  </Fragment>
+
+  <ul class="grid">
+    {runtimes.map((r) => (
+      <li class:list={['runtime', { local: r.local }]}>
+        <span class="name">{r.name}</span>
+        <code>{r.bin}</code>
+        {r.local && <span class="tag">no network</span>}
+      </li>
+    ))}
+  </ul>
+
+  <p class="body">
+    Point Claude Code or Codex at a local Ollama model and the loop closes completely:
+    your code, your machine, your inference. No API key. No network.
+  </p>
+</Section>
+
+<style>
+  .grid {
+    list-style: none;
+    margin-top: var(--space-xl);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+  }
+  .runtime {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 1px 0 var(--frame-highlight);
+    transition: border-color 150ms ease, transform 150ms ease;
+  }
+  .runtime:hover { border-color: var(--accent-gold); transform: translateY(-2px); }
+  .runtime.local { border-left: 2px solid var(--accent-cyan); }
+  .name { color: var(--text-primary); font-weight: 600; font-size: 0.95rem; }
+  .runtime code { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); }
+  .tag {
+    align-self: flex-start;
+    margin-top: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-cyan);
+  }
+  .body { color: var(--text-secondary); max-width: var(--measure); margin-top: var(--space-xl); }
+</style>

@@ -1,5 +1,14 @@
 ---
 import '../styles/theme.css'
+import '@fontsource/inter/300.css'
+import '@fontsource/inter/400.css'
+import '@fontsource/inter/500.css'
+import '@fontsource/inter/600.css'
+import '@fontsource/inter/700.css'
+import '@fontsource/jetbrains-mono/400.css'
+import '@fontsource/jetbrains-mono/700.css'
+import '@fontsource/instrument-serif/400.css'
+import '@fontsource/instrument-serif/400-italic.css'
 import Navigation from '../components/Navigation.astro'
 import Footer from '../components/Footer.astro'
 import themes from '../data/themes-meta.json'
@@ -11,10 +20,14 @@ interface Props {
   description?: string
 }
 const {
-  title = 'Manifold — A full developer workspace for orchestrating AI agents',
-  description = 'Run Claude Code, Codex, Gemini CLI, and other CLI coding agents side by side on the same repo — each on its own isolated branch, in a real terminal.',
+  title = 'Manifold: self-hosted AI coding agents for engineering organisations',
+  description = 'Run Claude Code, Codex, Gemini CLI, Copilot and local models across your repositories. Real terminals, isolated branches, and nothing leaving your own infrastructure. MIT licensed, no per-seat licence, no vendor holding your source.',
 } = Astro.props
-const ogImage = 'https://manifold.no/images/Manifold_ov.png'
+// JPEG rather than the on-page WebP: social crawlers are the one place where
+// broad format support still matters more than bytes. Regenerate alongside the
+// product shot with:
+//   sips -s format jpeg -s formatOptions 80 -Z 1200 <source> --out public/images/og.jpg
+const ogImage = 'https://manifold.no/images/og.jpg'
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -32,11 +45,11 @@ const ogImage = 'https://manifold.no/images/Manifold_ov.png'
           theme = saved
         } else {
           var light = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-          theme = light ? 'neon-light' : 'neon-dark'
+          theme = light ? 'manifold-light' : 'manifold-dark'
         }
         document.documentElement.setAttribute('data-theme', theme)
       } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'neon-dark')
+        document.documentElement.setAttribute('data-theme', 'manifold-dark')
       }
     })()
   </script>

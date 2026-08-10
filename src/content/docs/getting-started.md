@@ -6,7 +6,7 @@ order: 1
 
 <!-- Source: vippsas/manifold README.md (intro + Highlights) -->
 
-Manifold is a macOS desktop app for running AI coding assistants — Claude Code, Codex, Gemini CLI, Copilot, and Ollama-backed runtimes — side by side on the same codebase.
+Manifold is a desktop app for running AI coding assistants: Claude Code, Codex, Gemini CLI, Copilot, and Ollama-backed runtimes, side by side on the same codebase. Packaged releases target macOS, and x64 WSL2 with WSLg works through a local source build.
 
 Each agent can get its own git worktree (a separate checkout on a dedicated branch) when you want isolation, so multiple agents work the same repo without branch conflicts. Agents run in **real terminals**, not wrapper UIs, so you read and steer their output directly. Around the terminals, Manifold adds the workspace tools you expect: code browsing, diffs, shell tabs, search, previews, commits, and pull requests.
 
@@ -25,7 +25,7 @@ Each agent can get its own git worktree (a separate checkout on a dedicated bran
 - Launch work on a new branch, the current branch, an existing branch, or an open pull request.
 - Run automated **Loop** cycles that prompt, evaluate, and commit on improvement or revert on regression.
 - Review changes with diffs, a file tree, split editors, shell tabs, and embedded localhost previews.
-- Search code, file names, or captured session memory — with an optional AI mode.
+- Search code, file names, or captured session memory, with an optional AI mode.
 - Keep project state, chat history, dock layout, open files, and shell tabs across restarts.
 
 ## Next steps
@@ -33,3 +33,4 @@ Each agent can get its own git worktree (a separate checkout on a dedicated bran
 - [Install Manifold](/docs/install) and check the requirements.
 - [Set up your runtimes](/docs/runtimes) (Claude Code, Codex, and more).
 - Learn about [Workspaces](/docs/workspaces), [Loop](/docs/loop), and [Search](/docs/search).
+- Build something new with [Start From Scratch](/docs/start-from-scratch), or extend the app with [Plugins](/docs/plugins).

@@ -1,0 +1,32 @@
+---
+import Section from './Section.astro'
+---
+<Section eyebrow="Fidelity">
+  <Fragment slot="title">A real terminal. Not a <em>transcript</em> of one.</Fragment>
+  <Fragment slot="lede">
+    Manifold runs the agent's actual CLI in a real PTY.
+  </Fragment>
+
+  <p class="body">
+    You see the live stream, ANSI and all. You can type into a running agent while it
+    works, to correct it, answer it, or redirect it, without restarting the session.
+  </p>
+  <p class="pull">
+    When an agent goes wrong at step nine of twelve, you steer it.
+    You don't start over.
+  </p>
+</Section>
+
+<style>
+  .body { color: var(--text-secondary); max-width: var(--measure); margin-top: var(--space-xl); }
+  .pull {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1.35;
+    color: var(--text-primary);
+    border-left: 2px solid var(--accent-gold);
+    padding-left: var(--space-lg);
+    max-width: var(--measure);
+    margin-top: var(--space-xl);
+  }
+</style>

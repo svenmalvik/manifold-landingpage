@@ -1,7 +1,7 @@
 ---
 title: "Troubleshooting"
 description: "Common issues and where to look when something goes wrong."
-order: 7
+order: 9
 ---
 
 <!-- Source: vippsas/manifold README.md (Requirements, Local Data, Verify) -->
@@ -28,7 +28,7 @@ By default, Manifold stores state under `~/.manifold/`:
 | `~/.manifold/projects.json` | Registered projects (name, path, base branch). |
 | `~/.manifold/memory/*.db` | Per-project SQLite memory stores. |
 | `~/.manifold/loop-logs/*.jsonl` | Automated Loop iteration logs (one per worktree). |
-| `~/.manifold/debug.log` | Debug log — check here first when something goes wrong. |
+| `~/.manifold/debug.log` | Debug log. Check here first when something goes wrong. |
 | `~/.manifold/worktrees/...` | Managed git worktrees (default location). |
 | `~/.manifold/projects/...` | Locally generated app projects (default location). |
 

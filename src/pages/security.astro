@@ -1,0 +1,261 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHeader from '../components/PageHeader.astro'
+import Section from '../components/Section.astro'
+
+// This page is the artifact a security reviewer forwards, so every claim has to
+// be checkable and nothing may be aspirational. Rules:
+//  - No certifications Manifold does not hold. No SOC 2, no ISO, no pen-test
+//    report, no SLA. The "What we don't claim" section exists to say so.
+//  - Never write "no network requests", because electron-updater checks GitHub Releases.
+//  - The verify commands must be ones that have actually been run against
+//    vippsas/manifold, not plausible-looking greps.
+//  - Do not name or describe manifold-server's deployment infrastructure; that
+//    repo is internal.
+import { getManifoldRelease } from '../lib/manifold-release'
+
+// The claims on this page were checked by hand against a specific release, so
+// this is deliberately NOT bound to the live version, because auto-bumping it would
+// silently assert the audit was repeated for every future release. Bump it when
+// the page is actually re-reviewed. The live release is shown alongside so a
+// reader can see how far the review has drifted.
+const LAST_REVIEWED_VERSION = '0.2.108'
+const LAST_REVIEWED = `v${LAST_REVIEWED_VERSION}`
+const { version } = await getManifoldRelease()
+
+const title = 'Security · Manifold'
+const description =
+  "What leaves your machine and what doesn't, where state lives, how credentials are handled, and the commands to verify each claim yourself."
+---
+<BaseLayout title={title} description={description}>
+  <main>
+    <PageHeader eyebrow="Security">
+      <Fragment slot="title">What leaves your machine, and <em>how to check</em>.</Fragment>
+      <Fragment slot="lede">
+        Written to be forwarded. Every claim below is either visible in the source or
+        checkable with a command on this page. The last section lists what Manifold does
+        <em>not</em> claim.
+      </Fragment>
+    </PageHeader>
+
+    <Section eyebrow="Data flow">
+      <Fragment slot="title">Where your source code goes.</Fragment>
+
+      <div class="mono-figure boxed">
+        <pre>  <b>developer machine</b>
+  ┌──────────────────────────────────┐
+  │  Manifold (Electron)             │
+  │    agent CLI in a real PTY       │ ──→  the model provider you
+  │    git worktrees on your disk    │      already have a contract with
+  │    ~/.manifold/  (SQLite)        │
+  └──────────────────────────────────┘
+                    │
+                    └──→ github.com   <span class="dim">git push · pull requests · update check</span>
+
+  <b>optional, self-hosted</b>   <span class="dim">Manifold Server (beta)</span>
+  ┌──────────────────────────────────┐
+  │  your container, your cluster    │ ──→  the same model provider
+  │    per-issue sandbox clone       │
+  └──────────────────────────────────┘
+
+  <span class="dim">no endpoint operated by us appears anywhere above</span></pre>
+      </div>
+
+      <p class="body">
+        There is no Manifold-operated service in the path. Prompts and file contents go from
+        the machine running the agent straight to whichever model provider you configured.
+        Nothing is proxied through, stored by, or replayed by us, because there is nothing of
+        ours in between to do it.
+      </p>
+    </Section>
+
+    <Section eyebrow="What we receive">
+      <Fragment slot="title">Nothing. And one honest exception.</Fragment>
+
+      <ul class="facts">
+        <li>No account, no sign-in, no licence key. There is no identity to create.</li>
+        <li>No telemetry, no analytics, no crash reporting, no usage metrics.</li>
+        <li>No first-party backend, so no server-side logs of your activity exist.</li>
+      </ul>
+
+      <div class="caveat">
+        <p>
+          <b>The exception.</b> The desktop app checks GitHub Releases for updates, which is
+          an outbound request to <code>github.com</code>. It carries no source code and no
+          prompts. This is why the site says "no telemetry, no account" and never "no network
+          requests". The absolute claim would be false, and you would find that out.
+        </p>
+      </div>
+    </Section>
+
+    <Section eyebrow="State at rest">
+      <Fragment slot="title">Where everything lives.</Fragment>
+      <Fragment slot="lede">
+        All of it under a single directory you control, unencrypted, on your own disk.
+      </Fragment>
+
+      <div class="mono-figure">
+        <pre><b>~/.manifold/config.json</b>        settings
+<b>~/.manifold/projects.json</b>      registered repositories
+<b>~/.manifold/memory/*.db</b>        per-project SQLite: prompts, responses,
+                               observations, session summaries
+<b>~/.manifold/loop-logs/*.jsonl</b>  automated Loop iterations
+<b>~/.manifold/worktrees/...</b>      managed git worktrees
+<b>~/.manifold/debug.log</b>          local debug log</pre>
+      </div>
+
+      <p class="body">
+        The storage root is configurable. Session memory is captured locally to give a resumed
+        agent its history back and to make search work. It is never transmitted anywhere by
+        Manifold. Treat <code>~/.manifold</code> as you would a local git checkout: it contains
+        your source and your prompts, so it inherits whatever disk encryption and backup policy
+        you already apply to developer machines.
+      </p>
+    </Section>
+
+    <Section eyebrow="Credentials">
+      <Fragment slot="title">Yours, used directly.</Fragment>
+
+      <ul class="facts">
+        <li>Model access uses your own subscription or API key, held by the agent CLI you installed.</li>
+        <li>Git and pull-request operations use your own git credentials and GitHub CLI.</li>
+        <li>AI-assisted extras are <b>off by default</b>. The shipped setting is <code>provider: 'none'</code>, which returns a local fallback and makes no call.</li>
+        <li>On the optional server, the repo-controlled verify command runs with git credentials <b>stripped from its environment</b>, so a change to a repo cannot exfiltrate the push token.</li>
+      </ul>
+    </Section>
+
+    <Section eyebrow="Agent isolation">
+      <Fragment slot="title">What an agent can reach.</Fragment>
+
+      <ul class="facts">
+        <li>Each agent works in its own git worktree on its own branch, so it can't silently touch another agent's work.</li>
+        <li>Changes land as commits and pull requests. Your CI and branch protection remain the merge gate; Manifold never merges.</li>
+        <li>Embedded web previews are restricted to <code>localhost</code> and can't load external sites.</li>
+        <li><b>On the desktop app, the agent is not sandboxed.</b> It is the vendor's own CLI running as your user, with the filesystem reach that CLI has. Manifold neither widens it nor confines it. On a developer's own machine that is the same trust boundary as running the CLI in a terminal.</li>
+      </ul>
+
+      <p class="body">
+        If that boundary isn't acceptable for your organisation, that is precisely what the
+        server is for.
+      </p>
+
+      <div class="caveat">
+        <p>
+          <b>Manifold Server is the sandbox.</b> It runs the agent as a container in
+          Kubernetes, so the pod and namespace <em>are</em> the isolation boundary. You define
+          the service account, the security context, the resource limits and the network
+          policy, and the agent gets a per-issue clone rather than a developer's whole disk.
+          The confinement is enforced by your cluster, using the controls you already run
+          every other workload under. <b>In beta and not yet published.</b> The
+          <a href="/enterprise">page for engineering leaders</a> covers what exists today.
+        </p>
+      </div>
+    </Section>
+
+    <Section eyebrow="Plugin trust boundary">
+      <Fragment slot="title">Capabilities, enforced by the host.</Fragment>
+
+      <div class="mono-figure boxed">
+        <pre>  <b>process</b>       plugins run in a forked host process, not the
+                main process and not the UI
+  <b>manifest</b>      each plugin declares the capabilities it needs
+  <b>validation</b>    an unrecognised capability rejects the whole
+                manifest, so a typo can't widen reach
+  <b>privileged</b>    agent:control · agent:spawn · lm
+                workspace:manage · transcription:read
+                <span class="dim">built-in plugins only, whatever a manifest claims</span>
+  <b>identity</b>      plugin ids can't contain a path separator
+  <b>storage</b>       per-plugin, escape-guarded
+  <b>webviews</b>      own URL scheme, nonce CSP
+  <b>vscode shim</b>   imported extensions are never granted capabilities</pre>
+      </div>
+
+      <p class="body">
+        A plugin you write yourself can read the workspace, keep its own state and contribute
+        views. It can't drive an agent, spawn one, or reach the language model. Those three
+        capabilities are refused to anything that isn't built in.
+      </p>
+    </Section>
+
+    <Section eyebrow="Verify it yourself">
+      <Fragment slot="title">Don't take our word for it.</Fragment>
+      <Fragment slot="lede">
+        The desktop app is MIT licensed. Clone it and run these. They are the same checks we
+        run before making the claims above.
+      </Fragment>
+
+      <div class="mono-figure">
+        <pre><span class="dim">$</span> git clone https://github.com/vippsas/manifold && cd manifold
+
+<span class="dim"># no telemetry, analytics or crash reporting: expect no matches</span>
+<span class="dim">$</span> git grep -riE "posthog|mixpanel|amplitude|@sentry|gtag|plausible|umami" \
+      -- src/ package.json
+
+<span class="dim"># AI-assisted features are off by default</span>
+<span class="dim">$</span> grep -n "provider: 'none'" src/shared/defaults.ts
+
+<span class="dim"># every outbound host referenced in the source, in one list</span>
+<span class="dim">$</span> git grep -ohE "https://[a-zA-Z0-9.-]+" -- src/ | sort -u
+
+<span class="dim"># the app is signed, hardened and notarised</span>
+<span class="dim">$</span> grep -nE "hardenedRuntime|notarize|entitlements" package.json</pre>
+      </div>
+    </Section>
+
+    <Section eyebrow="Limits">
+      <Fragment slot="title">What we <em>don't</em> claim.</Fragment>
+      <Fragment slot="lede">
+        A page that lists only strengths would not be useful to you. Last reviewed against
+        {LAST_REVIEWED}{version !== LAST_REVIEWED_VERSION && <>. The current release is v{version}</>}.
+      </Fragment>
+
+      <ul class="facts limits">
+        <li><b>No certifications.</b> No SOC 2, no ISO 27001, no third-party penetration test report.</li>
+        <li><b>No SLA and no support contract.</b> There is no vendor to escalate to.</li>
+        <li><b>No managed configuration.</b> Settings are per-user. A platform team can't currently pin defaults, enforce a runtime allowlist, or push a standard plugin set org-wide.</li>
+        <li><b>The desktop app does not sandbox the agent.</b> It runs with your user's reach, as it would in your terminal. The server confines it in a pod. The app does not.</li>
+        <li><b>Packaged builds target macOS.</b> x64 WSL2 with WSLg is supported through a local source build. There is no Windows-native build today. It's an Electron app, so nothing in the stack prevents one. It simply hasn't been packaged.</li>
+        <li><b>Manifold Server is beta and unpublished.</b> Its source isn't public, so it can't be audited the way the app can.</li>
+      </ul>
+
+      <div class="caveat">
+        <p>
+          If one of these is a blocker for your organisation, that is worth establishing
+          before a pilot rather than after.
+          <a href="https://www.linkedin.com/in/svenmalvik/">Raise it directly</a>.
+        </p>
+      </div>
+    </Section>
+  </main>
+</BaseLayout>
+
+<style>
+  .body { color: var(--text-secondary); max-width: var(--measure); margin-top: var(--space-xl); }
+  .body code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent-cyan); }
+
+  .facts { list-style: none; margin-top: var(--space-xl); display: grid; gap: var(--space-md); max-width: var(--measure); }
+  .facts li {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    padding-left: var(--space-lg);
+    position: relative;
+  }
+  .facts li::before { content: '└'; position: absolute; left: 0; color: var(--accent-text); font-family: var(--font-mono); }
+  .facts b { color: var(--text-primary); }
+  .facts code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent-cyan); }
+  .limits li::before { content: '×'; }
+
+  .caveat {
+    margin-top: var(--space-xl);
+    max-width: var(--measure);
+    padding: var(--space-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent-cyan);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 1px 0 var(--frame-highlight);
+  }
+  .caveat p { color: var(--text-secondary); font-size: 0.95rem; }
+  .caveat b { color: var(--text-primary); }
+  .caveat code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent-cyan); }
+</style>

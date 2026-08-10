@@ -26,4 +26,4 @@ claude --version    # or codex / gemini / copilot --version
 ollama --version    # only for the Ollama-backed runtimes
 ```
 
-If the command is not found, ensure the install location is on your `PATH`. Manifold appends common directories (`~/.local/bin`, `/opt/homebrew/bin`, `/usr/local/bin`) automatically, but a custom install location may still need to be added to your shell profile.
+If the command isn't found, ensure the install location is on your `PATH`. Manifold appends common directories (`~/.local/bin`, `/opt/homebrew/bin`, `/usr/local/bin`) automatically, but a custom install location may still need to be added to your shell profile.

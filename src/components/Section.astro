@@ -1,0 +1,31 @@
+---
+// Shared shell for every page section: optional mono eyebrow, a display-serif
+// title, an optional lede, then whatever the section puts in the default slot.
+// Titles take markup (an <em> renders as gold italic), so they arrive as a slot
+// rather than a string prop.
+interface Props {
+  id?: string
+  eyebrow?: string
+  /** Availability label (e.g. "Beta"). Rides the eyebrow, where labels belong. */
+  badge?: string
+  wide?: boolean
+}
+const { id, eyebrow, badge, wide = false } = Astro.props
+---
+<section class="section" id={id}>
+  <div class:list={['container', { wide }]}>
+    {eyebrow && (
+      <p class="eyebrow">
+        {eyebrow}
+        {badge && <span class="badge">{badge}</span>}
+      </p>
+    )}
+    <h2 class="section-title"><slot name="title" /></h2>
+    {Astro.slots.has('lede') && <p class="section-lede"><slot name="lede" /></p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .container.wide { max-width: 1240px; }
+</style>

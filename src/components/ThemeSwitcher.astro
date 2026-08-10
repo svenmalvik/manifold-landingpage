@@ -8,7 +8,6 @@ const FAMILIES = [
   { id: 'manifold', label: 'Manifold' },
   { id: 'garfield', label: 'Garfield' },
   { id: 'neon', label: 'Neon' },
-  { id: 'royal', label: 'Royal' },
   { id: 'jade', label: 'Jade' },
   { id: 'platinum', label: 'Platinum' },
 ]
@@ -73,13 +72,13 @@ const FAMILIES = [
   if (root) {
     const html = document.documentElement
     const KEY = 'manifold-theme'
-    const FALLBACK = 'neon-dark'
-    const FAMILIES = ['manifold', 'garfield', 'neon', 'royal', 'jade', 'platinum']
+    const FALLBACK = 'manifold-dark'
+    const FAMILIES = ['manifold', 'garfield', 'neon', 'jade', 'platinum']
 
     const select = root.querySelector('.theme-select') as HTMLSelectElement
     const toggle = root.querySelector('.theme-toggle') as HTMLButtonElement
 
-    const familyOf = (id: string) => FAMILIES.find((f) => id.startsWith(f)) || 'neon'
+    const familyOf = (id: string) => FAMILIES.find((f) => id.startsWith(f)) || 'manifold'
     const modeOf = (id: string) => (id.endsWith('-light') ? 'light' : 'dark')
     const current = () => html.getAttribute('data-theme') || FALLBACK
 
@@ -100,6 +99,8 @@ const FAMILIES = [
         /* storage may be unavailable; theme still applies for the session */
       }
       sync(id)
+      // The theme gallery listens for this so its active swatch stays correct.
+      document.dispatchEvent(new CustomEvent('manifold:theme', { detail: id }))
     }
 
     select.addEventListener('change', () => {
@@ -114,5 +115,8 @@ const FAMILIES = [
 
     // Reflect the theme set before paint by the inline head script.
     sync(current())
+
+    // The theme gallery also sets data-theme; mirror its changes here.
+    document.addEventListener('manifold:theme', () => sync(current()))
   }
 </script>

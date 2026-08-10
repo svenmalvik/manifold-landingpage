@@ -8,7 +8,7 @@ interface Props {
 }
 const { title, description } = Astro.props
 ---
-<BaseLayout title={`${title} — Manifold Docs`} description={description}>
+<BaseLayout title={`${title} · Manifold Docs`} description={description}>
   <div class="docs-shell container">
     <aside class="docs-aside">
       <DocsSidebar />
@@ -26,21 +26,32 @@ const { title, description } = Astro.props
   .docs-shell { display: grid; grid-template-columns: 240px 1fr; gap: var(--space-2xl); padding-top: var(--space-2xl); padding-bottom: var(--space-2xl); align-items: start; }
   .docs-aside { position: sticky; top: 80px; }
   .docs-content { max-width: 720px; min-width: 0; }
-  .docs-title { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: var(--space-lg); color: var(--accent-gold); }
+  /* Same display serif as every other page title. Docs used bold sans, which
+     made this section read as a different site. */
+  .docs-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin-bottom: var(--space-lg);
+    color: var(--text-primary);
+  }
 
-  .docs-body :global(h2) { font-size: 1.3rem; margin: var(--space-xl) 0 var(--space-md); color: var(--text-primary); }
-  .docs-body :global(h3) { font-size: 1.05rem; margin: var(--space-lg) 0 var(--space-sm); color: var(--text-primary); }
+  .docs-body :global(h2) { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; letter-spacing: -0.01em; margin: var(--space-2xl) 0 var(--space-md); color: var(--text-primary); }
+  .docs-body :global(h3) { font-family: var(--font-display); font-weight: 400; font-size: 1.2rem; margin: var(--space-xl) 0 var(--space-sm); color: var(--text-primary); }
   .docs-body :global(p) { color: var(--text-secondary); margin-bottom: var(--space-md); }
   .docs-body :global(ul), .docs-body :global(ol) { color: var(--text-secondary); margin: 0 0 var(--space-md) var(--space-lg); }
   .docs-body :global(li) { margin-bottom: var(--space-xs); }
   .docs-body :global(a) { color: var(--accent-blue); }
   .docs-body :global(a:hover) { color: var(--accent-cyan); }
   .docs-body :global(code) { font-family: var(--font-mono); font-size: 0.85em; color: var(--accent-cyan); background: var(--surface); padding: 1px 5px; border-radius: var(--radius-xs); }
-  .docs-body :global(pre) { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-md); overflow-x: auto; margin-bottom: var(--space-md); }
+  /* Matches the .mono-figure treatment used on the marketing pages. */
+  .docs-body :global(pre) { background: var(--surface); border: 1px solid var(--border); border-left: 2px solid var(--accent-gold); border-radius: var(--radius-md); padding: var(--space-lg); overflow-x: auto; margin-bottom: var(--space-md); box-shadow: inset 0 1px 0 var(--frame-highlight); }
   .docs-body :global(pre code) { background: none; padding: 0; color: var(--text-primary); }
   .docs-body :global(table) { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-bottom: var(--space-md); display: block; overflow-x: auto; }
   .docs-body :global(th), .docs-body :global(td) { text-align: left; padding: var(--space-sm) var(--space-md); border-bottom: 1px solid var(--border); }
-  .docs-body :global(th) { color: var(--accent-blue); font-family: var(--font-mono); font-size: 0.8rem; }
+  .docs-body :global(th) { color: var(--accent-text); font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; }
   .docs-body :global(td) { color: var(--text-secondary); }
 
   @media (max-width: 768px) {

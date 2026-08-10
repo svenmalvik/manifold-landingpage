@@ -14,7 +14,7 @@ Download the latest `.dmg` from the [GitHub Releases page](https://github.com/vi
 
 | Requirement | Notes |
 | --- | --- |
-| macOS | The packaged app and build scripts currently target macOS only. |
+| Platform | Packaged `.dmg` releases target macOS. x64 WSL2 with WSLg is supported through a local source build (`./install-linux.sh`). No Windows-native build is packaged today. |
 | Git | Required for repository management, worktrees, diffs, commits, and pull request flows. |
 | One supported CLI agent on your `PATH` | Manifold checks for the runtime binaries directly. |
 | GitHub CLI (`gh`) | Optional, but required for creating pull requests from inside the app. |
@@ -30,7 +30,7 @@ gh --version             # optional, needed for pull request creation
 claude --version         # or: codex --version / gemini --version / copilot --version
 ```
 
-If a runtime command is not found, install it (see [Runtimes & Setup](/docs/runtimes)) and make sure its binary is on your `PATH`.
+If a runtime command isn't found, install it (see [Runtimes & Setup](/docs/runtimes)) and make sure its binary is on your `PATH`.
 
 ## PATH on macOS
 

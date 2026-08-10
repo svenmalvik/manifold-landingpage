@@ -1,0 +1,44 @@
+---
+// Header for standalone pages (/security, /enterprise). Same display-serif
+// treatment as the homepage hero, but left-aligned and smaller. These are
+// documents to be read and forwarded, not a landing surface.
+interface Props {
+  eyebrow: string
+  badge?: string
+}
+const { eyebrow, badge } = Astro.props
+---
+<header class="page-header">
+  <div class="container">
+    <p class="eyebrow">
+      {eyebrow}
+      {badge && <span class="badge">{badge}</span>}
+    </p>
+    <h1 class="page-title"><slot name="title" /></h1>
+    {Astro.slots.has('lede') && <p class="page-lede"><slot name="lede" /></p>}
+    <slot />
+  </div>
+</header>
+
+<style>
+  .page-header {
+    padding: var(--space-2xl) 0 0;
+    background: radial-gradient(120% 60% at 20% -20%, var(--hero-glow) 0%, var(--canvas) 60%);
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    max-width: 30ch;
+  }
+  .page-title :global(em) { font-style: italic; color: var(--accent-text); }
+  .page-lede {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: var(--measure);
+    margin-top: var(--space-lg);
+  }
+</style>

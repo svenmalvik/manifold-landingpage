@@ -1,0 +1,108 @@
+---
+import Section from './Section.astro'
+// Facts checked against vippsas/manifold: resources/plugins/* manifests and
+// docs/architecture/plugins.md.
+//
+// The privileged capabilities (agent:control, agent:spawn, lm, workspace:manage,
+// transcription:read) are restricted to BUILT-IN plugins regardless
+// of what a manifest claims. That is precisely why an enterprise plugin needing
+// them has to come through us. Say that plainly rather than implying anyone can
+// self-serve a privileged plugin.
+const shipped = [
+  { id: 'manifold.loop', name: 'Loop', desc: 'Edit → evaluate → keep or discard.' },
+  { id: 'manifold.worktrees', name: 'Worktrees', desc: 'Every managed worktree, in one view.' },
+  { id: 'manifold.watch', name: 'Watch', desc: 'Hand the agent a video: frames, transcript, report.' },
+]
+---
+<Section id="plugins" eyebrow="Plugins">
+  <Fragment slot="title">Extend it with <em>your own tooling</em>.</Fragment>
+  <Fragment slot="lede">
+    Manifold's own features are plugins. The automated Loop is one of them, so the
+    extension model is the one we build on ourselves.
+  </Fragment>
+
+  <ul class="grid">
+    {shipped.map((p) => (
+      <li>
+        <span class="name">{p.name}</span>
+        <code>{p.id}</code>
+        <span class="desc">{p.desc}</span>
+      </li>
+    ))}
+  </ul>
+
+  <p class="body">
+    Your own plugins load from <code>~/.manifold/plugins</code>. Each one runs in a
+    sandboxed host process, not in the app's main process and not in the UI, and declares
+    the capabilities it needs in its manifest. The host enforces that list. An unrecognised
+    capability rejects the whole manifest rather than being quietly ignored, so a typo can't
+    widen a plugin's reach.
+  </p>
+
+  <div class="mono-figure boxed">
+    <pre>  <b>manifest</b>     declares capabilities   <span class="dim">storage · workspace:read · configuration</span>
+  <b>host</b>         forks a sandboxed process, brokers every call
+  <b>gate</b>         unknown capability → <span class="dim">whole manifest rejected</span>
+  <b>privileged</b>   agent:control · agent:spawn · lm · workspace:manage
+               <span class="dim">built-in only, whatever a manifest claims</span></pre>
+  </div>
+
+  <p class="body">
+    Plugin ids can't contain a path separator, per-plugin storage is escape-guarded, and
+    plugin webviews are served over their own scheme under a nonce CSP. There is also a
+    VS&nbsp;Code compatibility shim, so a subset of existing extensions runs unmodified:
+    commands, activation events and tree views.
+  </p>
+
+  <div class="caveat">
+    <p>
+      <b>For enterprises.</b> Plugins that read the workspace, keep their own state or
+      contribute views, your team can write and drop in yourself. Three capabilities stay
+      reserved for built-in plugins, whatever a manifest asks for: driving an agent,
+      spawning one, and reaching the language model. Those we build together. Bring the use
+      case, and what ships lands as a built-in under the same MIT licence.
+      <a href="/enterprise">How that works</a>.
+    </p>
+  </div>
+</Section>
+
+<style>
+  .grid {
+    list-style: none;
+    margin-top: var(--space-xl);
+    display: grid;
+    /* Three shipped plugins, sized so they hold one row at full width. */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+  }
+  .grid li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent-gold);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 1px 0 var(--frame-highlight);
+  }
+  .name { color: var(--text-primary); font-weight: 600; font-size: 0.95rem; }
+  .grid code { font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted); }
+  .desc { color: var(--text-secondary); font-size: 0.88rem; margin-top: var(--space-xs); }
+
+  .body { color: var(--text-secondary); max-width: var(--measure); margin-top: var(--space-xl); }
+  .body code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent-cyan); }
+
+  .caveat {
+    margin-top: var(--space-xl);
+    max-width: var(--measure);
+    padding: var(--space-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent-cyan);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 1px 0 var(--frame-highlight);
+  }
+  .caveat p { color: var(--text-secondary); font-size: 0.95rem; }
+  .caveat b { color: var(--text-primary); }
+</style>

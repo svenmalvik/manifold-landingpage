@@ -8,7 +8,7 @@ order: 4
 
 ## The workspace
 
-Manifold opens straight into a full developer workspace — a panelled layout you can rearrange. The panel set includes a repositories sidebar, the agent terminal, search, a file tree, modified files, shell tabs, a web preview, and one or more editor panes.
+Manifold opens straight into a full developer workspace, a panelled layout you can rearrange. The panel set includes a repositories sidebar, the agent terminal, search, a file tree, modified files, shell tabs, a web preview, and one or more editor panes.
 
 Key workflows:
 
@@ -20,13 +20,28 @@ Key workflows:
 - Generate commit messages and pull request descriptions with the same runtime the session used.
 - Detect merge conflicts and see how far ahead or behind the base branch you are.
 
+## Launching an agent
+
+An agent can start in four ways:
+
+| Start on | What it does |
+| --- | --- |
+| **New branch** | The default. Creates a dedicated git worktree. |
+| **Current branch** | Runs in the project checkout, with no separate worktree. |
+| **Existing branch** | Continues work already in progress. |
+| **Open pull request** | Checks out the branch of a pull request and continues from there. |
+
+Each agent shows one of four states: `running` when it's working, `waiting` when it needs input from you, `done` when it finished, and `error` when it stopped on a failure.
+
 ## Working across multiple repositories
 
 A **Workspace** groups several repositories into one working set so a single agent can operate across all of them at once.
 
-- Create one from the **New Workspace** action in the sidebar and pick the repositories — and the runtime — to include.
+Workspaces are opt-in. Turn on **Settings → General → Enable Workspaces** first, which adds working-set cards to the left sidebar. With it off, Manifold keeps the standard repository-only workflow and the action below won't be there.
+
+- Create one from the **New Workspace** action in the sidebar, then pick the repositories and the runtime to include.
 - The first repository is the agent's working directory; the others are mounted through the runtime's own multi-directory flag (`--add-dir` for Claude, Codex, and Copilot; `--include-directories` for Gemini).
 - When the agent starts, Manifold creates a worktree for every git repository in the set, all on the same branch (`manifold/<workspace-name>` by default), and removes them when the session ends.
 - Add or remove repositories from a workspace at any time from its sidebar section.
 
-Workspaces are useful when a task spans several repositories at once — for example, landing a change that touches both a backend and a frontend repo, or running the same refactor across many services.
+Workspaces are useful when a task spans several repositories at once. One example is landing a change that touches both a backend and a frontend repo. Another is running the same refactor across many services.
