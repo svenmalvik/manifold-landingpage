@@ -20,9 +20,24 @@ Key workflows:
 - Generate commit messages and pull request descriptions with the same runtime the session used.
 - Detect merge conflicts and see how far ahead or behind the base branch you are.
 
+## Launching an agent
+
+An agent can start in four ways:
+
+| Start on | What it does |
+| --- | --- |
+| **New branch** | The default. Creates a dedicated git worktree. |
+| **Current branch** | Runs in the project checkout, with no separate worktree. |
+| **Existing branch** | Continues work already in progress. |
+| **Open pull request** | Checks out the branch of a pull request and continues from there. |
+
+Each agent shows one of four states: `running` when it's working, `waiting` when it needs input from you, `done` when it finished, and `error` when it stopped on a failure.
+
 ## Working across multiple repositories
 
 A **Workspace** groups several repositories into one working set so a single agent can operate across all of them at once.
+
+Workspaces are opt-in. Turn on **Settings → General → Enable Workspaces** first, which adds working-set cards to the left sidebar. With it off, Manifold keeps the standard repository-only workflow and the action below won't be there.
 
 - Create one from the **New Workspace** action in the sidebar, then pick the repositories and the runtime to include.
 - The first repository is the agent's working directory; the others are mounted through the runtime's own multi-directory flag (`--add-dir` for Claude, Codex, and Copilot; `--include-directories` for Gemini).

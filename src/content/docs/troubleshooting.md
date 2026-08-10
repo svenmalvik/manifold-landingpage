@@ -1,7 +1,7 @@
 ---
 title: "Troubleshooting"
 description: "Common issues and where to look when something goes wrong."
-order: 7
+order: 9
 ---
 
 <!-- Source: vippsas/manifold README.md (Requirements, Local Data, Verify) -->

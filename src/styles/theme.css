@@ -54,11 +54,14 @@ a:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 2px; }
 
 /* Links inside running prose must not be distinguished by colour alone
    (WCAG 1.4.1). Standalone links (nav, CTAs, footer) are unaffected. */
-p a, li a {
+p a, li a, td a, dd a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
 }
+/* Navigation is not prose. The docs sidebar and the footer link row are lists,
+   so the rule above would underline them; colour plus position is enough there. */
+nav a, .footer-links a { text-decoration: none; }
 
 h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; color: var(--text-primary); }
 

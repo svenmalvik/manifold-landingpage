@@ -1,12 +1,12 @@
 ---
 title: "Loop"
 description: "Automated improve-and-evaluate cycles that commit on improvement."
-order: 5
+order: 6
 ---
 
 <!-- Source: vippsas/manifold README.md (Automated Loop) -->
 
-The **Loop** dock panel runs an automated improve-and-evaluate cycle on an agent session:
+The **Loop** dock panel runs an automated improve-and-evaluate cycle on an agent session. It ships as a bundled [plugin](/docs/plugins), `manifold.loop`, and is enabled out of the box.
 
 1. Prompt the agent with your instruction.
 2. Run a user-defined evaluation command.

@@ -1,7 +1,7 @@
 ---
 title: "Search & Memory"
 description: "Search code, files, and captured session memory, with an optional AI mode."
-order: 6
+order: 7
 ---
 
 <!-- Source: vippsas/manifold README.md (Search And Memory) -->
@@ -13,6 +13,8 @@ The workspace includes a search system that goes beyond file text search.
 - **Match modes:** literal or regex.
 - Saved searches and recent searches are persisted per project.
 - **Ask AI** can answer questions using the retrieved results as context, or re-sort exact matches by relevance, depending on settings.
+
+**Ask AI is off by default.** The shipped setting is `provider: 'none'`, and with that in place nothing is sent anywhere. Turning it on means supplying your own provider and key, and the request then goes from your machine straight to that provider. Search over code, files, and memory works without it.
 
 ## Session memory
 
