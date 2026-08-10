@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro'
-const version = '0.2.108'
+import { getManifoldRelease } from '../lib/manifold-release'
+const { version } = await getManifoldRelease()
 ---
 <footer class="footer">
   <div class="container footer-inner">

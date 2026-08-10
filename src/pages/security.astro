@@ -12,6 +12,17 @@ import Section from '../components/Section.astro'
 //    vippsas/manifold, not plausible-looking greps.
 //  - Do not name or describe manifold-server's deployment infrastructure; that
 //    repo is internal.
+import { getManifoldRelease } from '../lib/manifold-release'
+
+// The claims on this page were checked by hand against a specific release, so
+// this is deliberately NOT bound to the live version — auto-bumping it would
+// silently assert the audit was repeated for every future release. Bump it when
+// the page is actually re-reviewed. The live release is shown alongside so a
+// reader can see how far the review has drifted.
+const LAST_REVIEWED_VERSION = '0.2.108'
+const LAST_REVIEWED = `v${LAST_REVIEWED_VERSION}`
+const { version } = await getManifoldRelease()
+
 const title = 'Security — Manifold'
 const description =
   "What leaves your machine and what doesn't, where state lives, how credentials are handled, and the commands to verify each claim yourself."
@@ -194,8 +205,8 @@ const description =
     <Section eyebrow="Limits">
       <Fragment slot="title">What we <em>don't</em> claim.</Fragment>
       <Fragment slot="lede">
-        A security page that lists only strengths isn't one. These are the gaps as of
-        v0.2.108.
+        A security page that lists only strengths isn't one. Last reviewed against
+        {LAST_REVIEWED}{version !== LAST_REVIEWED_VERSION && <> — the current release is v{version}</>}.
       </Fragment>
 
       <ul class="facts limits">

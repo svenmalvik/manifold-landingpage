@@ -2,8 +2,8 @@
 import Section from './Section.astro'
 // The full requirements matrix lives in /docs/install — a table of caveats was
 // the last thing between a convinced reader and a download.
-const version = '0.2.108'
-const armDmg = `https://github.com/vippsas/manifold/releases/download/v${version}/Manifold-${version}-arm64.dmg`
+import { getManifoldRelease } from '../lib/manifold-release'
+const { armDmg } = await getManifoldRelease()
 ---
 <Section id="install" eyebrow="Get started">
   <Fragment slot="title">Three steps and a <em>repo</em>.</Fragment>
