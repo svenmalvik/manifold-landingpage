@@ -24,9 +24,40 @@ and monetises a cloud tier at $50/mo individual, $60/mo/user for teams.
 Manifold has 14 stars and 3 forks. **Social proof is an unwinnable axis and the page must
 not attempt it.** No fake counters, no borrowed logos, no invented testimonials.
 
+## Audience — repositioned 2026-08-10
+
+**The page addresses engineering organisations, not individual developers.**
+
+The original spec wrote for an individual ("your Mac", "your own disk"). That was the wrong
+buyer. Manifold plus Manifold Server plus the plugin system give an organisation something no
+hosted competitor can offer: **full autonomy** — agents running across all its repositories,
+on its own machines and its own cluster, under its own CI policy, with no vendor in the
+critical path and no per-seat licence.
+
+That also inverts the social-proof problem. An individual choosing a tool wants to see that
+other individuals use it, which this project cannot show (14 stars). An organisation running
+a security review wants to know where its source goes, who holds it, what it costs at
+headcount, and whether it can read the code. Those are questions Manifold answers *by
+construction* — and the well-funded hosted alternative structurally cannot.
+
+Consequences, applied throughout:
+
+- Hero speaks to infrastructure, not to a laptop: *"Every agent. Every repo. None of it
+  leaves your infrastructure."*
+- Section 12b answers security-review questions directly, and names the missing pieces
+  (no support contract, no SLA, no account manager) rather than hiding them.
+- The receipt leads with **"No per-seat licence."**
+- Nav carries an `Enterprise` link, so the audience is signalled above the fold.
+- `<title>` and description say *self-hosted* and *engineering organisations*.
+
+The desktop app remains a free download with no gate — the enterprise framing must never
+introduce a "contact sales" wall in front of the product.
+
 ## Positioning
 
-**Lead claim: your code never leaves your Mac.**
+**Lead claim: your code never leaves your Mac.** *(Superseded by the repositioning above —
+the claim is now "none of it leaves your infrastructure", which covers developer machines and
+the optional self-hosted server. The reasoning below still holds; only the scope widened.)*
 
 This is chosen deliberately. The category's leading paid product runs sessions in managed
 cloud sandboxes and states in its own FAQ that it must store session inputs and outputs on
@@ -314,6 +345,41 @@ the desktop app, which is what visitors actually download.
 Interest routes to GitHub Discussions or the maintainer's LinkedIn. **No email address on
 the page** (spam surface, and publishing a work address is not this page's call), and no
 signup form — that would break the no-third-party-requests rule the copy depends on.
+
+### 9c — Plugins (added 2026-08-10)
+
+Manifold's own features are plugins. **Loop is `manifold.loop`** — the flagship automation is
+itself an extension, which is the strongest available evidence the model isn't a stub. Four
+ship: Loop, Statistics, Worktrees, Watch. (`resources/plugins` also holds `hello`,
+`hello-tree` and `hello-vscode`; those are API samples, not features, so the page does not
+list them as shipped plugins.)
+
+User plugins load from `~/.manifold/plugins`. Each runs in a **sandboxed extension-host
+process** and declares capabilities in its manifest; the host enforces the list, and an
+unrecognised capability **rejects the whole manifest** rather than being ignored. Plugin ids
+cannot contain a path separator, per-plugin storage is escape-guarded, webviews are served
+over their own scheme under a nonce CSP, and a VS Code shim runs a subset of existing
+extensions unmodified.
+
+**The enterprise hook, stated accurately.** Privileged capabilities — `agent:control`,
+`agent:spawn`, `lm`, `workspace:manage`, `verdicts:*`, `transcription:read` — are restricted
+to **built-in** plugins no matter what a manifest claims. So a team can self-serve a plugin
+that reads the workspace, stores state or contributes views, but a plugin that drives an
+agent has to come through the maintainers. The copy must say this plainly and not imply
+anyone can self-serve privileged reach.
+
+### 12b — For engineering organisations (added 2026-08-10)
+
+Six security-review questions, answered from behaviour rather than policy: where does source
+go, which region, cost per engineer, can we audit it, who approves what an agent writes, does
+it fit our stack.
+
+**This section must stay falsifiable.** No certifications Manifold doesn't hold, no SLA it
+doesn't offer, no compliance language it can't back. It closes with *"The honest trade"* —
+naming the absence of a support contract, SLA and account manager as a real cost of having no
+vendor, and inviting procurement-constrained readers to make contact *before* they start. A
+page that only lists advantages reads as marketing; one that names its own gap reads as
+engineering, and is more persuasive to the exact audience being addressed.
 
 ### 10 — The receipt
 

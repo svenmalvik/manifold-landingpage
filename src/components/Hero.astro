@@ -9,17 +9,19 @@ const intelDmg = `https://github.com/vippsas/manifold/releases/download/v${versi
     <div class="hero-rule"></div>
     <h1 class="hero-tagline">
       Every agent. Every repo.<br />
-      <em>Nothing leaves your Mac.</em>
+      <em>None of it leaves your infrastructure.</em>
     </h1>
     <p class="hero-lede">
-      Run Claude Code, Codex, Gemini CLI, Copilot — and local models — side by side
-      on one codebase. Real terminals, isolated git branches, all on your own disk.
+      Manifold runs Claude Code, Codex, Gemini CLI, Copilot — and local models — across your
+      repositories, in real terminals on isolated branches. Self-hosted end to end: your
+      machines, your credentials, your policy. No per-seat licence, and no vendor holding
+      your source.
     </p>
     <div class="hero-ctas">
       <a href={armDmg} class="btn-primary">Download for macOS (Apple Silicon)</a>
       <a href={intelDmg} class="hero-intel">Intel</a>
     </div>
-    <p class="hero-meta">MIT licensed · no account · no telemetry · v{version}</p>
+    <p class="hero-meta">MIT licensed · self-hosted · no account · no telemetry · v{version}</p>
   </div>
 </header>
 
@@ -48,8 +50,9 @@ const intelDmg = `https://github.com/vippsas/manifold/releases/download/v${versi
     line-height: 1.1;
     letter-spacing: -0.015em;
     color: var(--text-primary);
-    /* Both lines are ~24 characters; anything narrower orphans "Mac." */
-    max-width: 26ch;
+    /* Sized to the longer line ("None of it leaves your infrastructure.", 37ch)
+       so the claim holds one line instead of wrapping to a third. */
+    max-width: 38ch;
     margin: 0 auto;
   }
   .hero-tagline em { font-style: italic; color: var(--accent-text); }

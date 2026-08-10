@@ -6,13 +6,16 @@ import Section from './Section.astro'
 // "No server in the middle" was true when written and isn't any more — Manifold
 // Server exists (in beta). It runs on the operator's own infrastructure, so the
 // substance holds, but the line has to say *whose* server rather than none.
+// "No server in the middle" was true when written and isn't any more — Manifold
+// Server exists (in beta). It runs on the operator's own infrastructure, so the
+// substance holds, but the line has to say *whose* server rather than none.
 const absences = [
+  'No per-seat licence.',
   'No account to create.',
-  'No seat price.',
-  'No Pro tier.',
+  'No Pro tier, no upgrade path, no upsell.',
   'No service of ours in the middle.',
   'No telemetry.',
-  "No lock-in — it's your git, your branches, your disk.",
+  "No lock-in — it's your git, your branches, your infrastructure.",
 ]
 ---
 <Section id="receipt" eyebrow="The receipt">
@@ -23,7 +26,7 @@ const absences = [
   </ul>
 
   <p class="close">
-    Free under the MIT licence. 168 releases since March.
+    Free under the MIT licence, at any headcount. 168 releases since March.
     <a href="https://github.com/vippsas/manifold">Fork it</a> if we get it wrong.
   </p>
 </Section>
