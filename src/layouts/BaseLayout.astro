@@ -23,7 +23,11 @@ const {
   title = 'Manifold — A full developer workspace for orchestrating AI agents',
   description = 'Run Claude Code, Codex, Gemini CLI, Copilot and local models side by side on one codebase — real terminals, isolated git branches, and nothing leaving your Mac.',
 } = Astro.props
-const ogImage = 'https://manifold.no/images/Manifold_ov.png'
+// JPEG rather than the on-page WebP: social crawlers are the one place where
+// broad format support still matters more than bytes. Regenerate alongside the
+// product shot with:
+//   sips -s format jpeg -s formatOptions 80 -Z 1200 <source> --out public/images/og.jpg
+const ogImage = 'https://manifold.no/images/og.jpg'
 ---
 <!DOCTYPE html>
 <html lang="en">
