@@ -1,0 +1,58 @@
+---
+import Section from './Section.astro'
+// Every claim in this section was verified against vippsas/manifold @ v0.2.108;
+// see the verification table in the design spec. Do not strengthen this copy.
+// In particular: never write "no network requests" — the updater checks GitHub
+// Releases. "No account, no telemetry" is true; the absolute claim is not.
+---
+<Section id="local" eyebrow="Local first">
+  <Fragment slot="title">Nothing leaves your <em>Mac</em>.</Fragment>
+  <Fragment slot="lede">
+    There is no Manifold account, because there is no Manifold server.
+  </Fragment>
+
+  <div class="mono-figure boxed">
+    <pre>   <span class="dim">your Mac</span>
+   ┌─────────────────────────────┐
+   │  <b>Manifold</b>                   │
+   │    agent terminals          │ ──→  the model provider
+   │    git worktrees            │      you already pay for
+   │    <b>~/.manifold/</b>  (SQLite)   │
+   └─────────────────────────────┘
+
+   <span class="dim">nothing in between — there is no Manifold server</span></pre>
+  </div>
+
+  <p class="body">
+    Your repositories, your worktrees, your session history and your captured memory
+    live in <code>~/.manifold</code> on your own disk. Prompts go straight from your
+    machine to the provider you already pay for. Nothing is proxied, stored, or
+    replayed by us.
+  </p>
+
+  <ul class="facts">
+    <li>Sessions run on your machine — not in someone else's sandbox.</li>
+    <li>Session history in local SQLite, per project, under <code>~/.manifold</code>.</li>
+    <li>AI-assisted features are off by default and use your own key.</li>
+    <li>MIT licensed — don't take our word for it, <a href="https://github.com/vippsas/manifold">read it</a>.</li>
+  </ul>
+</Section>
+
+<style>
+  .body { color: var(--text-secondary); max-width: var(--measure); margin-top: var(--space-xl); }
+  .body code, .facts code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent-cyan); }
+  .facts { list-style: none; margin-top: var(--space-xl); display: grid; gap: var(--space-md); max-width: var(--measure); }
+  .facts li {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    padding-left: var(--space-lg);
+    position: relative;
+  }
+  .facts li::before {
+    content: '└';
+    position: absolute;
+    left: 0;
+    color: var(--accent-gold);
+  }
+</style>

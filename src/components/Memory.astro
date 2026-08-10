@@ -1,0 +1,27 @@
+---
+import Section from './Section.astro'
+---
+<Section eyebrow="Search &amp; memory">
+  <Fragment slot="title">It <em>remembers</em>.</Fragment>
+  <Fragment slot="lede">
+    Search code, file names, or everything the agent has ever noted — across every project.
+  </Fragment>
+
+  <div class="mono-figure">
+    <pre><b>modes</b>    code · files · memory · everything
+<b>scopes</b>   this session · this project · every project
+<b>match</b>    literal · regex
+<b>saved</b>    per project, with recent history
+<b>ask ai</b>   answer from the results, or re-rank them <span class="dim">(optional)</span></pre>
+  </div>
+
+  <p class="body">
+    Manifold captures what happened — prompts, responses, observations the agent noted,
+    session summaries — into per-project SQLite. Resume a stopped session weeks later and
+    the agent gets its history back.
+  </p>
+</Section>
+
+<style>
+  .body { color: var(--text-secondary); max-width: var(--measure); margin-top: var(--space-xl); }
+</style>

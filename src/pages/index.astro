@@ -1,124 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Hero from '../components/Hero.astro'
-import FeatureCard from '../components/FeatureCard.astro'
 import ProductShot from '../components/ProductShot.astro'
-
-const runtimes = ['Claude Code', 'Codex', 'Gemini CLI', 'Copilot', 'Ollama']
+import LocalFirst from '../components/LocalFirst.astro'
+import RealTerminal from '../components/RealTerminal.astro'
+import Parallel from '../components/Parallel.astro'
+import Loop from '../components/Loop.astro'
+import Runtimes from '../components/Runtimes.astro'
+import Workspaces from '../components/Workspaces.astro'
+import Memory from '../components/Memory.astro'
+import Receipt from '../components/Receipt.astro'
+import ThemeGallery from '../components/ThemeGallery.astro'
+import GetStarted from '../components/GetStarted.astro'
 ---
 <BaseLayout>
   <main>
     <Hero />
-
     <ProductShot />
-
-    <section class="features container">
-      <h2 class="section-heading">Everything you need to run agents in parallel</h2>
-      <div class="feature-grid">
-        <FeatureCard title="Parallel Agents" href="/docs/workspaces">
-          Run multiple agents on one repository without branch collisions. Each gets its own git worktree on a dedicated branch.
-        </FeatureCard>
-        <FeatureCard title="Full Agent Terminal" href="/docs">
-          Use the real agent terminal directly, with live streaming output and the ability to type input at any time.
-        </FeatureCard>
-        <FeatureCard title="Workspaces" href="/docs/workspaces">
-          Group several repositories into one working set and run a single agent across all of them at once.
-        </FeatureCard>
-        <FeatureCard title="Automated Loop" href="/docs/loop">
-          Run improve-and-evaluate cycles that score each attempt, commit on improvement, and revert on regression.
-        </FeatureCard>
-        <FeatureCard title="Search &amp; Memory" href="/docs/search">
-          Search code, file names, and captured session memory — with an optional AI mode that answers questions.
-        </FeatureCard>
-        <FeatureCard title="Review Tools" href="/docs">
-          Diffs, a file tree, split editors, shell tabs, and embedded localhost previews, all one click away.
-        </FeatureCard>
-      </div>
-    </section>
-
-    <section class="strip">
-      <div class="container strip-inner">
-        {runtimes.map((r) => <span class="strip-item">{r}</span>)}
-      </div>
-    </section>
-
-    <section class="install container" id="install">
-      <h2 class="section-heading">Get started</h2>
-      <p class="install-intro">
-        Download the latest <code>.dmg</code>, open it, and drag Manifold to <code>Applications</code>.
-      </p>
-      <div class="install-table-wrap">
-        <table class="install-table">
-          <thead><tr><th>Requirement</th><th>Notes</th></tr></thead>
-          <tbody>
-            <tr><td>macOS</td><td>The packaged app targets macOS only.</td></tr>
-            <tr><td>Git</td><td>Required for worktrees, diffs, commits, and pull requests.</td></tr>
-            <tr><td>A CLI agent on your <code>PATH</code></td><td>Claude Code, Codex, Copilot, or Gemini CLI.</td></tr>
-            <tr><td>GitHub CLI (<code>gh</code>)</td><td>Optional — needed to create pull requests in-app.</td></tr>
-            <tr><td>Ollama + a model</td><td>Optional — only for the Ollama-backed runtimes.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="install-ctas">
-        <a href="https://github.com/vippsas/manifold/releases" class="btn-primary">See all releases</a>
-        <a href="/docs/install" class="hero-intel">Read the install guide</a>
-      </div>
-    </section>
+    <LocalFirst />
+    <RealTerminal />
+    <Parallel />
+    <Loop />
+    <Runtimes />
+    <Workspaces />
+    <Memory />
+    <Receipt />
+    <ThemeGallery />
+    <GetStarted />
   </main>
 </BaseLayout>
-
-<style>
-  .shot { max-width: 940px; margin: var(--space-2xl) auto 0; padding: 0 var(--space-xl); }
-  .shot-frame {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    /* Separation is theme-aware (see --frame-* in themes.css): on dark canvases
-       it comes from light — a brushed-metal top highlight + faint rim over a
-       deep lift; on light canvases from a dark hairline + a softer shadow. */
-    box-shadow:
-      inset 0 1px 0 var(--frame-highlight),
-      0 0 0 1px var(--frame-rim),
-      var(--frame-shadow);
-  }
-  .shot-frame img { width: 100%; height: auto; display: block; }
-  .shot-caption { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: var(--space-md); }
-
-  .section-heading { text-align: center; font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: var(--space-xl); }
-  .features { margin-top: var(--space-2xl); }
-  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg); }
-
-  .strip { padding: var(--space-lg) 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: var(--space-2xl); }
-  .strip-inner { display: flex; justify-content: center; align-items: center; gap: var(--space-xl); flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); }
-  .strip-item::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--accent-cyan); border-radius: 50%; margin-right: var(--space-sm); vertical-align: middle; }
-
-  .install { margin-top: var(--space-2xl); max-width: 760px; }
-  .install-intro { text-align: center; color: var(--text-secondary); margin-bottom: var(--space-lg); }
-  .install-intro code, .install-table code { font-family: var(--font-mono); font-size: 0.85em; color: var(--accent-cyan); }
-  .install-table-wrap { overflow-x: auto; }
-  .install-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-  .install-table th, .install-table td { text-align: left; padding: var(--space-sm) var(--space-md); border-bottom: 1px solid var(--border); }
-  .install-table th { color: var(--accent-blue); font-family: var(--font-mono); font-size: 0.8rem; }
-  .install-table td { color: var(--text-secondary); }
-  .install-ctas { display: flex; gap: var(--space-md); align-items: center; justify-content: center; flex-wrap: wrap; margin-top: var(--space-xl); }
-</style>
-
-<script>
-  // Scroll-reveal for feature cards.
-  const els = document.querySelectorAll('.reveal')
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          const el = entry.target as HTMLElement
-          el.style.transitionDelay = `${(i % 3) * 100}ms`
-          el.classList.add('is-visible')
-          io.unobserve(el)
-        }
-      })
-    }, { threshold: 0.1 })
-    els.forEach((el) => io.observe(el))
-  } else {
-    els.forEach((el) => el.classList.add('is-visible'))
-  }
-</script>

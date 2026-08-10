@@ -1,0 +1,99 @@
+---
+import Section from './Section.astro'
+import themes from '../data/themes-meta.json'
+---
+<Section id="themes" eyebrow="Themes">
+  <Fragment slot="title">Ten themes ship with the app. This page <em>wears them too</em>.</Fragment>
+
+  <ul class="swatches">
+    {themes.map((t) => (
+      <li>
+        <button
+          type="button"
+          data-theme-id={t.id}
+          title={t.label}
+          aria-label={`Switch to the ${t.label} theme`}
+          style={`--sw-bg:${t.swatch.bg}; --sw-fg:${t.swatch.fg}; --sw-accent:${t.swatch.accent}`}
+        >
+          <span class="chip"><span class="chip-accent"></span></span>
+          <span class="label">{t.label}</span>
+        </button>
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .swatches {
+    list-style: none;
+    margin-top: var(--space-xl);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: var(--space-md);
+  }
+  .swatches button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+  .swatches button:hover { border-color: var(--accent-gold); color: var(--text-primary); }
+  .swatches button:focus-visible { outline: none; border-color: var(--accent-gold); box-shadow: 0 0 0 2px var(--accent-gold); }
+  .swatches button[aria-current='true'] { border-color: var(--accent-gold); color: var(--text-primary); }
+
+  .chip {
+    width: 26px;
+    height: 26px;
+    border-radius: var(--radius-xs);
+    background: var(--sw-bg);
+    border: 1px solid var(--sw-fg);
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 3px;
+    flex-shrink: 0;
+  }
+  .chip-accent { width: 9px; height: 9px; border-radius: 50%; background: var(--sw-accent); }
+</style>
+
+<script>
+  const gallery = document.querySelector('#themes')
+  if (gallery) {
+    const html = document.documentElement
+    const KEY = 'manifold-theme'
+    const buttons = gallery.querySelectorAll<HTMLButtonElement>('button[data-theme-id]')
+
+    const mark = () => {
+      const active = html.getAttribute('data-theme')
+      buttons.forEach((b) => b.setAttribute('aria-current', String(b.dataset.themeId === active)))
+    }
+
+    buttons.forEach((b) => {
+      b.addEventListener('click', () => {
+        const id = b.dataset.themeId
+        if (!id) return
+        html.setAttribute('data-theme', id)
+        try {
+          localStorage.setItem(KEY, id)
+        } catch (e) {
+          /* storage may be unavailable; the theme still applies for this session */
+        }
+        mark()
+        // Keep the nav control in sync with the gallery.
+        document.dispatchEvent(new CustomEvent('manifold:theme', { detail: id }))
+      })
+    })
+
+    mark()
+    document.addEventListener('manifold:theme', mark)
+  }
+</script>

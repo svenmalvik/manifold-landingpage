@@ -1,0 +1,46 @@
+---
+import Section from './Section.astro'
+// The comparison section that contains no comparison. Whitespace does the work
+// here — resist adding anything. Release count verified 2026-08-10 via
+// `gh release list --repo vippsas/manifold --limit 500 | wc -l`.
+const absences = [
+  'No account to create.',
+  'No seat price.',
+  'No Pro tier.',
+  'No server in the middle.',
+  'No telemetry.',
+  "No lock-in — it's your git, your branches, your disk.",
+]
+---
+<Section id="receipt" eyebrow="The receipt">
+  <Fragment slot="title">What you <em>don't</em> get.</Fragment>
+
+  <ul class="absences">
+    {absences.map((a) => <li>{a}</li>)}
+  </ul>
+
+  <p class="close">
+    Free under the MIT licence. 168 releases since March.
+    <a href="https://github.com/vippsas/manifold">Fork it</a> if we get it wrong.
+  </p>
+</Section>
+
+<style>
+  .absences {
+    list-style: none;
+    margin-top: var(--space-2xl);
+    display: grid;
+    gap: var(--space-lg);
+  }
+  .absences li {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 2vw, 1.15rem);
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+  .close {
+    margin-top: var(--space-2xl);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+</style>

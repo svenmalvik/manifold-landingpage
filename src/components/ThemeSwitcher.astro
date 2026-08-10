@@ -99,6 +99,8 @@ const FAMILIES = [
         /* storage may be unavailable; theme still applies for the session */
       }
       sync(id)
+      // The theme gallery listens for this so its active swatch stays correct.
+      document.dispatchEvent(new CustomEvent('manifold:theme', { detail: id }))
     }
 
     select.addEventListener('change', () => {
@@ -113,5 +115,8 @@ const FAMILIES = [
 
     // Reflect the theme set before paint by the inline head script.
     sync(current())
+
+    // The theme gallery also sets data-theme; mirror its changes here.
+    document.addEventListener('manifold:theme', () => sync(current()))
   }
 </script>

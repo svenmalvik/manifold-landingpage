@@ -1,0 +1,36 @@
+---
+import Section from './Section.astro'
+// The full requirements matrix lives in /docs/install — a table of caveats was
+// the last thing between a convinced reader and a download.
+const version = '0.2.108'
+const armDmg = `https://github.com/vippsas/manifold/releases/download/v${version}/Manifold-${version}-arm64.dmg`
+---
+<Section id="install" eyebrow="Get started">
+  <Fragment slot="title">Three steps and a <em>repo</em>.</Fragment>
+
+  <ol class="steps">
+    <li><span class="n">1</span> <span>Download the <code>.dmg</code> and drag Manifold to <code>Applications</code></span></li>
+    <li><span class="n">2</span> <span>Make sure one agent CLI is on your <code>PATH</code></span></li>
+    <li><span class="n">3</span> <span>Open a repo. Start an agent.</span></li>
+  </ol>
+
+  <div class="mono-figure">
+    <pre><span class="dim">$</span> claude --version     <span class="dim"># or codex / gemini / copilot</span>
+<span class="dim">$</span> git --version
+<span class="dim">$</span> gh --version         <span class="dim"># optional — for opening PRs in-app</span></pre>
+  </div>
+
+  <div class="ctas">
+    <a href={armDmg} class="btn-primary">Download for macOS</a>
+    <a href="/docs/install" class="hero-intel">Read the install guide</a>
+    <a href="https://github.com/vippsas/manifold/releases" class="hero-intel">See all releases</a>
+  </div>
+</Section>
+
+<style>
+  .steps { list-style: none; margin-top: var(--space-xl); display: grid; gap: var(--space-md); max-width: var(--measure); }
+  .steps li { color: var(--text-secondary); display: flex; gap: var(--space-md); align-items: baseline; }
+  .steps .n { font-family: var(--font-mono); color: var(--accent-gold); font-weight: 700; }
+  .steps code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent-cyan); }
+  .ctas { display: flex; gap: var(--space-lg); align-items: center; flex-wrap: wrap; margin-top: var(--space-2xl); }
+</style>

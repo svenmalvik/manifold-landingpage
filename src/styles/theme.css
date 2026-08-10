@@ -128,6 +128,12 @@ code, pre { font-family: var(--font-mono); }
 .mono-figure .dim { color: var(--text-muted); }
 .mono-figure pre { margin: 0; font: inherit; }
 
+/* Figures that draw boxes or tree connectors need near-solid leading, or the
+   box-drawing glyphs break into disconnected dashes. Line-height 2 is fine for
+   label/value figures but ruins a rectangle. */
+.mono-figure.boxed { line-height: 1.9; }
+.mono-figure.boxed pre { line-height: 1.15; }
+
 /* Shared CTA styles — used by both the hero and the install section. */
 .btn-primary {
   display: inline-block;
