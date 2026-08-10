@@ -1,19 +1,22 @@
 ---
-// PLACEHOLDER CONTENT. workspace.webp is currently a WebP re-encode of the old
-// hero image, which shows the empty "New agent" form — it proves nothing. It is
-// here so the page is fast and correctly sized; the content still needs a real
-// capture (sidebar + running agent terminal + open diff) on a scratch repo.
-// See docs/superpowers/plans/2026-08-10-landingpage-local-first-redesign.md,
-// Task 14. Update `alt` to match when the real shot lands.
+// Real capture, taken on a throwaway profile registering only a fictional
+// `checkout-service` repo — no internal project names. Cropped to exclude the
+// terminal's bottom strip; nothing in the frame is retouched.
+//
+// What it actually shows: two agent tabs (Claude and Codex), the live Claude
+// Code banner, the file tree, and a rendered README. The agents are idle, so the
+// caption must not claim work in flight, and there is deliberately no
+// running/waiting/done/error legend here — the four states are labelled in the
+// worktree figure further down, where a real example backs them up.
 const img = '/images/workspace.webp'
-const width = 1872
-const height = 1124
+const width = 2200
+const height = 672
 ---
 <section class="shot">
   <div class="shot-frame metal-frame">
     <img
       src={img}
-      alt="The Manifold workspace"
+      alt="The Manifold workspace: a Claude Code agent and a Codex agent open as tabs over one repository, with the file tree and rendered README beside them"
       width={width}
       height={height}
       loading="eager"
@@ -21,44 +24,18 @@ const height = 1124
       fetchpriority="high"
     />
   </div>
-  <ul class="legend">
-    <li><span class="dot running"></span>running</li>
-    <li><span class="dot waiting"></span>waiting</li>
-    <li><span class="dot done"></span>done</li>
-    <li><span class="dot error"></span>error</li>
-  </ul>
-  <p class="shot-caption">Four agents on one repository. Four git worktrees. One window.</p>
+  <p class="shot-caption">Two agents, one repository, one window — each on its own branch.</p>
 </section>
 
 <style>
   .shot { max-width: 1100px; margin: var(--space-2xl) auto 0; padding: 0 var(--space-xl); }
   .shot-frame img { width: 100%; height: auto; display: block; }
 
-  .legend {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-xl);
-    list-style: none;
-    margin-top: var(--space-lg);
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    color: var(--text-muted);
-  }
-  .legend li { display: flex; align-items: center; gap: var(--space-sm); }
-  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  /* Gemstone status colours, per the app's design system. */
-  .dot.running { background: var(--accent-cyan); }
-  .dot.waiting { background: var(--accent-gold); }
-  .dot.done { background: var(--status-success); }
-  .dot.error { background: var(--status-error); }
 
   .shot-caption {
     text-align: center;
     color: var(--text-muted);
     font-size: 0.85rem;
     margin-top: var(--space-md);
-  }
-  @media (max-width: 768px) {
-    .legend { gap: var(--space-md); flex-wrap: wrap; }
   }
 </style>
