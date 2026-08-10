@@ -84,7 +84,7 @@ code, pre { font-family: var(--font-mono); }
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent-gold);
+  color: var(--accent-text);
   margin-bottom: var(--space-md);
 }
 
@@ -96,7 +96,7 @@ code, pre { font-family: var(--font-mono); }
   letter-spacing: -0.01em;
   max-width: 20ch;
 }
-.section-title em { font-style: italic; color: var(--accent-gold); }
+.section-title em { font-style: italic; color: var(--accent-text); }
 
 .section-lede {
   color: var(--text-secondary);

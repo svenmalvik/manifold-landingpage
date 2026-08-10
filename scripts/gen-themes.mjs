@@ -136,14 +136,22 @@ function deriveTokens(colors, type) {
     // disabledForeground is tuned to recede in the app's chrome; on a page it
     // carries the hero meta line and figure annotations, so it gets a floor.
     '--text-muted': ensureContrast(c('disabledForeground'), [canvas, c('sideBar.background')], fg),
+    // Raw accent — for fills, borders and rules, where AA text rules don't apply.
     '--accent-gold': accent,
     // Foreground for text sitting on the accent fill (the download button).
     // On dark themes the canvas wins and nothing changes; on light themes with
     // a saturated accent, white-on-orange fails AA and the foreground wins.
     '--on-accent': bestOn(accent, canvas, fg),
+    // The accent used AS TEXT (eyebrows, italic emphasis, step numbers). A
+    // saturated light-theme accent — Garfield's orange, Neon's pink — only
+    // reaches ~3.1:1 on its canvas, so it gets darkened for text use while the
+    // raw accent above stays untouched for fills. Mirrors the app's own
+    // accent / accent-text split.
+    '--accent-text': ensureContrast(accent, [canvas, c('sideBar.background')], fg),
     '--accent-gold-hover': dark ? lighten(accent, 0.12) : darken(accent, 0.1),
-    '--accent-blue': c('terminal.ansiBrightBlue'),
-    '--accent-cyan': c('terminal.ansiBrightCyan'),
+    '--accent-blue': ensureContrast(c('terminal.ansiBrightBlue'), [canvas, c('sideBar.background')], fg),
+    // Used for inline code and tags, so it has to clear AA as text too.
+    '--accent-cyan': ensureContrast(c('terminal.ansiBrightCyan'), [canvas, c('sideBar.background')], fg),
     '--status-success': c('terminal.ansiGreen'),
     '--status-error': c('terminal.ansiRed'),
     '--nav-bg': rgba(canvas, 0.85),

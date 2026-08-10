@@ -4,9 +4,9 @@
     "label": "Manifold Dark",
     "type": "dark",
     "swatch": {
-      "bg": "#0A0A0E",
-      "fg": "#E8E8F0",
-      "accent": "#C9906D"
+      "bg": "#06080F",
+      "fg": "#E6ECF7",
+      "accent": "#E2C275"
     }
   },
   {
@@ -14,9 +14,9 @@
     "label": "Manifold Light",
     "type": "light",
     "swatch": {
-      "bg": "#FFFFFF",
-      "fg": "#1C1A17",
-      "accent": "#9E6038"
+      "bg": "#F6F1E7",
+      "fg": "#2B2E3A",
+      "accent": "#1B3A6B"
     }
   },
   {

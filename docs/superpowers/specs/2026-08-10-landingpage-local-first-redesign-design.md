@@ -103,10 +103,24 @@ like every other developer-tool site.
 ### Theme drift — fix during implementation
 
 `src/themes/data/` vendors **12** themes; the app ships **10** (Garfield, Jade, Manifold,
-Neon, Platinum — each light and dark). **Royal Dark and Royal Light no longer exist in the
-app** and must be dropped. Re-vendor from `vippsas/manifold` `src/shared/themes/data/` and
+Neon, Platinum — each light and dark).
+
+**What actually happened upstream:** app commit `94b7f780`, *"retire the old Manifold
+themes, promote Royal into the Manifold name"*, deleted `Royal *.json` and overwrote
+`Manifold *.json` with Royal's palette. So Royal was **renamed, not removed** — and the
+consequence is that the vendored `Manifold Dark/Light` are the *retired* palettes, not
+merely that Royal is surplus. Deleting the Royal files alone would leave the site showing a
+theme the app no longer ships under a name it still uses.
+
+Current Manifold Dark is `#06080F` canvas with `#E2C275` champagne gold (was `#0A0A0E` /
+`#C9906D` rose gold); Manifold Light is `#F6F1E7` cream with a `#1B3A6B` navy accent (was
+white). Re-vendor **all ten** files from `vippsas/manifold` `src/shared/themes/data/` and
 regenerate with `npm run themes`. Copy says "ten themes"; the switcher must offer exactly
 what the app ships.
+
+Re-vendoring is a diff, not a one-off: `for f in $APP/*.json; do diff -q "$f"
+"src/themes/data/$(basename "$f")"; done` is the check to re-run whenever the app's palette
+moves.
 
 Note: visitors with `manifold-theme: royal-*` in localStorage must fall back cleanly to
 `manifold-dark` rather than rendering unstyled. The existing guard in `BaseLayout.astro`
