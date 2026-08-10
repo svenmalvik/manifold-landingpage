@@ -54,10 +54,17 @@ function contrast(a, b) {
 function bestOn(bg, a, b) {
   return contrast(a, bg) >= contrast(b, bg) ? a : b
 }
-/** Nudge `colour` toward `target` until it clears `min` contrast against `bg`. */
-function ensureContrast(colour, bg, target, min = 4.5) {
+/**
+ * Nudge `colour` toward `target` until it clears `min` contrast against EVERY
+ * background in `bgs`. Text tokens land on more than one surface — muted text
+ * sits on the canvas in the hero meta line and on `--surface` inside figures —
+ * so checking only the canvas leaves the figures failing.
+ */
+function ensureContrast(colour, bgs, target, min = 4.5) {
+  const backgrounds = Array.isArray(bgs) ? bgs : [bgs]
+  const ok = (col) => backgrounds.every((bg) => contrast(col, bg) >= min)
   let out = colour
-  for (let t = 0; t <= 1.001 && contrast(out, bg) < min; t += 0.04) {
+  for (let t = 0; t <= 1.001 && !ok(out); t += 0.04) {
     out = mix(colour, target, t)
   }
   return out
@@ -122,10 +129,13 @@ function deriveTokens(colors, type) {
     '--border': c('panel.border'),
     '--divider': c('editorGroup.border'),
     '--text-primary': fg,
-    '--text-secondary': ensureContrast(c('descriptionForeground'), canvas, fg),
+    // Body and muted text land on the canvas AND on --surface (figures, cards),
+    // so both backgrounds have to clear AA — checking only the canvas leaves the
+    // figure annotations failing.
+    '--text-secondary': ensureContrast(c('descriptionForeground'), [canvas, c('sideBar.background')], fg),
     // disabledForeground is tuned to recede in the app's chrome; on a page it
     // carries the hero meta line and figure annotations, so it gets a floor.
-    '--text-muted': ensureContrast(c('disabledForeground'), canvas, fg),
+    '--text-muted': ensureContrast(c('disabledForeground'), [canvas, c('sideBar.background')], fg),
     '--accent-gold': accent,
     // Foreground for text sitting on the accent fill (the download button).
     // On dark themes the canvas wins and nothing changes; on light themes with

@@ -1,17 +1,24 @@
 ---
-// The real workspace capture lands in Task 14; until then fall back to the
-// existing asset so the build never breaks mid-plan.
-import { existsSync } from 'node:fs'
-const preferred = '/images/workspace.webp'
-const img = existsSync(`./public${preferred}`) ? preferred : '/images/Manifold_ov.png'
+// PLACEHOLDER CONTENT. workspace.webp is currently a WebP re-encode of the old
+// hero image, which shows the empty "New agent" form — it proves nothing. It is
+// here so the page is fast and correctly sized; the content still needs a real
+// capture (sidebar + running agent terminal + open diff) on a scratch repo.
+// See docs/superpowers/plans/2026-08-10-landingpage-local-first-redesign.md,
+// Task 14. Update `alt` to match when the real shot lands.
+const img = '/images/workspace.webp'
+const width = 1872
+const height = 1124
 ---
 <section class="shot">
   <div class="shot-frame metal-frame">
     <img
       src={img}
-      alt="The Manifold workspace: repositories sidebar, an agent running in a live terminal, and a diff open beside it"
+      alt="The Manifold workspace"
+      width={width}
+      height={height}
       loading="eager"
       decoding="async"
+      fetchpriority="high"
     />
   </div>
   <ul class="legend">
