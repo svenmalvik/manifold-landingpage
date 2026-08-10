@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import PageHeader from '../components/PageHeader.astro'
 import Section from '../components/Section.astro'
 
-// This page serves EVALUATION traffic — someone arriving from the nav asking
+// This page serves EVALUATION traffic: someone arriving from the nav asking
 // "can my organisation depend on this?". An earlier version carried a build
 // post-mortem ("what we'd skip", "what we still don't know"); it was written for
 // a peer platform leader, not a buyer, and to a buyer it read as "the thing
@@ -11,7 +11,7 @@ import Section from '../components/Section.astro'
 // reintroduce that framing here.
 //
 // Two hard rules that still apply:
-//   1. Manifold Server is UNPUBLISHED. More detail must not become a promise —
+//   1. Manifold Server is UNPUBLISHED. More detail must not become a promise.
 //      every mention keeps the beta caveat and no date is ever given.
 //   2. Never name the server's repository or its operator's infrastructure. A
 //      build gate asserts the repo slug and those infra terms never reach dist/.
@@ -20,7 +20,7 @@ import Section from '../components/Section.astro'
 // The partnering offer is deliberately non-commercial: bring the use case, we
 // review and ship it under MIT. No SLA, no engagement, no fee is offered
 // anywhere, because none has been defined.
-const title = 'For engineering leaders — Manifold'
+const title = 'For engineering leaders · Manifold'
 const description =
   'What Manifold is, how the self-hosted issue-to-pull-request server works, how the plugin boundary lets your team extend it, and what you own versus what we provide.'
 ---
@@ -52,7 +52,7 @@ const description =
 
       <p class="body">
         It runs entirely on infrastructure you control, with your own model credentials, and
-        it never merges anything — agents open pull requests and your existing CI and branch
+        it never merges anything. Agents open pull requests, and your existing CI and branch
         protection decide what lands. The <a href="/security">security page</a> documents the
         data flow, credential handling and the gaps.
       </p>
@@ -65,18 +65,18 @@ const description =
       </Fragment>
 
       <p class="availability">
-        <b>Not released yet.</b> It's in beta and isn't published — you can't deploy it today
-        and there's no date. The desktop app above ships independently and never depends on
+        <b>Not released yet.</b> It's in beta and isn't published. You can't deploy it today
+        and there is no date. The desktop app above ships independently and never depends on
         it. This is here so you can judge where Manifold is heading before you commit to it.
       </p>
 
       <div class="mono-figure boxed">
         <pre>  <b>trigger</b>      an issue gets your trigger label
-  <b>claim</b>        label swap — a durable claim, so two runners
+  <b>claim</b>        label swap: a durable claim, so two runners
                never take the same issue
   <b>sandbox</b>      per-issue clone on branch manifold/issue-&lt;n&gt;
   <b>agent</b>        runs unattended, with a per-run time limit
-  <b>verify</b>       your command — compile, unit, contract
+  <b>verify</b>       your command: compile, unit, contract
   <b>outcome</b>      pull request that closes the issue
                <span class="dim">or</span> needs-human <span class="dim">+ a comment explaining why</span></pre>
       </div>
@@ -88,7 +88,7 @@ const description =
             As a container in your own Kubernetes cluster. That is the point: the pod and
             namespace <em>are</em> the sandbox. You define the service account, the security
             context, the resource limits and the network policy, so the agent is confined by
-            the same controls you already run every other workload under — and it gets a
+            the same controls you already run every other workload under. It also gets a
             per-issue clone rather than a developer's whole disk.
           </dd>
         </div>
@@ -131,8 +131,8 @@ const description =
     <Section eyebrow="Plugins">
       <Fragment slot="title">Your team extends it. <em>We ship the privileged parts</em>.</Fragment>
       <Fragment slot="lede">
-        Manifold's own features are plugins — the automated Loop is one of them — so the
-        extension model is the one we build on, not a stub bolted to the side.
+        Manifold's own features are plugins. The automated Loop is one of them, so the
+        extension model is the one we build on ourselves.
       </Fragment>
 
       <div class="mono-figure boxed">
@@ -146,24 +146,24 @@ const description =
       </div>
 
       <p class="body">
-        Every plugin runs in a sandboxed host process — not in the app's main process, and not
-        in the UI — and declares the capabilities it needs in its manifest. The host enforces
+        Every plugin runs in a sandboxed host process, not in the app's main process and not
+        in the UI, and declares the capabilities it needs in its manifest. The host enforces
         that list, and an unrecognised capability rejects the whole manifest rather than being
-        quietly ignored, so a typo cannot widen a plugin's reach. There is also a
+        quietly ignored, so a typo can't widen a plugin's reach. There is also a
         VS&nbsp;Code compatibility shim, so a subset of extensions your team already uses runs
         unmodified.
       </p>
 
       <p class="pull">
         A plugin that reads the workspace or contributes a view, you can build and deploy
-        yourself. One that drives an agent needs to be built in — so that one we do together.
+        yourself. One that drives an agent needs to be built in, so that one we do together.
       </p>
 
       <div class="caveat">
         <p>
           <b>How that works.</b> Bring the use case. If it needs privileged reach, we review
           the design with you, and what ships lands as a built-in under the same MIT licence
-          as the rest of the app — yours to run, fork or walk away from. No fee, no contract,
+          as the rest of the app: yours to run, fork or walk away from. No fee, no contract,
           and no exclusivity in either direction.
         </p>
       </div>
@@ -189,7 +189,7 @@ const description =
             <li>The app, MIT licensed, source included</li>
             <li>The plugin API and its capability boundary</li>
             <li>Privileged plugins, built with you and shipped built-in</li>
-            <li>Releases — 168 since March</li>
+            <li>Releases, 168 of them since March</li>
             <li>A maintainer who answers</li>
           </ul>
         </div>
@@ -198,8 +198,8 @@ const description =
       <div class="caveat">
         <p>
           <b>Not in either column.</b> There is no SLA, no support contract, no account
-          manager, and no managed configuration yet — settings are per-user, so a platform
-          team cannot centrally pin defaults or push a standard plugin set. If any of those is
+          manager, and no managed configuration yet. Settings are per-user, so a platform
+          team can't centrally pin defaults or push a standard plugin set. If any of those is
           a hard requirement for your organisation, it is worth establishing before a pilot
           rather than after.
         </p>
@@ -209,7 +209,7 @@ const description =
     <Section eyebrow="Next step">
       <Fragment slot="title">Start with one thing you'd automate.</Fragment>
       <Fragment slot="lede">
-        The most useful first conversation isn't a demo — it's the specific job you would hand
+        The most useful first conversation isn't a demo. It's the specific job you would hand
         to an agent, and whether Manifold can already do it.
       </Fragment>
 

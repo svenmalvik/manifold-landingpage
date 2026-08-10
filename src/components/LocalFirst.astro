@@ -2,7 +2,7 @@
 import Section from './Section.astro'
 // Every claim in this section was verified against vippsas/manifold @ v0.2.108;
 // see the verification table in the design spec. Do not strengthen this copy.
-// In particular: never write "no network requests" — the updater checks GitHub
+// In particular: never write "no network requests", because the updater checks GitHub
 // Releases. "No account, no telemetry" is true; the absolute claim is not.
 ---
 <Section id="local" eyebrow="Local first">
@@ -20,7 +20,7 @@ import Section from './Section.astro'
    │    <b>~/.manifold/</b>  (SQLite)   │
    └─────────────────────────────┘
 
-   <span class="dim">nothing in between — no vendor, no proxy, no account</span></pre>
+   <span class="dim">nothing in between: no vendor, no proxy, no account</span></pre>
   </div>
 
   <p class="body">
@@ -31,10 +31,10 @@ import Section from './Section.astro'
   </p>
 
   <ul class="facts">
-    <li>Sessions run on your machine — not in someone else's sandbox.</li>
+    <li>Sessions run on your machine, not in someone else's sandbox.</li>
     <li>Session history in local SQLite, per project, under <code>~/.manifold</code>.</li>
     <li>AI-assisted features are off by default and use your own key.</li>
-    <li>MIT licensed — don't take our word for it, <a href="https://github.com/vippsas/manifold">read it</a>.</li>
+    <li>MIT licensed, so you can <a href="https://github.com/vippsas/manifold">read the source</a> and check.</li>
   </ul>
 </Section>
 

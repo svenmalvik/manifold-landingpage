@@ -2,7 +2,7 @@
 import Section from './Section.astro'
 import themes from '../data/themes-meta.json'
 
-// Group into one column per family so each pair reads together — dark above,
+// Group into one column per family so each pair reads together: dark above,
 // light below. Grouping (rather than letting a flat grid reflow) also keeps a
 // family intact when the columns wrap on narrow screens.
 type Theme = (typeof themes)[number]
@@ -18,7 +18,7 @@ for (const f of families) {
 }
 ---
 <Section id="themes" eyebrow="Themes">
-  <Fragment slot="title">Ten themes ship with the app. This page <em>wears them too</em>.</Fragment>
+  <Fragment slot="title">Ten themes ship with the app. This page <em>uses them too</em>.</Fragment>
 
   <ul class="swatches">
     {families.map((f) => (

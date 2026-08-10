@@ -4,7 +4,7 @@
 @import './themes.css';
 
 :root {
-  /* Structural tokens — theme-agnostic. Colours and shadows are per-theme and
+  /* Structural tokens, theme-agnostic. Colours and shadows are per-theme and
      live in themes.css (generated from src/themes/data/), applied via the
      data-theme attribute on <html>. Regenerate with `npm run themes`. */
 
@@ -53,7 +53,7 @@ a:hover { color: var(--accent-cyan); }
 a:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 2px; }
 
 /* Links inside running prose must not be distinguished by colour alone
-   (WCAG 1.4.1). Standalone links — nav, CTAs, footer — are unaffected. */
+   (WCAG 1.4.1). Standalone links (nav, CTAs, footer) are unaffected. */
 p a, li a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -74,8 +74,8 @@ code, pre { font-family: var(--font-mono); }
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
 
-/* Editorial section rhythm. Sections are left-aligned inside a centred column —
-   centred body text at these measures is hard to read. */
+/* Editorial section rhythm. Sections are left-aligned inside a centred column,
+   because centred body text at these measures is hard to read. */
 .section { padding: var(--space-3xl) 0; }
 .section + .section { padding-top: 0; }
 
@@ -160,7 +160,7 @@ code, pre { font-family: var(--font-mono); }
 .mono-figure.boxed { line-height: 1.9; }
 .mono-figure.boxed pre { line-height: 1.15; }
 
-/* Shared CTA styles — used by both the hero and the install section. */
+/* Shared CTA styles, used by both the hero and the install section. */
 .btn-primary {
   display: inline-block;
   background: var(--accent-gold);

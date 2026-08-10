@@ -7,12 +7,12 @@
 // output, the file tree, a rendered README, and the status bar. The agents are
 // idle and all sit on `main`, so the caption claims neither work in flight nor
 // per-agent branches, and there is deliberately no running/waiting/done/error
-// legend — the four states are labelled in the worktree figure further down,
+// legend. The four states are labelled in the worktree figure further down,
 // where a real example backs each one.
 //
 // Three candidates, sized to what each visitor actually needs. The frame is
 // 1100 CSS px on desktop but only ~348 on a phone, where a 1.75x screen needs
-// ~610 physical px — serving 1100w there wasted 23 KB, so 700w covers it.
+// ~610 physical px, so serving 1100w there wasted 23 KB, so 700w covers it.
 const width = 1100
 const height = 668
 ---
@@ -30,7 +30,7 @@ const height = 668
       fetchpriority="high"
     />
   </div>
-  <p class="shot-caption">Three agents, a shell and the docs — one window, one repository.</p>
+  <p class="shot-caption">Three agents, a shell and the docs. One window, one repository.</p>
 </section>
 
 <style>

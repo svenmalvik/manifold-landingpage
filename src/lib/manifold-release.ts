@@ -7,7 +7,7 @@
  *
  * Why the release rather than the app's `package.json` on `main`: the page
  * builds `.dmg` download URLs from this value, and `main` can run ahead of the
- * newest published release — which would produce 404 download links. The
+ * newest published release, which would produce 404 download links. The
  * release is the thing a visitor can actually download. The asset URLs are read
  * straight from the API response rather than being reconstructed from a
  * filename convention, so a change to how assets are named can't silently break
@@ -33,7 +33,7 @@ export interface ManifoldRelease {
   /** Intel disk image. */
   intelDmg: string
   releasesUrl: string
-  /** Where the value came from — 'fallback' means the API was unreachable. */
+  /** Where the value came from. 'fallback' means the API was unreachable. */
   source: 'github' | 'fallback'
 }
 
@@ -105,10 +105,10 @@ async function resolveRelease(): Promise<ManifoldRelease> {
     const reason = error instanceof Error ? error.message : String(error)
     // Deliberately non-fatal: an offline build should still produce a working
     // site. The links point at the last release this repo knew about, which
-    // exists, so they resolve — they are just not the newest.
+    // exists, so they resolve. They are just not the newest.
     console.warn(
       `[manifold-release] could not read the latest release of ${REPO} (${reason}). ` +
-        `Falling back to ${pkg.version} from package.json — download links will point at that release.`,
+        `Falling back to ${pkg.version} from package.json. Download links will point at that release.`,
     )
     return {
       version: pkg.version,

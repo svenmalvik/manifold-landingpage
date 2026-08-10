@@ -4,7 +4,7 @@ const steps = [
   { n: '1', label: 'prompt the agent', detail: '' },
   { n: '2', label: 'run your evaluation command', detail: '' },
   { n: '3', label: 'extract a score', detail: 'exit code · regex · JSON field · LLM judge' },
-  { n: '4', label: 'improved? commit — regressed? revert', detail: '' },
+  { n: '4', label: 'improved? commit · regressed? revert', detail: '' },
   { n: '5', label: 'repeat', detail: '' },
 ]
 ---
@@ -55,7 +55,7 @@ const steps = [
     box-shadow: inset 0 1px 0 var(--frame-highlight);
     /* The highlight walks the five steps to show this is a loop, not a
        checklist. Explanatory, which is why it is exempt from the no-motion
-       rule — see the design spec. */
+       rule. See the design spec. */
     animation: loop-walk 7.5s ease-in-out infinite;
     animation-delay: calc(var(--i) * 1.5s);
   }

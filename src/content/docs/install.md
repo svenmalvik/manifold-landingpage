@@ -30,7 +30,7 @@ gh --version             # optional, needed for pull request creation
 claude --version         # or: codex --version / gemini --version / copilot --version
 ```
 
-If a runtime command is not found, install it (see [Runtimes & Setup](/docs/runtimes)) and make sure its binary is on your `PATH`.
+If a runtime command isn't found, install it (see [Runtimes & Setup](/docs/runtimes)) and make sure its binary is on your `PATH`.
 
 ## PATH on macOS
 

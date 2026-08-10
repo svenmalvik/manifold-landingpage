@@ -1,7 +1,7 @@
 ---
 import Section from './Section.astro'
 // The Ollama entries are the only place on the page where a genuine offline
-// claim can be made — everywhere else, prompts go to the provider the user
+// claim can be made. Everywhere else, prompts go to the provider the user
 // configured. Keep the "no network" tag on these two and nowhere else.
 const runtimes = [
   { name: 'Claude Code', bin: 'claude', local: false },

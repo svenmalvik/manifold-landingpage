@@ -6,7 +6,7 @@ import Section from './Section.astro'
 // The privileged capabilities (agent:control, agent:spawn, lm, workspace:manage,
 // verdicts:*, transcription:read) are restricted to BUILT-IN plugins regardless
 // of what a manifest claims. That is precisely why an enterprise plugin needing
-// them has to come through us — say that plainly rather than implying anyone can
+// them has to come through us. Say that plainly rather than implying anyone can
 // self-serve a privileged plugin.
 const shipped = [
   { id: 'manifold.loop', name: 'Loop', desc: 'Edit → evaluate → keep or discard.' },
@@ -18,8 +18,8 @@ const shipped = [
 <Section id="plugins" eyebrow="Plugins">
   <Fragment slot="title">Extend it with <em>your own tooling</em>.</Fragment>
   <Fragment slot="lede">
-    Manifold's own features are plugins. The automated Loop is one of them — so the
-    extension model is the same one we build on, not a stub bolted to the side.
+    Manifold's own features are plugins. The automated Loop is one of them, so the
+    extension model is the one we build on ourselves.
   </Fragment>
 
   <ul class="grid">
@@ -34,7 +34,7 @@ const shipped = [
 
   <p class="body">
     Your own plugins load from <code>~/.manifold/plugins</code>. Each one runs in a
-    sandboxed host process — not in the app's main process, and not in the UI — and declares
+    sandboxed host process, not in the app's main process and not in the UI, and declares
     the capabilities it needs in its manifest. The host enforces that list. An unrecognised
     capability rejects the whole manifest rather than being quietly ignored, so a typo can't
     widen a plugin's reach.
@@ -51,18 +51,18 @@ const shipped = [
   <p class="body">
     Plugin ids can't contain a path separator, per-plugin storage is escape-guarded, and
     plugin webviews are served over their own scheme under a nonce CSP. There is also a
-    VS&nbsp;Code compatibility shim, so a subset of existing extensions — commands,
-    activation events, tree views — runs unmodified.
+    VS&nbsp;Code compatibility shim, so a subset of existing extensions runs unmodified:
+    commands, activation events and tree views.
   </p>
 
   <div class="caveat">
     <p>
       <b>For enterprises.</b> Plugins that read the workspace, keep their own state or
-      contribute views, your team can write and drop in yourself. The privileged
-      capabilities — driving an agent, spawning one, reaching the language model — are
-      reserved for built-in plugins no matter what a manifest asks for, so those we build
-      together: bring the use case, and what ships lands as a built-in under the same MIT
-      licence. <a href="/enterprise">How that works</a>.
+      contribute views, your team can write and drop in yourself. Three capabilities stay
+      reserved for built-in plugins, whatever a manifest asks for: driving an agent,
+      spawning one, and reaching the language model. Those we build together. Bring the use
+      case, and what ships lands as a built-in under the same MIT licence.
+      <a href="/enterprise">How that works</a>.
     </p>
   </div>
 </Section>

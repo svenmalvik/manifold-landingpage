@@ -1,13 +1,13 @@
 ---
 import Section from './Section.astro'
-// Manifold Server. IN BETA and not generally available — every mention must say
+// Manifold Server. IN BETA and not generally available. Every mention must say
 // so, and nothing here may promise a date.
 //
 // Two hard constraints on this copy:
 //  1. vippsas/manifold-server is an INTERNAL repo with no LICENSE. Do NOT link
 //     it (it 404s for everyone) and do NOT call it open source. Only the desktop
 //     app is MIT.
-//  2. Its README documents the operator's own deployment — cloud subscriptions,
+//  2. Its README documents the operator's own deployment: cloud subscriptions,
 //     key vaults, clusters, service catalogues. None of that belongs on a public
 //     page. Describe the behaviour, never the infrastructure.
 //
@@ -21,13 +21,13 @@ import Section from './Section.astro'
     Issues in. <em>Pull requests out</em>.
   </Fragment>
   <Fragment slot="lede">
-    Label a GitHub issue and a server you run works it to a pull request — with nobody
+    Label a GitHub issue and a server you run works it to a pull request, with nobody
     watching the terminal.
   </Fragment>
 
   <p class="availability">
-    <b>Not released yet.</b> Manifold Server is in beta and isn't published — you can't
-    download or run it today, and there's no date. The desktop app above is the shipping
+    <b>Not released yet.</b> Manifold Server is in beta and isn't published. You can't
+    download or run it today, and there is no date. The desktop app above is the shipping
     product and never depends on it. This is here so you know where Manifold is going.
   </p>
 
@@ -40,7 +40,7 @@ import Section from './Section.astro'
         │
   <b>agent runs</b>        unattended, with a time limit
         │
-  <b>verify</b>            your command — compile, unit, contract
+  <b>verify</b>            your command: compile, unit, contract
         │
   <b>pull request</b>      "Closes #&lt;n&gt;"  ·  manifold-done
         │
@@ -49,12 +49,12 @@ import Section from './Section.astro'
 
   <p class="body">
     A run that fails, or that changes nothing, escalates with a comment explaining why.
-    It does not open a speculative pull request.
+    It doesn't open a speculative pull request.
   </p>
 
   <p class="body">
     The verify command is yours, and it runs offline in the same locked-down sandbox as the
-    agent — so a green result means compile-and-unit sound, not integration-proven. A
+    agent, so a green result means compile-and-unit sound rather than integration-proven. A
     non-zero exit blocks the pull request rather than shipping something broken.
   </p>
 
@@ -70,15 +70,15 @@ import Section from './Section.astro'
 
   <p class="body">
     That is the real reason the server exists. It runs the agent as a container in
-    Kubernetes, so confinement is enforced by your cluster — service account, security
-    context, resource limits, network policy — using the controls you already run every
-    other workload under. The agent gets a per-issue clone instead of a developer's whole
+    Kubernetes, so confinement is enforced by your cluster, using the controls you already
+    run every other workload under: service account, security context, resource limits,
+    network policy. The agent gets a per-issue clone instead of a developer's whole
     disk. <a href="/security">The security page</a> covers both boundaries.
   </p>
 
   <div class="caveat">
     <p>
-      <b>This is the one place your code leaves your Mac</b> — into a container
+      <b>This is the one place your code leaves your Mac.</b> It goes into a container
       <em>you</em> deploy, with <em>your</em> GitHub and model credentials. There is still
       no account, and still no service of ours in the middle. Running it is entirely
       optional; the desktop app never needs it.
@@ -105,7 +105,7 @@ import Section from './Section.astro'
     margin-top: var(--space-xl);
   }
 
-  /* Availability first, before any capability copy — a reader who skims must not
+  /* Availability first, before any capability copy. A reader who skims must not
      come away thinking this ships today. */
   .availability {
     margin-top: var(--space-lg);

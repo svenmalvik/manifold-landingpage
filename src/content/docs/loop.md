@@ -10,7 +10,7 @@ The **Loop** dock panel runs an automated improve-and-evaluate cycle on an agent
 
 1. Prompt the agent with your instruction.
 2. Run a user-defined evaluation command.
-3. Extract a numeric score from the result — a process exit code, a regex match on stdout, a field from JSON output, or an LLM judge.
+3. Extract a numeric score from the result: a process exit code, a regex match on stdout, a field from JSON output, or an LLM judge.
 4. Commit the changes if the score improved, or discard them and revert to the previous state if it regressed.
 5. Repeat until you stop it or the maximum number of iterations is reached.
 

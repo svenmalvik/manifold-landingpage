@@ -1,12 +1,9 @@
 ---
 import Section from './Section.astro'
 // The comparison section that contains no comparison. Whitespace does the work
-// here — resist adding anything. Release count verified 2026-08-10 via
+// here. Resist adding anything. Release count verified 2026-08-10 via
 // `gh release list --repo vippsas/manifold --limit 500 | wc -l`.
-// "No server in the middle" was true when written and isn't any more — Manifold
-// Server exists (in beta). It runs on the operator's own infrastructure, so the
-// substance holds, but the line has to say *whose* server rather than none.
-// "No server in the middle" was true when written and isn't any more — Manifold
+// "No server in the middle" was true when written and isn't any more. Manifold
 // Server exists (in beta). It runs on the operator's own infrastructure, so the
 // substance holds, but the line has to say *whose* server rather than none.
 const absences = [
@@ -15,7 +12,7 @@ const absences = [
   'No Pro tier, no upgrade path, no upsell.',
   'No service of ours in the middle.',
   'No telemetry.',
-  "No lock-in — it's your git, your branches, your infrastructure.",
+  "No lock-in. It's your git, your branches, your infrastructure.",
 ]
 ---
 <Section id="receipt" eyebrow="The receipt">
